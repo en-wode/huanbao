@@ -3,12 +3,13 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/user/user",
-    "pages/addDevice/addDevice"
+    "pages/addDevice/addDevice",
+    "pages/deviceDetail/deviceDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#518cf6",
+    "navigationBarTitleText": "蓝翔环保",
+    "navigationBarTextStyle": "white"
   }
 }

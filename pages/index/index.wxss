@@ -1,4 +1,7 @@
 /**index.wxss**/
+page{
+  background: linear-gradient(#518cf6, #045193);
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -13,9 +16,10 @@
 }
 
 .userinfo-nickname {
-  color: #aaa;
+  color: #fff;
 }
 
 .usermotto {
-  margin-top: 200px;
+  margin-top: 160px;
+  color: #fff;
 }

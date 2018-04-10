@@ -1,12 +1,11 @@
-// pages/addDevice/addDevice.js
+// pages/deviceDetail/deviceDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    device: [
-    ]
+  
   },
 
   /**

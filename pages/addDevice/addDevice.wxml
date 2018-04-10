@@ -1,4 +1,28 @@
 <!--pages/addDevice/addDevice.wxml-->
-<view>
-  
+<view >
+  <view class="zan-panel">
+    <view class="zan-cell">
+      <view class="zan-cell__bd">用户</view>
+      <view class="zan-cell__ft">添加新设备</view>
+    </view>
+  </view>
+  <view wx:if="{{device.length < 5}}">
+    <view class="zan-panel">
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">设备1号</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel">
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">设备2号</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class='addmore' >
+    <view class='addmore_rad'>
+      添加设备
+    </view>
+  </view>
 </view>
