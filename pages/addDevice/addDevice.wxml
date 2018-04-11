@@ -7,7 +7,7 @@
     </view>
   </view>
   <view wx:if="{{device.length < 5}}">
-    <view class="zan-panel">
+    <view class="zan-panel" bindtap="detail">
       <view class="zan-cell zan-cell--access">
         <view class="zan-cell__bd">设备1号</view>
         <view class="zan-cell__ft"></view>
@@ -25,4 +25,5 @@
       添加设备
     </view>
   </view>
+  <view class='tip_title'>欢迎使用蓝翔环保管理小程序</view>
 </view>

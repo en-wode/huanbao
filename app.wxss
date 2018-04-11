@@ -1,5 +1,93 @@
 /**app.wxss**/
 @import 'index.wxss';
+
+
+@font-face {
+  font-family: 'iconfont';  /* project id 624563 */
+  src: url('//at.alicdn.com/t/font_624563_l7n1725ilpi4quxr.eot');
+  src: url('//at.alicdn.com/t/font_624563_l7n1725ilpi4quxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624563_l7n1725ilpi4quxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624563_l7n1725ilpi4quxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624563_l7n1725ilpi4quxr.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-unie65b:before { content: "\e6b4"; }
+
+.icon-shidu:before { content: "\e60f"; }
+
+.icon-wifi:before { content: "\e659"; }
+
+.icon-famen01:before { content: "\e63d"; }
+
+.icon-ren:before { content: "\e619"; }
+
+.icon-jienenghuanbao:before { content: "\e645"; }
+
+.icon-jia:before { content: "\e601"; }
+
+.icon-jishuidian:before { content: "\e604"; }
+
+.icon-wendu:before { content: "\e689"; }
+
+.icon-fenshuizha:before { content: "\e60b"; }
+
+.icon-shuiweizhan:before { content: "\e60e"; }
+
+.icon-shuikudian:before { content: "\e62a"; }
+
+.icon-shuizha:before { content: "\e62d"; }
+
+.icon-huanbao:before { content: "\e638"; }
+
+.icon-shuili:before { content: "\e63a"; }
+
+.icon-dycdp:before { content: "\e782"; }
+
+.icon-shouji:before { content: "\e633"; }
+
+.icon-shuilongtou:before { content: "\e733"; }
+
+.icon-riqi:before { content: "\e64d"; }
+
+.icon-biyan:before { content: "\e67d"; }
+
+.icon-video-surveillance:before { content: "\e654"; }
+
+.icon-open-eye:before { content: "\e79c"; }
+
+.icon-taiyang:before { content: "\e7ed"; }
+
+.icon-icon-humidity:before { content: "\e60c"; }
+
+.icon-taiyang1:before { content: "\e662"; }
+
+.icon-shuibei:before { content: "\e669"; }
+
+.icon-shuiyuan:before { content: "\e639"; }
+
+.icon-shuilongtou1:before { content: "\e612"; }
+
+.icon-dengpao:before { content: "\e60a"; }
+
+.icon-shuibeng:before { content: "\e625"; }
+
+.icon-lkingbolvsehuanbao:before { content: "\e602"; }
+
+.icon-shishiliuliang:before { content: "\e99a"; }
+
+.icon-famen:before { content: "\e9d3"; }
+
+
+
+
 .container {
   height: 100%;
   display: flex;
@@ -8,4 +96,6 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
+  font-family: Helvetica Neue,Helvetica,Roboto,Segoe UI,Arial,sans-serif;
+  color: #999;
 } 

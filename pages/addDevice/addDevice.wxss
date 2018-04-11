@@ -1,4 +1,7 @@
 /* pages/addDevice/addDevice.wxss */
+page{
+  background: #f3f3f3;
+}
 .addmore{
   display:flex;
   flex-direction:column;
@@ -13,4 +16,13 @@
   text-align: center;
   line-height: 188rpx;
   margin-top: 388rpx;
+}
+.tip_title{
+  font-size: 24rpx;
+  color: #999;
+  position: absolute;
+  bottom: 80rpx;
+  text-align: center;
+  left: 0;
+  right: 0;
 }

@@ -8,7 +8,14 @@ Page({
     device: [
     ]
   },
-
+  /**
+   * 事件处理函数
+   */
+  detail: function () {
+    wx.navigateTo({
+      url: '../deviceDetail/deviceDetail'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,2 +1,98 @@
 <!--pages/deviceDetail/deviceDetail.wxml-->
-<text>pages/deviceDetail/deviceDetail.wxml</text>
+<view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="zan-icon zan-icon-setting" ></view>当前状态
+    </view>
+    <view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-6">
+          <view class='card_status'>38℃</view>
+          <view class='card_status_name'>实际温度</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class='card_status'>65%</view>
+          <view class='card_status_name'>实际湿度</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class='card_status'>开</view>
+          <view class='card_status_name'>水闸状态</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class='card_status'>20km/s</view>
+          <view class='card_status_name'>实际流量</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>温度设置
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+        <slider 
+          max="80"
+          min='20'
+          step="10"
+          bindchange="sliderchange" 
+          show-value
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-shidu" ></view>设置湿度
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+        <slider 
+          max="80"
+          min='20'
+          step="10"
+          bindchange="sliderchange" 
+          show-value
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-shuilongtou" ></view>流量设置
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+        <slider 
+          max="80"
+          min='20'
+          step="10"
+          bindchange="sliderchange" 
+          show-value
+        />
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-dengpao" ></view>工作指示灯
+    </view>
+    <view class="zan-row ">
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-shuikudian light" ></view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-video-surveillance light" ></view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-famen01 light" ></view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-shuiweizhan light" ></view>
+        </view>
+      </view>
+  </view>
+</view>
