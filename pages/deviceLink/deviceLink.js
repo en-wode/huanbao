@@ -1,26 +1,13 @@
-// pages/addDevice/addDevice.js
+// pages/deviceLink/deviceLink.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    device: [
-    ]
+  
   },
-  /**
-   * 事件处理函数
-   */
-  detail: function () {
-    wx.navigateTo({
-      url: '../deviceDetail/deviceDetail'
-    })
-  },
-  addmore: function() {
-wx.navigateTo({
-  url: '../deviceLink/deviceLink',
-})
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

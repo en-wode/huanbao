@@ -2,7 +2,7 @@
 <view>
   <view class='card'>
     <view class='card_title'>
-      <view class="zan-icon zan-icon-setting" ></view>当前状态
+      <view class="iconfont icon-shezhi" ></view>当前状态
     </view>
     <view>
       <view class="zan-row">
@@ -33,9 +33,9 @@
     <view class="section section_gap">
       <view class="body-view">
         <slider 
-          max="80"
+          max="60"
           min='20'
-          step="10"
+          step="5"
           bindchange="sliderchange" 
           show-value
         />
@@ -52,7 +52,7 @@
         <slider 
           max="80"
           min='20'
-          step="10"
+          step="1"
           bindchange="sliderchange" 
           show-value
         />
@@ -67,9 +67,9 @@
     <view class="section section_gap">
       <view class="body-view">
         <slider 
-          max="80"
+          max="120"
           min='20'
-          step="10"
+          step="1"
           bindchange="sliderchange" 
           show-value
         />
@@ -80,9 +80,9 @@
     <view class='card_title'>
       <view class="iconfont icon-dengpao" ></view>工作指示灯
     </view>
-    <view class="zan-row ">
+    <view class="zan-row work_light">
         <view class="zan-col zan-col-6">
-          <view class="iconfont icon-shuikudian light" ></view>
+          <view class="iconfont icon-shuibei light" ></view>
         </view>
         <view class="zan-col zan-col-6">
           <view class="iconfont icon-video-surveillance light" ></view>

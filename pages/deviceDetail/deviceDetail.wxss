@@ -9,7 +9,7 @@ page{
 .card{
   background: #fff;
   font-size: 30rpx;
-  padding: 12rpx 0;
+  padding: 0 0 12rpx 0;
   margin-bottom: 18rpx;
   font-weight: 500
 }
@@ -41,7 +41,7 @@ page{
   margin-right:10rpx;
   font-size:36rpx;
 }
-.zan-icon-setting{
+.icon-shezhi{
   color: #0584d1;
 }
 .zan-col{
@@ -62,14 +62,23 @@ page{
 }
 
 /* 工作指示灯 */
+.work_light{
+  padding: 12rpx 0;
+}
 .light{
   font-size: 58rpx!important;
 }
-.icon-shuikudian{
-  color: blue
+.icon-shuibei{
+  color: #CD3700
 }
 .icon-video-surveillance{
-  color: 
+  color: blue
+}
+.icon-famen01{
+  color: #CDCD00
+}
+.icon-shuiweizhan{
+  color: #4A708B
 }
 /* slider */
 .section_gap{
