@@ -1,4 +1,4 @@
 <!--pages/deviceLink/deviceLink.wxml-->
-<view>
-
+<view class="container">
+  <canvas canvas-id="r"></canvas>
 </view>

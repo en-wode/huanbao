@@ -19,6 +19,7 @@ page{
   padding-bottom: 8rpx;
   border-bottom: 4rpx solid #f3f3f3;
   font-weight: bolder;
+  padding: 12rpx 0;
 }
 
 /* 卡片内部字体颜色 */
@@ -63,7 +64,7 @@ page{
 
 /* 工作指示灯 */
 .work_light{
-  padding: 12rpx 0;
+  padding: 24rpx 0;
 }
 .light{
   font-size: 58rpx!important;

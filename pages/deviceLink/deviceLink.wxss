@@ -1,1 +1,25 @@
 /* pages/deviceLink/deviceLink.wxss */
+.container{
+  height: 100%;
+  width: 100%;
+}
+  #c{
+      margin: 0 auto;
+      display: block;
+  }
+  #r{
+      display: block;
+      margin: 0 auto;
+      height: 100%;
+      width: 100%;
+  }
+  #r::before{
+      color: black;
+      content: attr(min);
+      padding-right: 10px;
+  }
+  #r::after{
+      color: black;
+      content: attr(max);
+      padding-left: 10px;
+  }
