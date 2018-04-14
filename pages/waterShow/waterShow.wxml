@@ -1,0 +1,5 @@
+<!--pages/waterShow/waterShow.wxml-->
+<view class="container">
+  <view>这是一个流量监控显示器</view>
+  <canvas canvas-id="r" style='width:{{view.width}}px;height:{{view.height}}px'></canvas>
+</view>

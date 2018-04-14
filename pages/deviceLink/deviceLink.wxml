@@ -1,4 +1,21 @@
 <!--pages/deviceLink/deviceLink.wxml-->
-<view class="container">
-  <canvas canvas-id="r"></canvas>
+<view>
+  <view class="link_top">
+    <view>
+      <image class='link_image' src='../../assets/images/warter.jpg' mode="aspectFill"></image>
+    </view>
+    <view class='link_name'>IW一体化智能截污井</view>
+  </view>
+  <view class='link_bottom'>
+    <view class="link_tip">请输入设备码及密码进行连接</view>
+    <view class='tijiao'>  
+    <form bindsubmit="sumit">  
+        <input bindinput="phone" maxlength="11" type="number" class="marginview" name="phone" placeholder="设备码"/>  
+        <input bindinput="password" maxlength="8" password class="marginview"name="passworld" placeholder="设备密码"/>  
+        <view class="link_button">
+        <button style="opacity: {{opacity}};color: white; background-color: #00b7ee;" disabled="{{disabled}}" loading="{{loginLoading}}"     form-type="submit">登录</button>  
+        </view>
+    </form>  
+</view> 
+  </view>
 </view>

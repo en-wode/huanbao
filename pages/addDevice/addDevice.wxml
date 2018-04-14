@@ -13,7 +13,7 @@
         <view class="zan-cell__ft"></view>
       </view>
     </view>
-    <view class="zan-panel">
+    <view class="zan-panel" bindtap='towater'>
       <view class="zan-cell zan-cell--access">
         <view class="zan-cell__bd">设备2号</view>
         <view class="zan-cell__ft"></view>

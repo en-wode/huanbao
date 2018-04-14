@@ -16,6 +16,11 @@ Page({
       url: '../deviceDetail/deviceDetail'
     })
   },
+  towater: function () {
+    wx.navigateTo({
+      url: '../waterShow/waterShow'
+    })
+  },
   addmore: function() {
 wx.navigateTo({
   url: '../deviceLink/deviceLink',

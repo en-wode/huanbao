@@ -5,7 +5,8 @@
     "pages/user/user",
     "pages/addDevice/addDevice",
     "pages/deviceDetail/deviceDetail",
-    "pages/deviceLink/deviceLink"
+    "pages/deviceLink/deviceLink",
+    "pages/waterShow/waterShow"
   ],
   "window": {
     "backgroundTextStyle": "light",

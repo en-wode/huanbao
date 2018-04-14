@@ -87,3 +87,11 @@ page{
   margin: 0 auto;
   padding: 24rpx;
 }
+.detail_buttom{
+  padding: 22rpx;
+  color: #77c0e8;
+  background:white
+}
+.save{
+  border-right: 1px solid #5f5f5f
+}
