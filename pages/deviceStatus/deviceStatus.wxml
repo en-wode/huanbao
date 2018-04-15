@@ -1,0 +1,43 @@
+<!--pages/deviceStatus/deviceStatus.wxml-->
+<view>
+<view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>井内水位：26米
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>河道水位：26米
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>排水阀开度 30%
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+           <wxc-progress percent="30" active-color="#ff76a2,#ac89ff"></wxc-progress>
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>截污阀开度 60%
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+           <wxc-progress percent="60" active-color="#ac89ff,#ff76a2"></wxc-progress>
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-taiyang1" ></view>垃圾高度 100%
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+           <wxc-progress percent="100" active-color="#ff76a2,#ac89ff"></wxc-progress>
+      </view>
+    </view>
+  </view>
+</view>

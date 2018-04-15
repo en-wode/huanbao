@@ -1,0 +1,4 @@
+<!--pages/dataChart/dataChart.wxml-->
+<view>
+  <canvas class="canvas" canvas-id="pieGraph"></canvas>
+</view>

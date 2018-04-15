@@ -113,7 +113,7 @@ Page({
       ctx.setFontSize(20);
       ctx.setTextAlign('center');
       ctx.fillStyle = "rgba(06, 85, 128, 0.8)";
-      ctx.fillText(~~nowRange + '%', r, r + size / 2);
+      ctx.fillText(~~nowRange + '%', r + size / 2, r + size / 2);
       ctx.restore();
     };
 

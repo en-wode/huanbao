@@ -1,4 +1,5 @@
 <!--pages/deviceDetail/deviceDetail.wxml-->
+<import src="/dist/dialog/index.wxml" />
 <view>
   <view class='card'>
     <view class='card_title'>
@@ -93,7 +94,7 @@
   </view>
   <view class='detail_buttom'>
     <view class="zan-row">
-      <view class="zan-col zan-col-12 save">
+      <view class="zan-col zan-col-12 save" bindtap="toggleBaseDialog">
         保存
       </view>
       <view class="zan-col zan-col-12">
@@ -101,4 +102,5 @@
       </view>
     </view>
   </view>
+  <template is="zan-dialog" data="{{ zanDialog }}"></template>
 </view>

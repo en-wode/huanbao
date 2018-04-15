@@ -18,13 +18,18 @@ Page({
   },
   towater: function () {
     wx.navigateTo({
-      url: '../waterShow/waterShow'
+      url: '../deviceStatus/deviceStatus'
     })
   },
   addmore: function() {
-wx.navigateTo({
-  url: '../deviceLink/deviceLink',
-})
+    wx.navigateTo({
+      url: '../deviceLink/deviceLink',
+    })
+  },
+  chart:function () {
+    wx.navigateTo({
+      url: '../dataChart/dataChart',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,7 +37,6 @@ wx.navigateTo({
   onLoad: function (options) {
   
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

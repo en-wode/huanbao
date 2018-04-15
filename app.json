@@ -1,12 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/user/user",
     "pages/addDevice/addDevice",
     "pages/deviceDetail/deviceDetail",
     "pages/deviceLink/deviceLink",
-    "pages/waterShow/waterShow"
+    "pages/waterShow/waterShow",
+    "pages/deviceStatus/deviceStatus",
+    "pages/dataChart/dataChart"
   ],
   "window": {
     "backgroundTextStyle": "light",
