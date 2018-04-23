@@ -13,6 +13,20 @@ page{
   margin-bottom: 18rpx;
   font-weight: 500
 }
+.card_num{
+  background: #fff;
+  font-size: 30rpx;
+  margin-bottom: 18rpx;
+  font-weight: 500
+}
+.card_contain{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 8rpx;
+  font-weight:500;
+  padding:12rpx 0;
+  font-size:34rpx;
+}
 .card_title{
   width: 90%;
   margin: 0 auto;
@@ -21,7 +35,13 @@ page{
   font-weight: bolder;
   padding: 12rpx 0;
 }
-
+.card_val{
+  min-width: 168rpx;
+  text-align: center!important;
+}
+.card_name{
+  font-weight: 500
+}
 /* 卡片内部字体颜色 */
 .card_status{
   color: #47aef3;

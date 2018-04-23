@@ -1,22 +1,24 @@
 <!--pages/deviceStatus/deviceStatus.wxml-->
 <view>
-<view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>井内水位：26米
-    </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >井内水位：</view>
+        <view class="zan-cell__ft card_val">12米</view>
+      </view>
+  </view>
+  <view class='card_num'>
+      <view class="zan-cell">
+        <view class="zan-cell__bd card_name">河道水位：</view>
+        <view class="zan-cell__ft card_val">12米</view>
+      </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>河道水位：26米
-    </view>
-  </view>
-  <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>排水阀开度 30%
+      排水阀开度 30%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="30" active-color="#ff76a2,#ac89ff"></wxc-progress>
+           <wxc-progress percent="30" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
@@ -26,7 +28,7 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="60" active-color="#ac89ff,#ff76a2"></wxc-progress>
+           <wxc-progress percent="60" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
@@ -36,8 +38,42 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="100" active-color="#ff76a2,#ac89ff"></wxc-progress>
+           <wxc-progress percent="100" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >COD浓度：</view>
+        <view class="zan-cell__ft card_val">32%</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >SS悬浮物：</view>
+        <view class="zan-cell__ft card_val">22</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >系统压力：</view>
+        <view class="zan-cell__ft card_val">22Mpa</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >污水累计流量：</view>
+        <view class="zan-cell__ft card_val">120m³/h</view>
+      </view>
+  </view>
+   <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >天气情况</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >监控</view>
+      </view>
   </view>
 </view>
