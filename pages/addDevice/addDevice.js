@@ -11,9 +11,11 @@ Page({
   /**
    * 事件处理函数
    */
-  detail: function () {
+  detail: function (event) {
+    console.log(event.currentTarget.id);
+    let devideId = event.currentTarget.id;
     wx.navigateTo({
-      url: '../deviceDetail/deviceDetail'
+      url: '../optionSelect/optionSelect?id=' + devideId
     })
   },
   towater: function () {
@@ -29,6 +31,16 @@ Page({
   chart:function () {
     wx.navigateTo({
       url: '../dataChart/dataChart',
+    })
+  },
+  weather: function () {
+    wx.navigateTo({
+      url: '../weather/weather',
+    })
+  },
+  video: function () {
+    wx.navigateTo({
+      url: '../video/video',
     })
   },
   /**

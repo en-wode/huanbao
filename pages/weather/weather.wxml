@@ -1,0 +1,10 @@
+<view class="weather">
+   <text>{{weatherData}}</text> 
+  <!-- <view class="menu-list">
+      <view class="menu-item" wx:for="{{furweather.results[0].weather_data}}" wx:key="*this">
+        <view class="menu-item-main">
+          <text class="menu-item-name">{{item.date}} {{item.weather}} {{item.wind}} {{item.temperature}}</text>
+        </view>
+      </view>
+  </view> -->
+</view>

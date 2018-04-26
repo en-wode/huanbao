@@ -1,0 +1,4 @@
+<!--pages/video/video.wxml-->
+<view>
+  <live-player src="rtmp://rtmp.open.ys7.com/openlive/58f8b98553bc47d69eede19c3bbfe3a7" mode="live" autoplay="true" object-fit="contain" />
+</view>

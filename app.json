@@ -7,7 +7,11 @@
     "pages/deviceLink/deviceLink",
     "pages/waterShow/waterShow",
     "pages/deviceStatus/deviceStatus",
-    "pages/dataChart/dataChart"
+    "pages/dataChart/dataChart",
+    "pages/weather/weather",
+    "pages/video/video",
+    "pages/optionSelect/optionSelect",
+    "pages/simulation/simulation"
   ],
   "window": {
     "backgroundTextStyle": "light",

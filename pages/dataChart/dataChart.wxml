@@ -1,4 +1,5 @@
 <!--pages/dataChart/dataChart.wxml-->
 <view>
   <canvas class="canvas" canvas-id="lineGraph"></canvas>
+  <view bindtap='change'>change</view>
 </view>

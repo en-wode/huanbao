@@ -1,0 +1,53 @@
+/* pages/optionSelect/optionSelect.wxss */
+page{
+  background: linear-gradient(#02a1b4,#d9bba3);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+.option-contain{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  box-sizing:border-box;
+  color: black;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:38vh;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+.option-bottom{
+  margin-top:30px;
+}
+.zan-col{
+  margin-top: 68rpx;
+}
+.usermotto {
+  width:100%;
+  text-align: center;
+  height: 62vh;
+  background: linear-gradient(#87d1d2,#d9bba3);
+  color: #727171;
+}
+.iconfont{
+  font-size: 32px;
+  color: white;
+  width:174rpx;
+  height:168rpx;
+  margin:0 auto 18rpx;
+  border-radius:50%;
+  background:red;
+}

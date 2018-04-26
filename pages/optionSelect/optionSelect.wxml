@@ -1,0 +1,30 @@
+<!--pages/optionSelect/optionSelect.wxml-->
+<view class="option-contain">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <view class="zan-row option-bottom">
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='1'>
+          <view class="iconfont icon-video-surveillance " ></view>
+          设备详情
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='2'>
+          <view class="iconfont icon-video-surveillance " ></view>
+          设备操作
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='3'>
+          <view class="iconfont icon-famen01 " ></view>
+          监控查看
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='4'>
+          <view class="iconfont icon-shuiweizhan " ></view>
+          历史数据
+        </view>
+      </view>
+  </view>
+</view>

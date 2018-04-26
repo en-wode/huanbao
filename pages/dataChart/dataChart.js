@@ -147,7 +147,36 @@ Page({
     }
     new _wxcharts(line)
   },
-
+  change: function () {
+    let line = {
+      canvasId: 'lineGraph',
+      type: 'line',
+      categories: ['12', '11', '10', '9', '8', '7'],
+      series: [{
+        name: '成交量1',
+        data: [0.15, 0.2, 0.45, 0.37, 0.4, 0.1],
+        format: function (val) {
+          return val.toFixed(2) + '万';
+        }
+      }, {
+        name: '成交量2',
+        data: [0.30, 0.37, 0.65, 0.78, 0.69, 0.34],
+        format: function (val) {
+          return val.toFixed(2) + '万';
+        }
+      }],
+      yAxis: {
+        title: '成交金额 (万元)',
+        format: function (val) {
+          return val.toFixed(2);
+        },
+        min: 0
+      },
+      width: 320,
+      height: 200
+    }
+    new _wxcharts(line)
+  },
   areaShow: function () {
     let area = {
       canvasId: 'areaGraph',

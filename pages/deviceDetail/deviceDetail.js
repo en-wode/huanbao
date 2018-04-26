@@ -2,6 +2,12 @@
 const Zan = require('../../dist/index');
 
 Page(Object.assign({}, Zan.Dialog, {
+  data: {
+    id: ''
+  },
+  onLoad: function (options) {
+    console.log(options.id);
+  },
   toggleBaseDialog() {
     this.showZanDialog({
       title: '设备管理操作',
