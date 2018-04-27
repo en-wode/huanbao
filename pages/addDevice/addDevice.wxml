@@ -37,6 +37,12 @@
         <view class="zan-cell__ft"></view>
       </view>
     </view>
+    <view class="zan-panel" bindtap='simulation'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">场景模拟</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
   </view>
   <view wx:else class='addmore' >
     <view class='addmore_rad'>

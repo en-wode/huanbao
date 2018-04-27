@@ -11,20 +11,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.request({
-      url: 'http://192.168.0.115:7001/user/wxLoginByCode',
-      method: 'POST',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      data: {
-        code: res.code
-      },
-      success: function (result) {
-        console.log(result);
-      }
-    })
+  onLoad: function () {
+
   },
 
   /**

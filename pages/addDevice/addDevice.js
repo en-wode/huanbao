@@ -43,6 +43,11 @@ Page({
       url: '../video/video',
     })
   },
+  simulation: function () {
+    wx.navigateTo({
+      url: '../simulation/simulation',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,2 +1,4 @@
 <!--pages/simulation/simulation.wxml-->
-<text>pages/simulation/simulation.wxml</text>
+<view>
+  <canvas canvas-id='first' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;"></canvas>
+</view>

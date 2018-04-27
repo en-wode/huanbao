@@ -100,8 +100,7 @@ Page({
       ctx.lineTo(axisLength, mH);
       ctx.lineTo(sX, mH);
       ctx.lineTo(points[0][0], points[0][1]);
-      ctx.fillStyle = '#1c86d1';
-      ctx.setFillStyle('#1c86d1')
+      ctx.setFillStyle('#1c86d1');
       ctx.fill();
       ctx.restore();
     };
