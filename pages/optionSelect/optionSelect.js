@@ -68,7 +68,7 @@ Page({
         break;
       case 3:
         wx.navigateTo({
-          url: '../deviceStatus/deviceStatus?id=' + that.data.id
+          url: '../waterShow/waterShow?id=' + that.data.id
         });
         break;
       case 4:

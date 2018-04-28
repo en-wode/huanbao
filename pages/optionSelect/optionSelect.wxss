@@ -42,12 +42,17 @@ page{
   background: linear-gradient(#87d1d2,#d9bba3);
   color: #727171;
 }
+
 .iconfont{
-  font-size: 32px;
+  font-size: 64rpx;
   color: white;
   width:174rpx;
   height:168rpx;
   margin:0 auto 18rpx;
   border-radius:50%;
   background:red;
+  line-height: 168rpx;
+  text-align: center;
+  vertical-align: middle;
 }
+
