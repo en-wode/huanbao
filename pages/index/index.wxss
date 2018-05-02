@@ -23,3 +23,13 @@ page{
   margin-top: 160px;
   color: #fff;
 }
+
+.user-motto{
+  display: block;
+  text-align: center
+}
+.tip{
+  margin-top: 66px;
+  color: 	#CDC9C9;
+  font-size: 12px
+}

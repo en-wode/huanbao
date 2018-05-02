@@ -12,7 +12,6 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数 
-    console.log(options.id);
     this.setData({
       id: options.id
     }) 
@@ -44,11 +43,6 @@ Page({
     }
   },
   //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   //功能跳转
   optionSelect: function (options) {
     let that = this;
@@ -56,7 +50,6 @@ Page({
     console.log(targetid)
     switch (Number(targetid)) {
       case 1:
-      console.log(2);
         wx.navigateTo({
           url: '../deviceStatus/deviceStatus?id=' + that.data.id
         });

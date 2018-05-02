@@ -10,6 +10,7 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log(res.authSetting['scope.userInfo']);
         var authSetting = res.authSetting;
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
@@ -57,6 +58,7 @@ App({
     const that = this;
     wx.login({
       success: res => {
+        console.log(res);
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -69,7 +71,8 @@ App({
               code: res.code
             },
             success: function (result) {
-              if (result.code == 1) {
+              console.log(result);
+              if (result.data.code == 1) {
                 wx.getUserInfo({
                   success: function (res) {
                     var userInfo = Object.assign({}, result.data.result.data, res.userInfo);
@@ -84,7 +87,7 @@ App({
                         userInfo: userInfo
                       },
                       success: function (res) {
-                        console.log(res.data)
+                        console.log('注册')
                       }
                     })
                   }
