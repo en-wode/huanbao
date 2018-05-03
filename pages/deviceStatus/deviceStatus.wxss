@@ -31,7 +31,7 @@ page{
   width: 90%;
   margin: 0 auto;
   padding-bottom: 8rpx;
-  border-bottom: 4rpx solid #f3f3f3;
+  border-bottom: 6rpx solid #f3f3f3;
   font-weight: bolder;
   padding: 12rpx 0;
 }
@@ -83,6 +83,18 @@ page{
 }
 
 /* 工作指示灯 */
+.icon-qiwen-{
+  color: red
+}
+.icon-jishuidian{
+  color: #AAAAAA
+}
+.icon-open-eye{
+  color: #5CACEE
+}
+.icon-shuilongtou1{
+  color: #36648B
+}
 .work_light{
   padding: 24rpx 0;
 }
@@ -101,9 +113,21 @@ page{
 .icon-shuiweizhan{
   color: #4A708B
 }
+.card_title2{
+  font-weight:bolder
+}
 /* slider */
+.weather{
+  padding: 16rpx 0;
+  text-align: center;
+  line-height: 24px;
+}
+
 .section_gap{
   width: 90%;
   margin: 0 auto;
   padding: 24rpx;
+}
+.monitor{
+  padding: 18rpx 18px
 }

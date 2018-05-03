@@ -55,4 +55,16 @@ page{
   text-align: center;
   vertical-align: middle;
 }
+.de-detail{
+  background: #fc3403
+}
+.de-caozuo{
+  background: #fccd05
+}
+.de-check{
+  background: #039cfc
+}
+.de-history{
+  background: #441dd2
+}
 

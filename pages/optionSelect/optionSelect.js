@@ -66,7 +66,7 @@ Page({
         break;
       case 4:
         wx.navigateTo({
-          url: '../dataChart/dataChart?id=' + that.data.id
+          url: '../chartList/chartList?id=' + that.data.id
         });
         break;
     };

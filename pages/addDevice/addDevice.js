@@ -38,11 +38,6 @@ Page({
       url: '../weather/weather',
     })
   },
-  video: function () {
-    wx.navigateTo({
-      url: '../video/video',
-    })
-  },
   simulation: function () {
     wx.navigateTo({
       url: '../simulation/simulation',
@@ -52,7 +47,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.request({
+      url: 'http://192.168.0.115:7001/equipment/list',
+      method: 'GET',
+      data: {
+        userId: 1
+      },
+      success: function (result) {
+        console.log(result);
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

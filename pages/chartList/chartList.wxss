@@ -1,0 +1,28 @@
+/* pages/chartList/chartList.wxss */
+page{
+  background: #f3f3f3;
+}
+.addmore{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.addmore_rad{
+  width: 188rpx;
+  height: 188rpx;
+  border-radius: 50%;
+  background: #518cf6;
+  color: white;
+  text-align: center;
+  line-height: 188rpx;
+  margin-top: 388rpx;
+}
+.tip_title{
+  font-size: 24rpx;
+  color: #999;
+  position: absolute;
+  bottom: 80rpx;
+  text-align: center;
+  left: 0;
+  right: 0;
+}

@@ -4,11 +4,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 624563 */
-  src: url('//at.alicdn.com/t/font_624563_pvvhv1qabg25ipb9.eot');
-  src: url('//at.alicdn.com/t/font_624563_pvvhv1qabg25ipb9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624563_pvvhv1qabg25ipb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624563_pvvhv1qabg25ipb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624563_pvvhv1qabg25ipb9.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.eot');
+  src: url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -39,9 +39,45 @@
 
 .icon-wendu:before { content: "\e689"; }
 
+.icon-sun:before { content: "\e603"; }
+
+.icon-icon-test:before { content: "\e605"; }
+
+.icon-icon-test1:before { content: "\e606"; }
+
+.icon-icon-test3:before { content: "\e608"; }
+
+.icon-icon-test9:before { content: "\e614"; }
+
+.icon-icon-test11:before { content: "\e616"; }
+
+.icon-icon-test14:before { content: "\e61a"; }
+
+.icon-icon-test15:before { content: "\e61b"; }
+
+.icon-icon-test16:before { content: "\e61c"; }
+
+.icon-icon-test21:before { content: "\e621"; }
+
+.icon-icon-test22:before { content: "\e622"; }
+
+.icon-icon-test23:before { content: "\e65b"; }
+
 .icon-fenshuizha:before { content: "\e60b"; }
 
 .icon-shuiweizhan:before { content: "\e60e"; }
+
+.icon-xue:before { content: "\e6b7"; }
+
+.icon-qiwen:before { content: "\e6b8"; }
+
+.icon-qing:before { content: "\e6b9"; }
+
+.icon-qiwen-:before { content: "\e6ba"; }
+
+.icon-yin:before { content: "\e6bb"; }
+
+.icon-yu:before { content: "\e6bc"; }
 
 .icon-shuikudian:before { content: "\e62a"; }
 
@@ -88,6 +124,7 @@
 .icon-shishiliuliang:before { content: "\e99a"; }
 
 .icon-famen:before { content: "\e9d3"; }
+
 
 
 

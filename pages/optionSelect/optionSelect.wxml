@@ -10,19 +10,19 @@
   <view class="usermotto">
     <view class="zan-row option-bottom">
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='1'>
-          <view class="iconfont icon-video-surveillance " ></view>
+          <view class="iconfont icon-shuizha de-detail" ></view>
           设备详情
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='2'>
-          <view class="iconfont icon-video-surveillance " ></view>
+          <view class="iconfont icon-shezhi de-caozuo" ></view>
           设备操作
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='3'>
-          <view class="iconfont icon-famen01 " ></view>
+          <view class="iconfont icon-video-surveillance de-check" ></view>
           监控查看
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='4'>
-          <view class="iconfont icon-shuiweizhan " ></view>
+          <view class="iconfont icon-xitongzhuangtai de-history" ></view>
           历史数据
         </view>
       </view>

@@ -14,7 +14,7 @@
   </view>
   <view class='card'>
     <view class='card_title'>
-      排水阀开度 30%
+      <view class="iconfont icon-shuilongtou" ></view>排水阀开度 30%
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -24,7 +24,7 @@
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>截污阀开度 60%
+      <view class="iconfont icon-shuilongtou1" ></view>截污阀开度 60%
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -34,7 +34,7 @@
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>垃圾高度 100%
+      <view class="iconfont icon-jishuidian" ></view>垃圾高度 100%
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -66,14 +66,36 @@
         <view class="zan-cell__ft card_val">120m³/h</view>
       </view>
   </view>
-   <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >天气情况</view>
+   <view class='card'>
+     <view class='card_title'>
+      <view class="iconfont icon-qiwen-" ></view>天气情况
+    </view>
+      <view class="weather">
+        <view >
+          {{weatherData[0].date}}
+          {{weatherData[0].weather}} 
+          {{weatherData[0].temperature}} 
+        </view>
+        <view >
+          {{weatherData[1].date}}
+          {{weatherData[1].weather}}
+          {{weatherData[1].temperature}}
+        </view>
+        <view >
+          {{weatherData[2].date}}
+          {{weatherData[2].weather}}
+          {{weatherData[2].temperature}}
+        </view>
+          
       </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >监控</view>
-      </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-open-eye" ></view>监控
+    </view>
+    <view class='zan-row monitor'>
+        <view class="zan-col zan-col-12" bindtap='monitor' id='1'>井内监控</view>
+        <view class="zan-col zan-col-12" bindtap='monitor' id='2'>井外监控</view>
+    </view>
   </view>
 </view>

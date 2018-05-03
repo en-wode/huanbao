@@ -1,31 +1,10 @@
 <!--pages/deviceDetail/deviceDetail.wxml-->
 <import src="/dist/dialog/index.wxml" />
+<import src="/dist/switch/index.wxml" />
 <view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shezhi" ></view>当前状态
-    </view>
-    <view>
-      <view class="zan-row">
-        <view class="zan-col zan-col-8">
-          <view class='card_status'>38%</view>
-          <view class='card_status_name'>排水闸开度</view>
-        </view>
-        <view class="zan-col zan-col-8">
-          <view class='card_status'>65%</view>
-          <view class='card_status_name'>截污闸开度</view>
-        </view>
-        <view class="zan-col zan-col-8">
-          <view class='card_status'>28%</view>
-          <view class='card_status_name'>COD浓度</view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>温度设置
+      <view class="iconfont icon-taiyang1" ></view>排水闸开度
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -42,7 +21,7 @@
 
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shidu" ></view>设置湿度
+      <view class="iconfont icon-shidu" ></view>截污闸开度
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -59,7 +38,7 @@
 
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>流量设置
+      <view class="iconfont icon-shuilongtou" ></view>提篮格栅
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -73,6 +52,28 @@
       </view>
     </view>
   </view>
+  <view class='card'>
+    <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">1号水泵</view>
+        <view class="zan-cell__ft card_val">    
+          <view class="section section_gap">
+            <template is="zan-switch" data="{{ ...sync, componentId: 'sync' }}"></template>
+          </view>
+        </view>
+      </view>
+  </view>
+    
+  <view class='card'>
+    <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">2号水泵</view>
+        <view class="zan-cell__ft card_val">    
+          <view class="section section_gap">
+            <template is="zan-switch" data="{{ ...async, componentId: 'async' }}"></template>
+          </view>
+        </view>
+      </view>
+  </view>
+
   <view class='card' style='margin-bottom:8rpx'>
     <view class='card_title'>
       <view class="iconfont icon-dengpao" ></view>工作指示灯

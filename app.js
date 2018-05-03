@@ -1,9 +1,9 @@
 //app.js
 var util = require('utils/util')
 App({
-  onLaunch: function () {
+  onLaunch1: function () {
     // 展示本地存储能力
-    const that = this;
+    var that = this;
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
@@ -41,14 +41,16 @@ App({
     that.userLogin();
   },
   getUserInfo: function () {
+    const that = this;
     wx.getUserInfo({
       success: res => {
+        console.log('更新成功');
         // 可以将 res 发送给后台解码出 unionId
-        this.globalData.userInfo = res.userInfo;
+        that.globalData.userInfo = res.userInfo;
         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
         // 所以此处加入 callback 以防止这种情况
-        if (this.userInfoReadyCallback) {
-          this.userInfoReadyCallback(res)
+        if (that.userInfoReadyCallback) {
+          that.userInfoReadyCallback(res)
         }
       }
     })
@@ -71,7 +73,6 @@ App({
               code: res.code
             },
             success: function (result) {
-              console.log(result);
               if (result.data.code == 1) {
                 wx.getUserInfo({
                   success: function (res) {

@@ -1,4 +1,7 @@
 <!--pages/simulation/simulation.wxml-->
-<view>
-  <canvas canvas-id='first' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;"></canvas>
+<view class='wrap'>
+    <scroll-view scroll-x style="height: 100%;width: 100%;">  
+    <!-- <view><text>sass</text></view> -->
+     <canvas canvas-id='first' style="width: 200vw; height: 100vh;position:absolute;top:0;left:0;"></canvas> 
+   </scroll-view> 
 </view>

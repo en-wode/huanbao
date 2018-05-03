@@ -1,13 +1,23 @@
-// pages/user/user.js
+// pages/chartList/chartList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    device: [
+    ]
   },
-
+  /**
+   * 事件处理函数
+   */
+  history: function (event) {
+    console.log(event.currentTarget.id);
+    let devideId = event.currentTarget.id;
+    wx.navigateTo({
+      url: '../dataChart/dataChart?id=' + devideId
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

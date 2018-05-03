@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "设备列表",
   "usingComponents": {
     "wxc-progress": "../../packages/@minui/wxc-progress/dist/index"
   }

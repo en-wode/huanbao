@@ -29,7 +29,7 @@ page{
   text-align: center
 }
 .tip{
-  margin-top: 66px;
+  margin-top: 240rpx;
   color: 	#CDC9C9;
   font-size: 12px
 }
