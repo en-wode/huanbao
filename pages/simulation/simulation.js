@@ -19,17 +19,16 @@ Page({
     const that = this;
     that.tree();
     that.scene();
+    that.wind();
   },
   tree: function() {
     var Tree = (function () {
       var ctx = wx.createCanvasContext('first');
       var wxH = wx.getSystemInfoSync().windowHeight;
       var wxW = wx.getSystemInfoSync().windowWidth;
-
       //封顶
       ctx.moveTo(0, wxH - 350)
       ctx.lineTo(wxW, wxH - 350)
-      
       //左侧管道
       ctx.moveTo(0, wxH - 300 / 2 - 75);
       ctx.lineTo(50, wxH - 300 / 2 - 75);
@@ -52,67 +51,81 @@ Page({
       ctx.moveTo(wxW - 50, wxH - 300 / 2 - 25);
       ctx.lineTo(wxW - 50, wxH - 50);
       //右侧排水阀门
-      ctx.rect(wxW - 60, wxH - 200, 10, 100);
+      ctx.rect(wxW - 62, wxH - 200, 10, 100);
       ctx.setFillStyle('#515151');
       ctx.fill();
-
+      //提篮线条
+      ctx.moveTo(75, wxH - 335);
+      ctx.lineTo(75, wxH - 226);
+      // //封底
+      // ctx.moveTo(50, wxH - 50)
+      // ctx.lineTo(wxW - 50, wxH - 50)
       ctx.stroke();
+
       //测量计
       ctx.drawImage("/assets/images/survey.png", 10, wxH - 228, 26, 26);
-      ctx.drawImage("/assets/images/survey.png", 60, wxH - 352, 26, 26);
+      ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", wxW - 30, wxH - 228, 26, 26);
 
       ctx.drawImage("/assets/images/basket.png", 50, wxH - 250, 50, 50);
       ctx.drawImage("/assets/images/pump.png", 100, wxH - 130, 50, 50);
-      ctx.drawImage("/assets/images/tap.png", 150, wxH - 130, 50, 50);
+      ctx.drawImage("/assets/images/tap.png", 170, wxH - 130, 50, 50);
+      //树
+      ctx.drawImage("/assets/images/tree.jpg", 300, wxH - 456, 66, 106);
+      ctx.drawImage("/assets/images/tree3.jpg", 200, wxH - 457, 66, 106);
+      
+      //土壤
+      ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 350, 50, 125);
+      ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 350, 50, 125);
+      ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 300 / 2 - 25, 50, 175);
+      ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 300 / 2 - 25, 50, 175);
+      // ctx.drawImage("/assets/images/soil.jpg", 0, wxH-50, wxW, 50);
+
+      //背景色
+
       //水流
       ctx.setGlobalAlpha(0.6);
-      ctx.rect(50, wxH - 270, wxW - 100, wxH - 280);
-      ctx.rect(0, wxH - 225, 50, 50);
-      ctx.rect(wxW - 50, wxH - 225, 50, 50);
-      ctx.setFillStyle('#1E90FF');
+      const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
+      wrd.addColorStop(0, '#63B8FF');
+      wrd.addColorStop(0.6, '#1C86EE');
+      wrd.addColorStop(1, '#0000FF');
+      ctx.setFillStyle(wrd);
+      ctx.fillRect(50, wxH - 300, wxW - 100, wxH - 264);
+      ctx.fillRect(0, wxH - 225, 50, 50);
+      ctx.fillRect(wxW - 50, wxH - 225, 50, 50);
+
+      //草坪
+      ctx.beginPath();
+      ctx.moveTo(0, wxH - 350);
+      ctx.lineTo(0, wxH - 358);
+      ctx.lineTo(10, wxH - 359);
+      ctx.lineTo(64, wxH - 366);
+      ctx.lineTo(200, wxH - 370);
+      ctx.lineTo(240, wxH - 363);
+      ctx.lineTo(wxW-60, wxH - 364);
+      ctx.lineTo(wxW, wxH - 356);
+      ctx.lineTo(wxW, wxH - 350);
+      const grd = ctx.createLinearGradient(0, 0, 0, 300);
+      grd.addColorStop(0, '#458B74');
+      grd.addColorStop(0.7, '#2e4f11');
+      grd.addColorStop(1, '#54FF9F');
+      ctx.setStrokeStyle('#458B74');
+      ctx.setFillStyle(grd);
+      ctx.closePath();
       ctx.fill();
+      ctx.stroke();
+
+      //天空
+      const ard = ctx.createLinearGradient(0, 0, 0, 120)
+      ard.addColorStop(0, '#63B8FF')
+      ard.addColorStop(1, 'white')
+      ctx.setFillStyle(ard)
+      ctx.fillRect(0, 0, wxW, 120)
+      ctx.stroke();
       ctx.draw()
-      var maxBranch = 4;
-      var W = 375;
-      var H = 800;
-      var init = function (x, y) {
-        var x = 250, y = 150;
-        draw(x, y, 20, -Math.PI / 2, 8, 2);
-      }
-      var draw = function (startX, startY, length, angle, depth, branchWidth) {
-        var color, endX, endY, subBranches, newAngle, newLength;
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        endX = startX + length * Math.cos(angle);
-        endY = startY + length * Math.sin(angle);
-        ctx.setLineCap('round');
-        ctx.setLineWidth(branchWidth);
-        ctx.lineTo(endX, endY);
-        if (depth-- <= 2) {
-          color = 'rgb(0,' + (rand(128, 192) >> 0) + ',0)';
-        } else {
-          color = 'rgb(' + (rand(64, 128) >> 0) + ',50,25)';
-        }
-        ctx.setStrokeStyle(color);
-        ctx.stroke();
-        ctx.draw(true);
-        if (!depth) return;
-        subBranches = rand(1, maxBranch);
-        branchWidth *= 0.7;
-        for (var i = 0; i < subBranches; i++) {
-          newAngle = angle + rand(-Math.PI / 4, Math.PI / 4);
-          newLength = length * rand(0.7, 1);
-          draw(endX, endY, newLength, newAngle, depth, branchWidth)
-        }
-      }
-      var rand = function (min, max) {
-        return Math.random() * (max - min) + min;
-      }
-      return { init: init }
+
     })();
-    Tree.init()
   },
   scene: function () {
     // const ctx = wx.createCanvasContext('first');
@@ -205,5 +218,48 @@ Page({
     //   }, 35)
     // }
     // render();
+  },
+  wind: function () {
+    /*Javascript代码片段*/
+    //创建画布并开始动画
+    function showCloud() {
+      //创建画布设置画布属性
+      const ctx = wx.createCanvasContext('first');
+      drawCloud(ctx, 30, 40, 40);
+      drawCloud(ctx, 260, 40, 30);
+      drawCloud(ctx, 160, 30, 50);
+    }
+
+
+    /*渲染单个云朵
+    context:  canvas.getContext("2d")对象
+    cx: 云朵X轴位置
+    cy: 云朵Y轴位置
+    cw: 云朵宽度
+    */
+    function drawCloud(context, cx, cy, cw) {
+      //云朵高度为宽度的60%
+      var ch = cw * 0.6;
+      //开始绘制云朵
+      context.beginPath();
+      context.setFillStyle('white');
+      //创建渐变
+      var grd = context.createLinearGradient(0, 0, 0, cy);
+      grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+      grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+      context.fillStyle = grd;
+      context.fill();
+      //在不同位置创建5个圆拼接成云朵现状
+      context.arc(cx, cy, cw * 0.19, 0, 360, false);
+      context.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+      context.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+      context.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+      context.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+      context.closePath();
+      context.fill();
+      context.draw(true)
+      
+    }
+    showCloud();
   }
 })

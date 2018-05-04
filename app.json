@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/simulation/simulation",
     "pages/index/index",
     "pages/addDevice/addDevice",
     "pages/deviceDetail/deviceDetail",
@@ -9,6 +8,7 @@
     "pages/deviceStatus/deviceStatus",
     "pages/dataChart/dataChart",
     "pages/video/video",
+    "pages/simulation/simulation",
     "pages/optionSelect/optionSelect",
     "pages/chartList/chartList"
   ],
