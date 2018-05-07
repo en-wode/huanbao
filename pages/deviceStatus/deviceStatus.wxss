@@ -101,26 +101,31 @@ page{
 .light{
   font-size: 58rpx!important;
 }
-.icon-shuibei{
+.icon-dianji{
   color: #CD3700
 }
-.icon-video-surveillance{
+.icon-famen01{
   color: blue
 }
-.icon-famen01{
+.icon-xiaofangshuibeng{
   color: #CDCD00
 }
-.icon-shuiweizhan{
+.icon-icon-test23{
   color: #4A708B
 }
 .card_title2{
   font-weight:bolder
+}
+.work-name{
+  margin-top: 8rpx;
+  font-size: 24rpx
 }
 /* slider */
 .weather{
   padding: 16rpx 0;
   text-align: center;
   line-height: 24px;
+  font-size: 26rpx
 }
 
 .section_gap{

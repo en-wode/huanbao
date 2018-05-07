@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: '欢迎使用蓝翔环保',
+    motto: '点击开始使用蓝翔环保',
     tip: '本产品需微信授权登录，请点击上方按钮进行授权',
     userInfo: {},
     hasUserInfo: false,

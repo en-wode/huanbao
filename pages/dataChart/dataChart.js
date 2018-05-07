@@ -1,19 +1,28 @@
 // pages/dataChart/dataChart.js
 var _wxcharts = require('../../utils/wxcharts')
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    id: '',
+    datalist: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    console.log(options);
+    that.setData({
+      id: options.id,
+      datalist: options.datalist
+    }) 
+    that.getdata()
   },
 
   /**
@@ -23,6 +32,20 @@ Page({
     // 页面渲染完成
     this.getDeviceInfo()
     this.graphShow()
+  },
+  getdata: function () {
+    var that = this;
+    wx.request({
+      url: 'http://192.168.0.115:7001/equipmentArametersHistory/getByEquipmentId',
+      method: 'GET',
+      data: {
+        equipmentId: that.data.id,
+        openId: app.globalData.openId,
+      },
+      success: function (result) {
+        console.log(result)
+      }
+    })
   },
   /**
      * @Explain：获取设备信息
@@ -38,27 +61,6 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
   /**
   * @Explain：初始化静态图表
   */

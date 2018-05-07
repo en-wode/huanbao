@@ -5,24 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    device: [
-    ]
+    id: ''
   },
   /**
    * 事件处理函数
    */
   history: function (event) {
-    console.log(event.currentTarget.id);
+    const that = this;
     let devideId = event.currentTarget.id;
     wx.navigateTo({
-      url: '../dataChart/dataChart?id=' + devideId
+      url: '../dataChart/dataChart?id=' + that.data.id + '&datalist=' + devideId
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options)
+    const that = this;
+    that.setData({
+      id: options.id
+    }) 
   },
 
   /**

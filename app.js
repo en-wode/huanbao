@@ -10,7 +10,6 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        console.log(res.authSetting['scope.userInfo']);
         var authSetting = res.authSetting;
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
@@ -44,7 +43,6 @@ App({
     const that = this;
     wx.getUserInfo({
       success: res => {
-        console.log('更新成功');
         // 可以将 res 发送给后台解码出 unionId
         that.globalData.userInfo = res.userInfo;
         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -60,7 +58,6 @@ App({
     const that = this;
     wx.login({
       success: res => {
-        console.log(res);
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -77,7 +74,7 @@ App({
                 wx.getUserInfo({
                   success: function (res) {
                     var userInfo = Object.assign({}, result.data.result.data, res.userInfo);
-                    console.log(userInfo);
+                    that.globalData.openId = userInfo.openid;
                     wx.request({
                       url: 'http://192.168.0.115:7001/user/addUserOrUpdate',
                       method: 'POST',
@@ -107,6 +104,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openId: null
   }
 })

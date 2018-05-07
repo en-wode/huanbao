@@ -2,13 +2,13 @@
   "pages": [
     "pages/index/index",
     "pages/addDevice/addDevice",
-    "pages/deviceDetail/deviceDetail",
     "pages/deviceLink/deviceLink",
+    "pages/deviceDetail/deviceDetail",
+    "pages/simulation/simulation",
     "pages/waterShow/waterShow",
     "pages/deviceStatus/deviceStatus",
     "pages/dataChart/dataChart",
     "pages/video/video",
-    "pages/simulation/simulation",
     "pages/optionSelect/optionSelect",
     "pages/chartList/chartList"
   ],

@@ -1,13 +1,17 @@
 // pages/deviceStatus/deviceStatus.js
 var bmap = require('../../utils/bmap-wx.min.js');
-Page({
+const Zan = require('../../dist/index');
+const app = getApp()
+
+Page(Object.assign({}, Zan.TopTips, {
 
   /**
    * 页面的初始数据
    */
   data: {
     weatherData: [],
-    id: ''
+    id: '',
+    data: {}
   },
 
   /**
@@ -18,6 +22,7 @@ Page({
     that.setData({
       id: options.id
     }) 
+    that.devicestatus();
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
@@ -28,7 +33,6 @@ Page({
       var weatherData = data.originalData.results[0].weather_data;
       // weatherData = '城市：' + weatherData.currentCity + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n';
       // var weather = data.originalData;
-      console.log(weatherData);
       that.setData({
         weatherData: weatherData,
       });
@@ -45,13 +49,9 @@ Page({
   onReady: function () {
   
   },
-  sliderchange: function (val) {
-    console.log(val)
-  },
   monitor: function (options) {
     let that = this;
     let targetid = options.currentTarget.id;
-    console.log(targetid)
     switch (Number(targetid)) {
       case 1:
         wx.navigateTo({
@@ -65,45 +65,29 @@ Page({
         break;
     };
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  devicestatus: function () {
+    const that = this;
+    wx.request({
+      url: 'http://192.168.0.115:7001/equipmentArameters/getByEquipmentId',
+      method: 'GET',
+      data: {
+        equipmentId: that.data.id,
+        openId: app.globalData.openId,
+      },
+      success: function (result) {
+        if (result.data.code == 1) {
+          that.showTopTips('刷新成功')
+          that.setData({
+            data: result.data.result,
+          });
+          console.log(result.data.result);
+        } else {
+          that.showTopTips(result.data.msg)
+        }
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  showTopTips(data) {
+    this.showZanTopTips(data);
   }
-})
+}))

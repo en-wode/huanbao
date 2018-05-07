@@ -1,14 +1,13 @@
 /**app.wxss**/
 @import 'index.wxss';
 
-
 @font-face {
   font-family: 'iconfont';  /* project id 624563 */
-  src: url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.eot');
-  src: url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624563_oer3axq94ibe29.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.eot');
+  src: url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -25,13 +24,23 @@
 
 .icon-wifi:before { content: "\e659"; }
 
+.icon-shuibeng1:before { content: "\e630"; }
+
 .icon-famen01:before { content: "\e63d"; }
 
 .icon-ren:before { content: "\e619"; }
 
+.icon-jiantouarrow506:before { content: "\e6b5"; }
+
+.icon-jiantoushangsheng:before { content: "\e7f1"; }
+
+.icon-jiantouxiajiang:before { content: "\e7f2"; }
+
 .icon-jienenghuanbao:before { content: "\e645"; }
 
 .icon-jia:before { content: "\e601"; }
+
+.icon-jiantou:before { content: "\e7a9"; }
 
 .icon-jishuidian:before { content: "\e604"; }
 
@@ -79,6 +88,8 @@
 
 .icon-yu:before { content: "\e6bc"; }
 
+.icon-caidanmoshi:before { content: "\e665"; }
+
 .icon-shuikudian:before { content: "\e62a"; }
 
 .icon-shuizha:before { content: "\e62d"; }
@@ -87,7 +98,11 @@
 
 .icon-shuili:before { content: "\e63a"; }
 
+.icon-dianji:before { content: "\e607"; }
+
 .icon-dycdp:before { content: "\e782"; }
+
+.icon-xiaofangshuibeng:before { content: "\e60d"; }
 
 .icon-shouji:before { content: "\e633"; }
 
@@ -124,9 +139,6 @@
 .icon-shishiliuliang:before { content: "\e99a"; }
 
 .icon-famen:before { content: "\e9d3"; }
-
-
-
 
 
 

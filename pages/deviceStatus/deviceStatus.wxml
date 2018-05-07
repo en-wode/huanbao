@@ -1,69 +1,93 @@
 <!--pages/deviceStatus/deviceStatus.wxml-->
+<import src="/dist/toptips/index.wxml" />
 <view>
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >井内水位：</view>
-        <view class="zan-cell__ft card_val">12米</view>
+        <view class="zan-cell__ft card_val">{{data.wellWater}}米</view>
       </view>
   </view>
   <view class='card_num'>
       <view class="zan-cell">
         <view class="zan-cell__bd card_name">河道水位：</view>
-        <view class="zan-cell__ft card_val">12米</view>
+        <view class="zan-cell__ft card_val">{{data.riverWater}}米</view>
       </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>排水阀开度 30%
+      <view class="iconfont icon-shuilongtou" ></view>排水阀开度 {{data.drainage}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="30" active-color="#33ccff,#3399ff"></wxc-progress>
-      </view>
-    </view>
-  </view>
-  <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-shuilongtou1" ></view>截污阀开度 60%
-    </view>
-    <view class="section section_gap">
-      <view class="body-view">
-           <wxc-progress percent="60" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.drainage}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-jishuidian" ></view>垃圾高度 100%
+      <view class="iconfont icon-shuilongtou1" ></view>截污阀开度 {{data.InterceptingPollution}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="100" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.InterceptingPollution}}" active-color="#33ccff,#3399ff"></wxc-progress>
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card_title'>
+      <view class="iconfont icon-jishuidian" ></view>垃圾高度 {{data.garbage}}%
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+           <wxc-progress percent="{{data.garbage}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >COD浓度：</view>
-        <view class="zan-cell__ft card_val">32%</view>
+        <view class="zan-cell__ft card_val">{{data.COD}}%</view>
       </view>
   </view>
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >SS悬浮物：</view>
-        <view class="zan-cell__ft card_val">22</view>
+        <view class="zan-cell__ft card_val">{{data.ss}}</view>
       </view>
   </view>
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >系统压力：</view>
-        <view class="zan-cell__ft card_val">22Mpa</view>
+        <view class="zan-cell__ft card_val">{{data.systemressure}}Mpa</view>
       </view>
   </view>
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >污水累计流量：</view>
-        <view class="zan-cell__ft card_val">120m³/h</view>
+        <view class="zan-cell__ft card_val">{{data.flow}}m³/h</view>
+      </view>
+  </view>
+  <view class='card' style='margin-bottom:8rpx'>
+    <view class='card_title'>
+      <view class="iconfont icon-dengpao" ></view>工作指示灯
+    </view>
+    <view class="zan-row work_light">
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-dianji light" ></view>
+          <view class="work-name">电机</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-xiaofangshuibeng light" ></view>
+          <view class="work-name">1#水泵</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-famen01 light" ></view>
+          <view class="work-name">2#水泵</view>
+        </view>
+        <view class="zan-col zan-col-6">
+          <view class="iconfont icon-icon-test23 light" ></view>
+          <view class="work-name">提篮格栅</view>
+        </view>
       </view>
   </view>
    <view class='card'>
@@ -98,4 +122,5 @@
         <view class="zan-col zan-col-12" bindtap='monitor' id='2'>井外监控</view>
     </view>
   </view>
+  <template is="zan-toptips" data="{{ zanTopTips }}"></template>
 </view>

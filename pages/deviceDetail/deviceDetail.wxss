@@ -83,6 +83,9 @@ page{
 .icon-shuiweizhan{
   color: #4A708B
 }
+.icon-caidanmoshi{
+  color: #09b6ba
+}
 /* slider */
 .section_gap{
   width: 90%;

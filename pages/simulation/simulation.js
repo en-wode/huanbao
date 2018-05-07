@@ -29,11 +29,49 @@ Page({
       //封顶
       ctx.moveTo(0, wxH - 350)
       ctx.lineTo(wxW, wxH - 350)
+
+      //水流
+      ctx.beginPath();
+      ctx.setGlobalAlpha(0.8);
+      const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
+      wrd.addColorStop(0, '#63B8FF');
+      wrd.addColorStop(0.6, '#1C86EE');
+      wrd.addColorStop(1, '#0000FF');
+      ctx.setFillStyle(wrd);
+      ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300)));
+      ctx.fillRect(0, wxH - 225, 50, 50);
+      ctx.fillRect(wxW - 50, wxH - 225, 50, 50);
+      ctx.stroke();
+
+      //提篮线条
+      ctx.moveTo(75, wxH - 335);
+      ctx.lineTo(75, wxH - 226);
+      ctx.stroke();
+
+      //水泵管道
+
+      //截污阀
+      const jiewufa = ctx.createLinearGradient(0, 0, 200, 0)
+      jiewufa.addColorStop(0, 'red')
+      jiewufa.addColorStop(1, 'white')
+
+      // Fill with gradient
+      ctx.setFillStyle(jiewufa)
+      ctx.fillRect(180, wxH - 120, 40, 70)
+
+      //右侧排水阀门
+      ctx.rect(wxW - 65, wxH - 204, 10, 100);
+      ctx.setFillStyle('#515151');
+      ctx.fill();
+
+      ctx.beginPath()
+      ctx.setLineWidth(8)
+      ctx.setStrokeStyle('#A6A6A6')
       //左侧管道
       ctx.moveTo(0, wxH - 300 / 2 - 75);
-      ctx.lineTo(50, wxH - 300 / 2 - 75);
+      ctx.lineTo(54, wxH - 300 / 2 - 75);
       ctx.moveTo(0, wxH - 300 / 2 - 25);
-      ctx.lineTo(50, wxH - 300 / 2 - 25);
+      ctx.lineTo(54, wxH - 300 / 2 - 25);
       //左侧墙壁
       ctx.moveTo(50, wxH-300-50);
       ctx.lineTo(50, wxH-300/2-75);
@@ -41,36 +79,35 @@ Page({
       ctx.lineTo(50, wxH -50);
 
       //右侧管道
-      ctx.moveTo(wxW - 50, wxH - 300 / 2 - 75);
+      ctx.moveTo(wxW - 54, wxH - 300 / 2 - 75);
       ctx.lineTo(wxW, wxH - 300 / 2 - 75);
-      ctx.moveTo(wxW - 50, wxH - 300 / 2 - 25);
+      ctx.moveTo(wxW - 54, wxH - 300 / 2 - 25);
       ctx.lineTo(wxW, wxH - 300 / 2 - 25);
       //右侧墙壁
       ctx.moveTo(wxW - 50, wxH - 300 - 50);
       ctx.lineTo(wxW - 50, wxH - 300 / 2 - 75);
       ctx.moveTo(wxW - 50, wxH - 300 / 2 - 25);
       ctx.lineTo(wxW - 50, wxH - 50);
-      //右侧排水阀门
-      ctx.rect(wxW - 62, wxH - 200, 10, 100);
-      ctx.setFillStyle('#515151');
-      ctx.fill();
-      //提篮线条
-      ctx.moveTo(75, wxH - 335);
-      ctx.lineTo(75, wxH - 226);
-      // //封底
-      // ctx.moveTo(50, wxH - 50)
-      // ctx.lineTo(wxW - 50, wxH - 50)
+
+      //封底
+      ctx.moveTo(50, wxH - 50)
+      ctx.lineTo(wxW - 50, wxH - 50)
       ctx.stroke();
+
+      //水流方向
+      ctx.drawImage("/assets/images/right.png", 10, wxH - 210, 36, 26);
+      ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 210, 36, 26);
 
       //测量计
       ctx.drawImage("/assets/images/survey.png", 10, wxH - 228, 26, 26);
       ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", wxW - 30, wxH - 228, 26, 26);
-
       ctx.drawImage("/assets/images/basket.png", 50, wxH - 250, 50, 50);
-      ctx.drawImage("/assets/images/pump.png", 100, wxH - 130, 50, 50);
-      ctx.drawImage("/assets/images/tap.png", 170, wxH - 130, 50, 50);
+
+      //水泵 阀门
+      ctx.drawImage("/assets/images/shuibeng.png", 120, wxH - 100, 50, 50);
+      ctx.drawImage("/assets/images/tap.png", 185, wxH - 100, 30, 30);
       //树
       ctx.drawImage("/assets/images/tree.jpg", 300, wxH - 456, 66, 106);
       ctx.drawImage("/assets/images/tree3.jpg", 200, wxH - 457, 66, 106);
@@ -78,25 +115,16 @@ Page({
       //土壤
       ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 350, 50, 125);
       ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 350, 50, 125);
-      ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 300 / 2 - 25, 50, 175);
-      ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 300 / 2 - 25, 50, 175);
+      ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 300 / 2 - 25, 50, 130);
+      ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 300 / 2 - 25, 50, 130);
       // ctx.drawImage("/assets/images/soil.jpg", 0, wxH-50, wxW, 50);
 
       //背景色
 
-      //水流
-      ctx.setGlobalAlpha(0.6);
-      const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
-      wrd.addColorStop(0, '#63B8FF');
-      wrd.addColorStop(0.6, '#1C86EE');
-      wrd.addColorStop(1, '#0000FF');
-      ctx.setFillStyle(wrd);
-      ctx.fillRect(50, wxH - 300, wxW - 100, wxH - 264);
-      ctx.fillRect(0, wxH - 225, 50, 50);
-      ctx.fillRect(wxW - 50, wxH - 225, 50, 50);
-
       //草坪
       ctx.beginPath();
+      ctx.setLineWidth(1)
+      ctx.setGlobalAlpha(0.6);
       ctx.moveTo(0, wxH - 350);
       ctx.lineTo(0, wxH - 358);
       ctx.lineTo(10, wxH - 359);
