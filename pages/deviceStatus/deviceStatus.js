@@ -33,9 +33,11 @@ Page(Object.assign({}, Zan.TopTips, {
       var weatherData = data.originalData.results[0].weather_data;
       // weatherData = '城市：' + weatherData.currentCity + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n';
       // var weather = data.originalData;
+      weatherData[0].date = weatherData[0].date.slice(0,2)
       that.setData({
         weatherData: weatherData,
       });
+      console.log(weatherData)
     }
     BMap.weather({
       fail: fail,
@@ -48,6 +50,18 @@ Page(Object.assign({}, Zan.TopTips, {
    */
   onReady: function () {
   
+  },
+  simulation: function () {
+    let that = this;
+    wx.navigateTo({
+      url: '../simulation/simulation?id=' + that.data.id
+    });
+  },
+  location: function () {
+    let that = this;
+    wx.navigateTo({
+      url: '../location/location?id=' + that.data.id
+    });
   },
   monitor: function (options) {
     let that = this;

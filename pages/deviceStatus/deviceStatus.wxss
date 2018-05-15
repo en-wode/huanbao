@@ -9,7 +9,7 @@ page{
 .card{
   background: #fff;
   font-size: 30rpx;
-  padding: 0 0 12rpx 0;
+  padding: 0 0 12rpx 0; 
   margin-bottom: 18rpx;
   font-weight: 500
 }
@@ -35,11 +35,15 @@ page{
   font-weight: bolder;
   padding: 12rpx 0;
 }
+.bdline{
+  border-right: 1px solid #ccc
+}
 .card_val{
   min-width: 168rpx;
   text-align: center!important;
 }
 .card_name{
+  font-size: 32rpx;
   font-weight: 500
 }
 /* 卡片内部字体颜色 */
@@ -89,7 +93,7 @@ page{
 .icon-jishuidian{
   color: #AAAAAA
 }
-.icon-open-eye{
+.icon-video-surveillance{
   color: #5CACEE
 }
 .icon-shuilongtou1{
@@ -135,4 +139,7 @@ page{
 }
 .monitor{
   padding: 18rpx 18px
+}
+.today{
+  font-weight: 700
 }

@@ -1,14 +1,24 @@
 <!--index.wxml-->
+<import src="../../dist/field/index.wxml" />
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信授权登录 </button>
-    <block wx:else>
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+    <text class="user-motto" bindtap="adddevice" >{{motto}}</text>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="zan-panel">
+        <template
+          is="zan-field"
+          data="{{ ...base.name, name}}"></template>
+        <template
+          is="zan-field"
+          data="{{ ...base.password, password}}"></template>
+      </view>
+      <view class='editpassword' bindtap='editpassword'>修改密码</view>
+       <button
+          class="zan-btn"
+          formType="submit">登录</button>
+      </form>
   </view>
   <view class="usermotto">
-    <text class="user-motto" bindtap="adddevice" >{{motto}}</text>
     <text class="user-motto tip" >{{tip}}</text>
   </view>
 </view>

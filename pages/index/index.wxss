@@ -3,9 +3,8 @@ page{
   background: linear-gradient(#518cf6, #045193);
 }
 .userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 86%;
+  margin: 28rpx auto
 }
 
 .userinfo-avatar {
@@ -20,16 +19,42 @@ page{
 }
 
 .usermotto {
-  margin-top: 160px;
+  margin-top: 160rpx;
   color: #fff;
 }
 
 .user-motto{
   display: block;
-  text-align: center
+  text-align: center;
+  color: white
 }
 .tip{
-  margin-top: 240rpx;
   color: 	#CDC9C9;
   font-size: 12px
+}
+.zan-panel{
+  background: none;
+  color: white;
+  margin-top: 148rpx;
+}
+.zan-field__title{
+  color: white
+}
+.zan-field__placeholder{
+  color: #B8B8B8
+}
+.zan-cell__bd{
+  color: white;
+}
+.zan-btn{
+  margin-top: 128rpx;
+  color: #63B8FF;
+  background: #FCFCFC;
+  border-radius: 45px
+}
+.editpassword{
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  text-align: right;
+  color: #DCDCDC;
 }

@@ -1,0 +1,50 @@
+/* pages/model/model.wxss */
+page{
+  background: #f3f3f3;
+}
+.edit{
+  font-size: 28rpx;
+  background: #fff;
+  padding: 18rpx 0 18rpx 28rpx;
+}
+.addmore{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.addmore_rad{
+  font-size: 32rpx;
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 50%;
+  background: #518cf6;
+  color: white;
+  text-align: center;
+  line-height: 168rpx;
+  margin-top: 138rpx;
+}
+.tip_title{
+  font-size: 24rpx;
+  color: #999;
+  position: absolute;
+  bottom: 80rpx;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+.zan-panel{
+  margin-bottom: 10px;
+  margin-top: 0px
+}
+.iconfont{
+  display: inline-block;
+  margin-right:10rpx;
+  font-size:36rpx;
+}
+.hide{
+ display: none;
+}
+.show{ 
+ display: block;
+ transition: 0.5s
+}

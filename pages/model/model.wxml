@@ -1,0 +1,52 @@
+<!--pages/model/model.wxml-->
+<view >
+  <view class='edit'>
+    <button class="zan-btn zan-btn--small" bindtap="onChangeState">编辑</button>
+  </view>
+  <view>
+    <view class="zan-panel" bindtap='model' id='1'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">晴天截流模式</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='model' id='2'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">预警排空模式</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='model' id='3' >
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">雨天直排模式</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='model' id='4'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">自动值守模式</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='model' id='5'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__icon zan-icon zan-icon-delete {{showView?'show':'hide'}}" style="color:red;"></view>
+        <view class="zan-cell__bd">自定义模式</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class='addmore' bindtap='model' id='0'>
+      <view class='addmore_rad'>
+        新建模式
+      </view>
+    </view>
+    <!-- <view class="zan-panel" bindtap='simulation'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">场景模拟</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view> -->
+  </view>
+  <view class='tip_title'>欢迎使用蓝翔环保管理小程序</view>
+</view>
+

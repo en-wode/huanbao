@@ -2,7 +2,7 @@
 <view >
   <view class="zan-panel">
     <view class="zan-cell">
-      <view class="zan-cell__bd">用户</view>
+      <view class="zan-cell__bd" >用户</view>
       <view class="zan-cell__ft" bindtap='addmore'>添加新设备</view>
     </view>
   </view>

@@ -2,20 +2,24 @@
 <import src="/dist/toptips/index.wxml" />
 <view>
   <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >井内水位：</view>
-        <view class="zan-cell__ft card_val">{{data.wellWater}}米</view>
+   <view class="zan-row">
+      <view class="zan-col zan-col-12 ">
+        <view class="zan-cell bdline">
+          <view class="zan-cell__bd card_name" >井内水位：</view>
+          <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+        </view>
       </view>
-  </view>
-  <view class='card_num'>
-      <view class="zan-cell">
-        <view class="zan-cell__bd card_name">河道水位：</view>
-        <view class="zan-cell__ft card_val">{{data.riverWater}}米</view>
+      <view class="zan-col zan-col-12">
+        <view class="zan-cell">
+          <view class="zan-cell__bd card_name">河道水位：</view>
+          <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+        </view>
       </view>
+    </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>排水阀开度 {{data.drainage}}%
+      <view class="iconfont icon-shuilongtou" ></view>排水闸门开度 {{data.drainage}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -25,7 +29,7 @@
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou1" ></view>截污阀开度 {{data.InterceptingPollution}}%
+      <view class="iconfont icon-shuilongtou1" ></view>截污闸门开度 {{data.InterceptingPollution}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -46,7 +50,7 @@
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >COD浓度：</view>
-        <view class="zan-cell__ft card_val">{{data.COD}}%</view>
+        <view class="zan-cell__ft card_val">{{data.COD}}mg/L</view>
       </view>
   </view>
   <view class='card_num'>
@@ -63,8 +67,26 @@
   </view>
   <view class='card_num'>
      <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >污水累计流量：</view>
+        <view class="zan-cell__bd card_name" >管道污水累计流量：</view>
         <view class="zan-cell__ft card_val">{{data.flow}}m³/h</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell">
+        <view class="zan-cell__bd card_name" >管道污水瞬时流量：</view>
+        <view class="zan-cell__ft card_val">{{data.flow}}m³/h</view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell" bindtap='simulation'>
+        <view class="zan-cell__bd card_name" >场景模拟</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+  </view>
+  <view class='card_num'>
+     <view class="zan-cell" bindtap='location'>
+        <view class="zan-cell__bd card_name" >地理位置</view>
+        <view class="zan-cell__ft"></view>
       </view>
   </view>
   <view class='card' style='margin-bottom:8rpx'>
@@ -94,31 +116,32 @@
      <view class='card_title'>
       <view class="iconfont icon-qiwen-" ></view>天气情况
     </view>
-      <view class="weather">
-        <view >
-          {{weatherData[0].date}}
-          {{weatherData[0].weather}} 
-          {{weatherData[0].temperature}} 
+    <view class="weather">
+      <view class='zan-row'>
+        <view class='zan-col zan-col-8'>
+          <view>{{weatherData[0].date}}<text class='today'>（今天）</text></view>
+          <view>{{weatherData[0].weather}}</view>
+          <view>{{weatherData[0].temperature}}</view>
         </view>
-        <view >
-          {{weatherData[1].date}}
-          {{weatherData[1].weather}}
-          {{weatherData[1].temperature}}
+        <view class='zan-col zan-col-8'>
+          <view>{{weatherData[1].date}}</view>
+          <view>{{weatherData[1].weather}}</view>
+          <view>{{weatherData[1].temperature}}</view>
         </view>
-        <view >
-          {{weatherData[2].date}}
-          {{weatherData[2].weather}}
-          {{weatherData[2].temperature}}
+        <view class='zan-col zan-col-8'>
+          <view>{{weatherData[2].date}}</view>
+          <view>{{weatherData[2].weather}}</view>
+          <view>{{weatherData[2].temperature}}</view>
         </view>
-          
       </view>
+    </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-open-eye" ></view>监控
+      <view class="iconfont icon-video-surveillance" ></view>监控
     </view>
     <view class='zan-row monitor'>
-        <view class="zan-col zan-col-12" bindtap='monitor' id='1'>井内监控</view>
+        <view class="zan-col zan-col-12 bdline" bindtap='monitor' id='1'>井内监控</view>
         <view class="zan-col zan-col-12" bindtap='monitor' id='2'>井外监控</view>
     </view>
   </view>

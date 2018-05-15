@@ -1,0 +1,30 @@
+/* pages/location/location.wxss */
+.contain{
+  margin-top: 42rpx;
+  color: #787878
+}
+picker{
+  margin: 0 52rpx 36rpx 52rpx;
+}
+map{
+  margin: 0 auto
+}
+.questionname{
+  margin-right: 48rpx;
+  font-size: 32rpx;
+}
+.picker{
+  display: inline-block;
+  font-size: 32rpx;
+  padding-bottom: 4rpx;
+  border-bottom: 1px solid #ccc;
+  width: 68%;
+  text-align: center
+}
+.submit{
+  margin: 0 auto;
+  margin-top: 88rpx;
+  width: 80%;
+  background: #4876FF;
+  color: white
+}

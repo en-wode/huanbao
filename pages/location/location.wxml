@@ -1,0 +1,24 @@
+<!--pages/location/location.wxml-->
+<view class='contain'>
+  <picker bindchange="bindPickertype" value="{{typeindex}}" range="{{questiontype}}">
+  <text class='questionname'>问题类型:</text>
+    <view class="picker">
+      {{questiontype[typeindex]}}
+    </view>
+  </picker>
+  <picker bindchange="bindPickerlevel" value="{{levelindex}}" range="{{questionlevel}}">
+  <text class='questionname'>紧急程度:</text>
+    <view class="picker">
+      {{questionlevel[levelindex]}}
+    </view>
+  </picker>
+  <map id="map4select"
+    longitude="{{longitude}}" latitude="{{latitude}}" 
+    markers="{{markers}}"
+    scale="20" 
+    style="width:{{map_width}}px;height:{{map_height}}px"
+    bindregionchange="regionchange"
+    controls="{{controls}}">
+  </map>
+  <button class='submit'>提交</button>
+</view>

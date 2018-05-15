@@ -18,7 +18,6 @@ Page({
   onLoad: function () {
     const that = this;
     that.tree();
-    that.scene();
     that.wind();
   },
   tree: function() {
@@ -29,10 +28,13 @@ Page({
       //封顶
       ctx.moveTo(0, wxH - 350)
       ctx.lineTo(wxW, wxH - 350)
-
-      //水流
+      //背景色
       ctx.beginPath();
       ctx.setGlobalAlpha(0.8);
+      ctx.setFillStyle('#D3D3D3')
+      ctx.fillRect(50, wxH - 350, wxW - 100, 300);
+      //水流
+      ctx.beginPath();
       const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
       wrd.addColorStop(0, '#63B8FF');
       wrd.addColorStop(0.6, '#1C86EE');
@@ -43,29 +45,31 @@ Page({
       ctx.fillRect(wxW - 50, wxH - 225, 50, 50);
       ctx.stroke();
 
+
       //提篮线条
       ctx.moveTo(75, wxH - 335);
       ctx.lineTo(75, wxH - 226);
       ctx.stroke();
 
-      //水泵管道
+      
+      // //截污阀
+      // const jiewufa = ctx.createLinearGradient(180, wxH - 120, 220, wxH - 50)
+      // jiewufa.addColorStop(0, 'green')
+      // jiewufa.addColorStop(1, 'white')
 
-      //截污阀
-      const jiewufa = ctx.createLinearGradient(0, 0, 200, 0)
-      jiewufa.addColorStop(0, 'red')
-      jiewufa.addColorStop(1, 'white')
+      // // Fill with gradient
+      // ctx.setFillStyle(jiewufa)
+      // ctx.fillRect(180, wxH - 120, 40, 70)
+      
 
-      // Fill with gradient
-      ctx.setFillStyle(jiewufa)
-      ctx.fillRect(180, wxH - 120, 40, 70)
 
       //右侧排水阀门
-      ctx.rect(wxW - 65, wxH - 204, 10, 100);
-      ctx.setFillStyle('#515151');
-      ctx.fill();
+      // ctx.rect(wxW - 65, wxH - 204, 10, 100);
+      // ctx.setFillStyle('#515151');
+      // ctx.fill();
 
       ctx.beginPath()
-      ctx.setLineWidth(8)
+      ctx.setLineWidth(10)
       ctx.setStrokeStyle('#A6A6A6')
       //左侧管道
       ctx.moveTo(0, wxH - 300 / 2 - 75);
@@ -93,21 +97,31 @@ Page({
       ctx.moveTo(50, wxH - 50)
       ctx.lineTo(wxW - 50, wxH - 50)
       ctx.stroke();
+      ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 80, 220);
 
       //水流方向
       ctx.drawImage("/assets/images/right.png", 10, wxH - 210, 36, 26);
       ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 210, 36, 26);
+      //水泵水流方向
+      ctx.drawImage("/assets/images/upward.png", 110, wxH - 210, 22, 46);
+
+      //水泵 阀门 提篮
+      ctx.drawImage("/assets/images/shuibeng.png", 140, wxH - 155, 90, 100);
+      ctx.drawImage("/assets/images/jiewu.png", 230, wxH - 190, 45, 135);
 
       //测量计
-      ctx.drawImage("/assets/images/survey.png", 10, wxH - 228, 26, 26);
+      ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
       ctx.drawImage("/assets/images/survey.png", wxW - 30, wxH - 228, 26, 26);
-      ctx.drawImage("/assets/images/basket.png", 50, wxH - 250, 50, 50);
+      ctx.drawImage("/assets/images/basket.png", 60, wxH - 250, 30, 30);
 
-      //水泵 阀门
-      ctx.drawImage("/assets/images/shuibeng.png", 120, wxH - 100, 50, 50);
-      ctx.drawImage("/assets/images/tap.png", 185, wxH - 100, 30, 30);
+      //右侧排水阀门
+      ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 204, 24, 140);
+
+      //主机
+      ctx.drawImage("/assets/images/zhuji.png", wxW - 85, wxH - 350, 30, 30);
+      
       //树
       ctx.drawImage("/assets/images/tree.jpg", 300, wxH - 456, 66, 106);
       ctx.drawImage("/assets/images/tree3.jpg", 200, wxH - 457, 66, 106);
@@ -119,11 +133,72 @@ Page({
       ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 300 / 2 - 25, 50, 130);
       // ctx.drawImage("/assets/images/soil.jpg", 0, wxH-50, wxW, 50);
 
-      //背景色
+      //主机箱
+      ctx.beginPath();
+      ctx.setLineWidth(5);
+      ctx.setLineJoin('round');
+      ctx.setStrokeStyle('white');
+      ctx.moveTo(wxW - 88, wxH - 350);
+      ctx.lineTo(wxW - 88, wxH - 316);
+      ctx.lineTo(wxW - 55, wxH - 316);
+      ctx.stroke();
 
+      //水泵管道
+      ctx.beginPath();
+      ctx.setLineWidth(5);
+      ctx.setLineJoin('round');
+      ctx.setStrokeStyle('white');
+      ctx.moveTo(110, wxH - 86);
+      ctx.lineTo(110, wxH - 106);
+      // ctx.moveTo(125, wxH - 86);
+      // ctx.lineTo(110, wxH - 86);
+      // ctx.lineTo(110, wxH - 300);
+      // ctx.lineTo(53, wxH - 300);
+      // ctx.stroke();
+      // ctx.beginPath();
+      // ctx.setLineWidth(12)
+      // ctx.setStrokeStyle('white');
+      // ctx.moveTo(200, wxH - 120);
+      // ctx.lineTo(200, wxH - 152);
+      
+      ctx.stroke();
+      // //主机连线
+      // ctx.beginPath();
+      // ctx.setLineWidth(1);
+      // ctx.setLineJoin('round');
+      // ctx.setStrokeStyle('black');
+      // ctx.moveTo(wxW - 78, wxH - 320);
+      // ctx.lineTo(wxW - 78, wxH - 180);
+      // ctx.lineTo(wxW - 176, wxH - 180);
+      // ctx.lineTo(wxW - 220, wxH - 180);
+      // ctx.lineTo(wxW - 220, wxH - 98);
+      
+      // ctx.moveTo(wxW - 166, wxH - 180);
+      // ctx.lineTo(wxW - 166, wxH - 155);
+
+      // ctx.moveTo(wxW - 78, wxH - 180);
+      // ctx.lineTo(wxW - 65, wxH - 180);
+
+      // ctx.moveTo(wxW - 220, wxH - 180);
+      // ctx.lineTo(wxW - 220, wxH - 220);
+      // ctx.lineTo(wxW - 270, wxH - 220);
+      
+      // ctx.stroke();
+      
+      //水位计工作
+      ctx.beginPath();
+      ctx.setLineWidth(1);
+      ctx.setLineJoin('round');
+      ctx.setStrokeStyle('black');
+      ctx.moveTo(wxW - 162, wxH - 325);
+      ctx.lineTo(wxW - 162, wxH - 290);
+      ctx.lineTo(wxW - 156, wxH - 295);
+      ctx.moveTo(wxW - 162, wxH - 290);
+      ctx.lineTo(wxW - 168, wxH - 295);
+      ctx.stroke();
       //草坪
       ctx.beginPath();
-      ctx.setLineWidth(1)
+      ctx.setLineWidth(1);
       ctx.setGlobalAlpha(0.6);
       ctx.moveTo(0, wxH - 350);
       ctx.lineTo(0, wxH - 358);
@@ -151,6 +226,22 @@ Page({
       ctx.setFillStyle(ard)
       ctx.fillRect(0, 0, wxW, 120)
       ctx.stroke();
+
+      //设备名称
+      ctx.setFontSize(12)
+      ctx.setFillStyle('black')
+      ctx.fillText('水流方向', 8, wxH - 205)
+      ctx.fillText('提篮格栅', 55, wxH - 30)
+      ctx.fillText('水泵', 130, wxH - 30)
+      ctx.fillText('截污阀', 180, wxH - 30)
+      ctx.fillText('排水阀门', 290, wxH - 30)
+      ctx.fillText('水位计', 168, wxH - 334)
+      ctx.fillText('物位计', 86, wxH - 334)
+      ctx.fillText('主机', 245, wxH - 334)
+      // ctx.fillText('截污体系', 215, wxH - 190)
+      ctx.fillText('水位监控', 160, wxH - 300)
+      ctx.setFontSize(18)
+      ctx.fillText('一体化智能截污井', 120, 80)
       ctx.draw()
 
     })();

@@ -1,5 +1,29 @@
 <!--pages/dataChart/dataChart.wxml-->
+<import src="../../dist/tab/index.wxml" />
 <view>
+  <view >
+    <template
+      is="zan-tab"
+      data="{{ ...tab1, componentId: 'tab1' }}"></template>
+  </view>
   <canvas class="canvas" canvas-id="lineGraph"></canvas>
-  <view bindtap='change'>change</view>
+  <view class='contain'>
+    <view class='title'>流量记录</view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-12">
+          最高：16.8 m/h
+        </view>
+        <view class="zan-col zan-col-12">
+          最低：16.8 m/h
+        </view>
+      </view>
+    <view class="zan-row">
+      <view class="zan-col zan-col-12">
+        平均: 8 m/h
+      </view>
+      <view class="zan-col zan-col-12">
+        瞬时: 8
+      </view>
+    </view>
+  </view>
 </view>

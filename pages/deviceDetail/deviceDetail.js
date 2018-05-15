@@ -11,7 +11,27 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
     waterPump2: {
       checked: true,
     },
-    data: {}
+    data: {},
+    controls: [
+      {
+        id: 'drainage',
+        name: '功能一',
+        min: 0,
+        max: 80
+      },
+      {
+        id: 'InterceptingPollution',
+        name: '功能二',
+        value: 0,
+        max: 100
+      },
+      {
+        id: 'garbage',
+        name: '功能三',
+        min: 0,
+        max: 100
+      }
+    ]
   },
   onLoad: function (options) {
     var that = this;
@@ -56,6 +76,95 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
       });
     }
   },
+  garbagechange: function (value) {
+    const that = this
+    that.setData({
+      [`data.garbage`]: value.detail.value
+    });
+  },
+  InterceptingPollutionchange: function (value) {
+    const that = this
+    that.setData({
+      [`data.InterceptingPollution`]: value.detail.value
+    });
+  },
+  addCount: function (event) {
+    const that = this;
+    let data = event.currentTarget.dataset
+    let controls = that.data.controls[data.id];
+    switch (parseInt(data.id))
+    {
+      case 0:
+        if (that.data.data.drainage >= controls.max) {
+          return
+      } else{
+        that.setData({
+          [`data.drainage`]: that.data.data.drainage + 1
+        });
+        console.log(that.data.data)
+      }
+        break
+      case 1:
+        if (that.data.data.InterceptingPollution >= controls.max) {
+          return
+        } else {
+          that.setData({
+            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution + 1
+          });
+        }
+        break
+      case 2:
+        if (that.data.data.garbage >= controls.max) {
+          return
+        } else {
+          that.setData({
+            [`data.garbage`]: that.data.data.garbage + 1
+          });
+        }
+        break
+    }
+  },
+  minusCount: function (event) {
+    const that = this;
+    let data = event.currentTarget.dataset
+    let controls = that.data.controls[data.id];
+    switch (parseInt(data.id)) {
+      case 0:
+        if (that.data.data.drainage <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.drainage`]: that.data.data.drainage - 1
+          });
+          console.log(that.data.data)
+        }
+        break
+      case 1:
+        if (that.data.data.InterceptingPollution <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution - 1
+          });
+        }
+        break
+      case 2:
+        if (that.data.data.garbage <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.garbage`]: that.data.data.garbage - 1
+          });
+        }
+        break
+    }
+  },
+  drainagechange: function (value) {
+    const that = this
+    that.setData({
+      [`data.drainage`]: value.detail.value
+    });
+  },
   getdata: function () {
     const that = this;
     wx.request({
@@ -97,7 +206,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
             },
           });
         }
-        console.log(that.data.data)
       }
     })
   },

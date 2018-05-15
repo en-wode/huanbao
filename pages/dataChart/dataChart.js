@@ -1,15 +1,29 @@
 // pages/dataChart/dataChart.js
 var _wxcharts = require('../../utils/wxcharts')
+const { Tab, extend } = require('../../dist/index');
 const app = getApp()
 
-Page({
+Page(extend({}, Tab, {
 
   /**
    * 页面的初始数据
    */
   data: {
     id: '',
-    datalist: ''
+    datalist: '',
+    tab1: {
+      list: [{
+        id: 'month',
+        title: '月'
+      }, {
+        id: 'week',
+        title: '周'
+      }, {
+        id: 'day',
+        title: '天'
+      }],
+      selectedId: 'month'
+    },
   },
 
   /**
@@ -61,12 +75,22 @@ Page({
       }
     })
   },
+  handleZanTabChange(e) {
+    var componentId = e.componentId;
+    var selectedId = e.selectedId;
+
+    this.setData({
+      [`${componentId}.selectedId`]: selectedId
+    });
+  },
   /**
   * @Explain：初始化静态图表
   */
   graphShow: function () {
     let that = this
     that.lineShow();
+    that.pieShow();
+    that.barShow();
   },
 
   pieShow: function () {
@@ -149,36 +173,6 @@ Page({
     }
     new _wxcharts(line)
   },
-  change: function () {
-    let line = {
-      canvasId: 'lineGraph',
-      type: 'line',
-      categories: ['12', '11', '10', '9', '8', '7'],
-      series: [{
-        name: '成交量1',
-        data: [0.15, 0.2, 0.45, 0.37, 0.4, 0.1],
-        format: function (val) {
-          return val.toFixed(2) + '万';
-        }
-      }, {
-        name: '成交量2',
-        data: [0.30, 0.37, 0.65, 0.78, 0.69, 0.34],
-        format: function (val) {
-          return val.toFixed(2) + '万';
-        }
-      }],
-      yAxis: {
-        title: '成交金额 (万元)',
-        format: function (val) {
-          return val.toFixed(2);
-        },
-        min: 0
-      },
-      width: 320,
-      height: 200
-    }
-    new _wxcharts(line)
-  },
   areaShow: function () {
     let area = {
       canvasId: 'areaGraph',
@@ -207,4 +201,4 @@ Page({
     }
     new _wxcharts(area)
   }
-})
+}))

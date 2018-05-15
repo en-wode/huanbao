@@ -4,13 +4,16 @@
     "pages/addDevice/addDevice",
     "pages/deviceLink/deviceLink",
     "pages/deviceDetail/deviceDetail",
-    "pages/simulation/simulation",
     "pages/waterShow/waterShow",
+    "pages/simulation/simulation",
+    "pages/model/model",
     "pages/deviceStatus/deviceStatus",
-    "pages/dataChart/dataChart",
     "pages/video/video",
+    "pages/dataChart/dataChart",
     "pages/optionSelect/optionSelect",
-    "pages/chartList/chartList"
+    "pages/location/location",
+    "pages/chartList/chartList",
+    "pages/editPassword/editPassword"
   ],
   "window": {
     "backgroundTextStyle": "light",

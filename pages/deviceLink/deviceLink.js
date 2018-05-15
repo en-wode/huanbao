@@ -14,6 +14,7 @@ Page({
   data: {
     disabled: true,  //是否可用  
     opacity: 0.4,
+    show: "", 
   },
   //手机的输入框  
   phone: function (e) {
@@ -72,4 +73,11 @@ Page({
       })
     }
   },
+  code: function () {
+    wx.scanCode({
+      success: (res) => {
+        console.log(res)
+      }
+    })
+  }
 })  

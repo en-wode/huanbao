@@ -61,7 +61,7 @@ Page({
         break;
       case 3:
         wx.navigateTo({
-          url: '../simulation/simulation?id=' + that.data.id
+          url: '../model/model?id=' + that.data.id
         });
         break;
       case 4:

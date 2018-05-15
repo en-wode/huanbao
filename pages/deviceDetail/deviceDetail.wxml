@@ -9,14 +9,16 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
+       <text class="s-con" data-id="0" bindtap="minusCount">-</text>
         <slider 
-          max="60"
-          min='20'
-          step="5"
-          bindchange="sliderchange" 
+          max="{{controls[0].max}}"
+          min='{{controls[0].min}}'
+          step="1"
+          bindchange="drainagechange" 
           value='{{data.drainage}}'
           show-value
         />
+         <text class="s-con" data-id="0" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>
@@ -27,31 +29,36 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
+       <text class="s-con" data-id="1" bindtap="minusCount">-</text>
         <slider 
-          max="80"
-          min='20'
+          max="100"
+          min='0'
           step="1"
-          bindchange="sliderchange" 
+          bindchange="InterceptingPollutionchange" 
           value='{{data.InterceptingPollution}}'
           show-value
         />
+         <text class="s-con" data-id="1" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>
 
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>提篮格栅
+      <view class="iconfont icon-icon-test23" ></view>提篮格栅
     </view>
     <view class="section section_gap">
       <view class="body-view">
+       <text class="s-con" data-id="2" bindtap="minusCount">-</text>
         <slider 
-          max="120"
+          max="100"
           min='20'
           step="1"
-          bindchange="sliderchange" 
+          bindchange="garbagechange" 
+          value='{{data.garbage}}'
           show-value
         />
+         <text class="s-con" data-id="2" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>
@@ -77,7 +84,7 @@
       </view>
   </view>
 
-  <view class='card' style='margin-bottom:8rpx'>
+  <!-- <view class='card' style='margin-bottom:8rpx'>
     <view class='card_title'>
       <view class="iconfont icon-caidanmoshi" ></view>情景模式
     </view>
@@ -95,7 +102,7 @@
           <view class="iconfont icon-shuiweizhan light" ></view>
         </view>
       </view>
-  </view>
+  </view> -->
   <view class='detail_buttom'>
     <view class="zan-row">
       <view class="zan-col zan-col-12 save" bindtap="toggleBaseDialog">

@@ -60,7 +60,7 @@ page{
 .icon-shidu{
   color: #00C1DE;
 }
-.icon-dengpao{
+.icon-icon-test23{
   color: #f1c232;
 }
 
@@ -88,7 +88,7 @@ page{
 }
 /* slider */
 .section_gap{
-  width: 90%;
+  width: 85%;
   margin: 0 auto;
   padding: 24rpx;
 }
@@ -102,4 +102,21 @@ page{
 }
 .body-view{
   padding: 0 10rpx
+}
+.s-con{
+  height:40rpx;
+  line-height:38rpx;
+  vertical-align:-8rpx;
+  width:40rpx;
+  display:inline-block;
+  text-align:center;
+  background:red;
+  border-radius:6rpx;
+  color:white;
+  box-shadow:#EE4000 0rpx 0rpx 4rpx ;
+}
+slider{
+  padding:0 12rpx;
+  display:inline-block;
+  width:70%
 }

@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 624563 */
-  src: url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.eot');
-  src: url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_624563_udoqiui4l5wmi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_624563_tnzethppxrvbo6r.eot');
+  src: url('//at.alicdn.com/t/font_624563_tnzethppxrvbo6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624563_tnzethppxrvbo6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624563_tnzethppxrvbo6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624563_tnzethppxrvbo6r.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -36,11 +36,15 @@
 
 .icon-jiantouxiajiang:before { content: "\e7f2"; }
 
+.icon-banshou:before { content: "\e65c"; }
+
 .icon-jienenghuanbao:before { content: "\e645"; }
 
 .icon-jia:before { content: "\e601"; }
 
 .icon-jiantou:before { content: "\e7a9"; }
+
+.icon-shouhu:before { content: "\e62b"; }
 
 .icon-jishuidian:before { content: "\e604"; }
 
@@ -116,11 +120,17 @@
 
 .icon-shezhi:before { content: "\e675"; }
 
+.icon-shanchu:before { content: "\e611"; }
+
 .icon-open-eye:before { content: "\e79c"; }
 
 .icon-taiyang:before { content: "\e7ed"; }
 
 .icon-icon-humidity:before { content: "\e60c"; }
+
+.icon-caozuomoshiqiehuan:before { content: "\e677"; }
+
+.icon-zidingyi:before { content: "\e634"; }
 
 .icon-taiyang1:before { content: "\e662"; }
 
@@ -136,6 +146,8 @@
 
 .icon-lkingbolvsehuanbao:before { content: "\e602"; }
 
+.icon-yujing:before { content: "\e61e"; }
+
 .icon-shishiliuliang:before { content: "\e99a"; }
 
 .icon-famen:before { content: "\e9d3"; }
@@ -149,7 +161,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 120rpx 0;
   box-sizing: border-box;
   font-family: Helvetica Neue,Helvetica,Roboto,Segoe UI,Arial,sans-serif;
   color: #999;

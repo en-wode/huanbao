@@ -11,7 +11,7 @@
     <view class="zan-row option-bottom">
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='1'>
           <view class="iconfont icon-shuizha de-detail" ></view>
-          设备详情
+          设备实况
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='2'>
           <view class="iconfont icon-shezhi de-caozuo" ></view>
@@ -19,7 +19,7 @@
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='3'>
           <view class="iconfont icon-video-surveillance de-check" ></view>
-          场景模拟
+          情景模式
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='4'>
           <view class="iconfont icon-xitongzhuangtai de-history" ></view>
