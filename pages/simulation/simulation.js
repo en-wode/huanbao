@@ -103,7 +103,7 @@ Page({
       ctx.drawImage("/assets/images/right.png", 10, wxH - 210, 36, 26);
       ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 210, 36, 26);
       //水泵水流方向
-      ctx.drawImage("/assets/images/upward.png", 110, wxH - 210, 22, 46);
+      ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
 
       //水泵 阀门 提篮
       ctx.drawImage("/assets/images/shuibeng.png", 140, wxH - 155, 90, 100);
@@ -144,22 +144,23 @@ Page({
       ctx.stroke();
 
       //水泵管道
+      function drawFrame() {
+        interVal = window.requestAnimationFrame(drawFrame, canvas);
+        if (x < maxX && y <= maxY) {
+          context.lineTo(x += 10, y += 10);
+          context.stroke();
+        } else {
+          window.cancelAnimationFrame(interVal);
+        }
+      }
+      var maxh = wxH - 286, maxw = 222, leftw = 50, x = 222, y = wxH - 106;
       ctx.beginPath();
-      ctx.setLineWidth(5);
+      ctx.setLineWidth(10);
       ctx.setLineJoin('round');
       ctx.setStrokeStyle('white');
-      ctx.moveTo(110, wxH - 86);
-      ctx.lineTo(110, wxH - 106);
-      // ctx.moveTo(125, wxH - 86);
-      // ctx.lineTo(110, wxH - 86);
-      // ctx.lineTo(110, wxH - 300);
-      // ctx.lineTo(53, wxH - 300);
-      // ctx.stroke();
-      // ctx.beginPath();
-      // ctx.setLineWidth(12)
-      // ctx.setStrokeStyle('white');
-      // ctx.moveTo(200, wxH - 120);
-      // ctx.lineTo(200, wxH - 152);
+      ctx.moveTo(222, wxH - 106);
+      ctx.lineTo(222, wxH - 286);
+      ctx.lineTo(50, wxH - 286);
       
       ctx.stroke();
       // //主机连线

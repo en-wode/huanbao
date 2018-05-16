@@ -1,0 +1,122 @@
+/* pages/setModel/setModel.wxss */
+page{
+  background: #f3f3f3;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color: #000;
+}
+
+/* 卡片即头部样式 */
+.card{
+  background: #fff;
+  font-size: 30rpx;
+  padding: 0 0 12rpx 0;
+  margin-bottom: 18rpx;
+  font-weight: 500
+}
+.card_title{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 8rpx;
+  border-bottom: 4rpx solid #f3f3f3;
+  font-weight: bolder;
+  padding: 12rpx 0;
+}
+.switch{
+  padding: 0 15px;
+}
+/* 卡片内部字体颜色 */
+.card_status{
+  color: #47aef3;
+}
+.card_status_name{
+  margin-top: 8rpx;
+  color: #5f5f5f;
+  font-size: 26rpx
+}
+
+/* 字体图标 */
+.zan-icon{
+  margin-right: 10rpx;
+  font-size: 30rpx;
+}
+.iconfont{
+  display: inline-block;
+  margin-right:10rpx;
+  font-size:36rpx;
+}
+.icon-shezhi{
+  color: #0584d1;
+}
+.zan-col{
+  padding: 12rpx;
+  text-align: center;
+}
+.icon-taiyang1{
+  color: red;
+}
+.icon-shuilongtou{
+  color: #3D8099;
+}
+.icon-shidu{
+  color: #00C1DE;
+}
+.icon-icon-test23{
+  color: #f1c232;
+}
+
+/* 工作指示灯 */
+.work_light{
+  padding: 24rpx 0;
+}
+.light{
+  font-size: 58rpx!important;
+}
+.icon-shuibei{
+  color: #CD3700
+}
+.icon-video-surveillance{
+  color: blue
+}
+.icon-famen01{
+  color: #CDCD00
+}
+.icon-shuiweizhan{
+  color: #4A708B
+}
+.icon-caidanmoshi{
+  color: #09b6ba
+}
+/* slider */
+.section_gap{
+  width: 85%;
+  margin: 0 auto;
+  padding: 24rpx;
+}
+.detail_buttom{
+  padding: 22rpx;
+  color: #77c0e8;
+  background:white
+}
+.save{
+  border-right: 1px solid #5f5f5f
+}
+.body-view{
+  padding: 0 10rpx
+}
+.s-con{
+  height:40rpx;
+  line-height:38rpx;
+  vertical-align:-8rpx;
+  width:40rpx;
+  display:inline-block;
+  text-align:center;
+  background:red;
+  border-radius:6rpx;
+  color:white;
+  box-shadow:#EE4000 0rpx 0rpx 4rpx ;
+}
+slider{
+  padding:0 12rpx;
+  display:inline-block;
+  width:70%
+}

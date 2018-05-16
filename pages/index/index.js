@@ -7,58 +7,38 @@ const Zan = require('../../dist/index');
 // const socket = io('http://192.168.0.115:7001')
 Page(Object.assign({}, Zan.Field,{
   data: {
+    message: '',
     base: {
       name: {
-        focus: true,
         title: '帐号',
         placeholder: '请输入帐号',
+        componentId: 'name'
       },
       password: {
         title: '密码',
         placeholder: '请输入密码',
+        inputType: 'password',
+        componentId: 'password'
       }
     },
     motto: '一体化智能截污井',
-    tip: '本产品需微信授权登录，请点击上方按钮进行授权',
-    name: '',
-    password: '',
+    tip: '欢迎使用蓝翔环保一体化智能截污井',
+    usname: '',
+    uspassword: '',
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  adddevice:function() {
-    const that = this;
-    if (that.data.hasUserInfo) {
-      wx.navigateTo({
-        url: '../addDevice/addDevice'
-      })
-    } else {
-      wx.showModal({
-        title: '用户未授权',
-        content: '此功能需要微信授权，请按确定并在授权管理中选中“用户信息”，然后点按确定。最后再重新进入小程序即可正常使用。',
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            wx.openSetting({
-              success: function success(res) {
-                that.getUserInfosc();
-              }
-            });
-          }
-        }
-      })
-    }
-  },
   onLoad: function () {
     var userName = wx.getStorageSync('userName');
-      var userPassword = wx.getStorageSync('userPassword');
+    var userPassword = wx.getStorageSync('userPassword');
       console.log(userName);
       console.log(userPassword);
       if (userName) {
-         this.setData({ userName: userName });
+        this.setData({ usname: userName });
       }
       if (userPassword) {
-         this.setData({ userPassword: userPassword });
+        this.setData({ uspassword: userPassword });
       }
     // socket.emit('index', '123456');
     // socket.on('res', msg => {
@@ -70,7 +50,42 @@ Page(Object.assign({}, Zan.Field,{
       url: '../editPassword/editPassword'
     })
   },
-  formSubmit: function () {
+  formSubmit: function (event) {
+    wx.navigateTo({
+      url: '../addDevice/addDevice'
+    })
+    return
+    console.log(event.detail.value);
+    const that = this;
+    if (!event.detail.value.name || !event.detail.value.password) {
+      that.setData({
+        message: '请输入帐号密码'
+      })
+    }else{
+      wx.request({
+        url: 'http://192.168.0.115:7001/user/login',
+        method: 'POST',
+        data: {
+          name: event.detail.value.name,
+          password: event.detail.value.password
+        },
+        success: function (result) {
+          wx.setStorageSync("sessionid", result.header["set-cookie"])
+          wx.setStorageSync("userName", event.detail.value.name);
+          wx.setStorageSync("userPassword", event.detail.value.password);
+          if (result.data.code == 1) {
+            that.data.message = '登录成功';
+            wx.navigateTo({
+              url: '../addDevice/addDevice'
+            })
+          } else {
+            that.setData({
+              message: '帐号或密码错误'
+            })
+          }
+        },
+      })
+    }
     console.log()
   },
   getUserInfo: function(e) {

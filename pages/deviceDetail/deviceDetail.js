@@ -99,7 +99,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
       } else{
         that.setData({
-          [`data.drainage`]: that.data.data.drainage + 1
+          [`data.drainage`]: that.data.data.drainage + 5
         });
         console.log(that.data.data)
       }
@@ -109,7 +109,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
         } else {
           that.setData({
-            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution + 1
+            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution + 5
           });
         }
         break
@@ -118,7 +118,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
         } else {
           that.setData({
-            [`data.garbage`]: that.data.data.garbage + 1
+            [`data.garbage`]: that.data.data.garbage + 5
           });
         }
         break
@@ -134,7 +134,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
         } else {
           that.setData({
-            [`data.drainage`]: that.data.data.drainage - 1
+            [`data.drainage`]: that.data.data.drainage - 5
           });
           console.log(that.data.data)
         }
@@ -144,7 +144,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
         } else {
           that.setData({
-            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution - 1
+            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution - 5
           });
         }
         break
@@ -153,7 +153,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
           return
         } else {
           that.setData({
-            [`data.garbage`]: that.data.data.garbage - 1
+            [`data.garbage`]: that.data.data.garbage - 5
           });
         }
         break

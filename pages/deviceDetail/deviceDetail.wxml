@@ -13,7 +13,7 @@
         <slider 
           max="{{controls[0].max}}"
           min='{{controls[0].min}}'
-          step="1"
+          step="5"
           bindchange="drainagechange" 
           value='{{data.drainage}}'
           show-value
@@ -33,32 +33,12 @@
         <slider 
           max="100"
           min='0'
-          step="1"
+          step="5"
           bindchange="InterceptingPollutionchange" 
           value='{{data.InterceptingPollution}}'
           show-value
         />
          <text class="s-con" data-id="1" bindtap="addCount">＋</text>
-      </view>
-    </view>
-  </view>
-
-  <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-icon-test23" ></view>提篮格栅
-    </view>
-    <view class="section section_gap">
-      <view class="body-view">
-       <text class="s-con" data-id="2" bindtap="minusCount">-</text>
-        <slider 
-          max="100"
-          min='20'
-          step="1"
-          bindchange="garbagechange" 
-          value='{{data.garbage}}'
-          show-value
-        />
-         <text class="s-con" data-id="2" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>

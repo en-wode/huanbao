@@ -35,7 +35,7 @@ Page({
     const that = this;
     let modelId = event.currentTarget.id;
     wx.navigateTo({
-      url: '../deviceDetail/deviceDetail?id=' + that.data.id + '&modelId=' + modelId
+      url: '../setModel/setModel?id=' + that.data.id + '&modelId=' + modelId
     })
   }
 })

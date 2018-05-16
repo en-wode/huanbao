@@ -18,38 +18,44 @@ Page({
       url: '../optionSelect/optionSelect?id=' + devideId
     })
   },
-  towater: function () {
-    wx.navigateTo({
-      url: '../deviceStatus/deviceStatus'
-    })
-  },
   addmore: function() {
     wx.navigateTo({
       url: '../deviceLink/deviceLink',
     })
   },
-  chart:function () {
-    wx.navigateTo({
-      url: '../dataChart/dataChart',
-    })
-  },
-  weather: function () {
-    wx.navigateTo({
-      url: '../weather/weather',
-    })
-  },
-  simulation: function () {
-    wx.navigateTo({
-      url: '../simulation/simulation',
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function () {
+    console.log(1);
+    console.log(wx.getStorageSync("sessionid"));
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
     wx.request({
       url: 'http://192.168.0.115:7001/equipment/list',
       method: 'GET',
+      header: header,
+      data: {
+        userId: 1
+      },
+      success: function (result) {
+        console.log(result);
+      }
+    })
+  },
+  onLoad: function (options) {
+    console.log(1);
+    console.log(wx.getStorageSync("sessionid"));
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: 'http://192.168.0.115:7001/equipment/list',
+      method: 'GET',
+      header: header,
       data: {
         userId: 1
       },

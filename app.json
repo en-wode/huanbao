@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/simulation/simulation",
     "pages/index/index",
     "pages/addDevice/addDevice",
     "pages/deviceLink/deviceLink",
     "pages/deviceDetail/deviceDetail",
     "pages/waterShow/waterShow",
-    "pages/simulation/simulation",
     "pages/model/model",
     "pages/deviceStatus/deviceStatus",
     "pages/video/video",
@@ -13,7 +13,8 @@
     "pages/optionSelect/optionSelect",
     "pages/location/location",
     "pages/chartList/chartList",
-    "pages/editPassword/editPassword"
+    "pages/editPassword/editPassword",
+    "pages/setModel/setModel"
   ],
   "window": {
     "backgroundTextStyle": "light",

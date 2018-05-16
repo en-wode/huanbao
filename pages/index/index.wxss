@@ -26,7 +26,8 @@ page{
 .user-motto{
   display: block;
   text-align: center;
-  color: white
+  color: white;
+  font-size: 48rpx
 }
 .tip{
   color: 	#CDC9C9;
@@ -55,6 +56,12 @@ page{
 .editpassword{
   margin-top: 28rpx;
   font-size: 26rpx;
-  text-align: right;
+  float: right;
   color: #DCDCDC;
+}
+.tips{
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  float: left;
+  color: red 
 }
