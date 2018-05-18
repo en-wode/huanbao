@@ -63,7 +63,12 @@
         </view>
       </view>
   </view>
-
+  <view class='card'>
+     <view class="zan-cell zan-cell--access" bindtap='location'>
+        <view class="zan-cell__bd card_name" >设备报修</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+  </view>
   <!-- <view class='card' style='margin-bottom:8rpx'>
     <view class='card_title'>
       <view class="iconfont icon-caidanmoshi" ></view>情景模式

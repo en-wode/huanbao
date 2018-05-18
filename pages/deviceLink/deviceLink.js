@@ -14,7 +14,8 @@ Page({
   data: {
     disabled: true,  //是否可用  
     opacity: 0.4,
-    show: "", 
+    show: "",
+    msg: ' ' 
   },
   //手机的输入框  
   phone: function (e) {
@@ -33,18 +34,22 @@ Page({
   },
   //提交按钮确认  
   sumit: function (e) {
-    if (e.detail.value.equipmentPassword.length == 0) {
-      wx.showModal({
-        title: '密码不得为空',
-        showCancel: false
+    const that = this;
+    console.log(e)
+    if (e.detail.value.equipmentPassword.length == 0 || e.detail.value.equipmentName.length == 0) {
+      that.setData({
+        msg: '帐号密码不能为空',
       })
     } else {
       //提交  
-      console.log(e.detail.value)
+      var header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': wx.getStorageSync("sessionid")//读取cookie
+      };
       wx.request({
         url: 'http://192.168.0.115:7001/equipment/matching',
         method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-        // header: {}, // 设置请求的 header  
+        header: header,
         data: {
           equipmentName: e.detail.value.equipmentName,
           equipmentPassword: e.detail.value.equipmentPassword,
@@ -55,20 +60,17 @@ Page({
           // success  
           if (res.data.code == 0) {
             wx.showModal({
-              title: '设备添加失败',
+              title: res.data.msg,
               showCancel: false
             })
           } else {
+            that.setData({
+              msg: '添加成功',
+            })
             wx.navigateTo({
-              url: '../addDevice/addDevice'
+              url: '../deviceGroup/deviceGroup?deviceId=' + res.data.result.equipmentId
             })
           }
-        },
-        fail: function () {
-          // fail  
-        },
-        complete: function () {
-          // complete  
         }
       })
     }

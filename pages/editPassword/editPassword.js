@@ -30,6 +30,7 @@ Page(Object.assign({}, Zan.Field,{
         componentId: 'newpassword1'
       }
     },
+    msg: ' '
   },
 
   /**
@@ -39,6 +40,7 @@ Page(Object.assign({}, Zan.Field,{
   
   },
   formSubmit: function (event) {
+    const that = this;
     console.log(event);
     wx.request({
       url: 'http://192.168.0.115:7001/user/modifyPassword',
@@ -50,7 +52,16 @@ Page(Object.assign({}, Zan.Field,{
         newPassword2: event.detail.value.newpassword1,
       },
       success: function(result) {
-        console.log(result);
+        console.log(result)
+        if (result.data.code == 0) {
+          that.setData({
+            msg: result.data.msg
+          })
+        } else if (result.data.code == 1) {
+          that.setData({
+            msg: '密码修改成功'
+          })
+        }
       }
     })
   }

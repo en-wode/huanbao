@@ -12,7 +12,7 @@
     <form bindsubmit="sumit">  
         <input bindinput="phone" maxlength="11" type="number" class="marginview" name="equipmentName" placeholder="设备码"/>  
         <input maxlength="8" password class="marginview" name="equipmentPassword" placeholder="设备密码"/>  
-        
+        <view class='tips'>{{msg}}</view>
         <view class="link_button">
         <button style="opacity: {{opacity}};color: white; background-color: #00b7ee;" loading="{{loginLoading}}" disabled='{{disabled}}' formType="submit">登录</button>  
         </view>

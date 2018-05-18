@@ -3,7 +3,6 @@
 const app = getApp()
 const Zan = require('../../dist/index');
 // const io = require('../../utils/socket/weapp.socket.io.js')
-
 // const socket = io('http://192.168.0.115:7001')
 Page(Object.assign({}, Zan.Field,{
   data: {
@@ -51,10 +50,6 @@ Page(Object.assign({}, Zan.Field,{
     })
   },
   formSubmit: function (event) {
-    wx.navigateTo({
-      url: '../addDevice/addDevice'
-    })
-    return
     console.log(event.detail.value);
     const that = this;
     if (!event.detail.value.name || !event.detail.value.password) {
@@ -70,11 +65,14 @@ Page(Object.assign({}, Zan.Field,{
           password: event.detail.value.password
         },
         success: function (result) {
+          console.log(result)
           wx.setStorageSync("sessionid", result.header["set-cookie"])
           wx.setStorageSync("userName", event.detail.value.name);
           wx.setStorageSync("userPassword", event.detail.value.password);
           if (result.data.code == 1) {
-            that.data.message = '登录成功';
+            that.setData({
+              message: '登录成功'
+            })
             wx.navigateTo({
               url: '../addDevice/addDevice'
             })

@@ -57,12 +57,7 @@ Page(Object.assign({}, Zan.TopTips, {
       url: '../simulation/simulation?id=' + that.data.id
     });
   },
-  location: function () {
-    let that = this;
-    wx.navigateTo({
-      url: '../location/location?id=' + that.data.id
-    });
-  },
+
   monitor: function (options) {
     let that = this;
     let targetid = options.currentTarget.id;

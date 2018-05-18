@@ -159,8 +159,22 @@ Page({
       ctx.setLineJoin('round');
       ctx.setStrokeStyle('white');
       ctx.moveTo(222, wxH - 106);
-      ctx.lineTo(222, wxH - 286);
-      ctx.lineTo(50, wxH - 286);
+      function render() {
+        ctx.beginPath();
+        ctx.moveTo(222, y);
+        ctx.lineTo(222, y -= 10);
+        ctx.stroke();
+      }
+      let timer = setTimeout(function () {
+        console.log(1)
+        render();
+        clearTimeout(timer);
+      }, 35)
+
+
+      // ctx.moveTo(222, wxH - 106);
+      // ctx.lineTo(222, wxH - 286);
+      // ctx.lineTo(50, wxH - 286);
       
       ctx.stroke();
       // //主机连线
@@ -243,6 +257,21 @@ Page({
       ctx.fillText('水位监控', 160, wxH - 300)
       ctx.setFontSize(18)
       ctx.fillText('一体化智能截污井', 120, 80)
+
+      // var maxh = wxH - 286, maxw = 222, leftw = 50, x = 222, y = wxH - 106;
+      // ctx.beginPath();
+      // ctx.setLineWidth(10);
+      // ctx.setLineJoin('round');
+      // ctx.setStrokeStyle('red');
+      // function render() {
+      //   ctx.lineTo(222, y -= 10);
+      //   ctx.stroke();
+      // }
+      // let timer = setTimeout(function () {
+      //   render();
+      //   clearTimeout(timer);
+      // }, 35)
+
       ctx.draw()
 
     })();

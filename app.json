@@ -1,20 +1,20 @@
 {
   "pages": [
-    "pages/simulation/simulation",
     "pages/index/index",
+    "pages/setModel/setModel",
+    "pages/deviceGroup/deviceGroup",
     "pages/addDevice/addDevice",
     "pages/deviceLink/deviceLink",
     "pages/deviceDetail/deviceDetail",
     "pages/waterShow/waterShow",
     "pages/model/model",
-    "pages/deviceStatus/deviceStatus",
+    "pages/simulation/simulation",
     "pages/video/video",
     "pages/dataChart/dataChart",
     "pages/optionSelect/optionSelect",
-    "pages/location/location",
     "pages/chartList/chartList",
-    "pages/editPassword/editPassword",
-    "pages/setModel/setModel"
+    "pages/deviceStatus/deviceStatus",
+    "pages/editPassword/editPassword"
   ],
   "window": {
     "backgroundTextStyle": "light",

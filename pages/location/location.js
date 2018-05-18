@@ -15,6 +15,7 @@ Page({
     var that = this;
     // 获取定位，并把位置标示出来
     app.getLocationInfo(function (locationInfo) {
+      console.log(locationInfo);
       that.setData({
         longitude: locationInfo.longitude
         , latitude: locationInfo.latitude

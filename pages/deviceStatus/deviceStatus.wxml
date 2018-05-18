@@ -56,13 +56,7 @@
   <view class='card_num'>
      <view class="zan-cell">
         <view class="zan-cell__bd card_name" >SS悬浮物：</view>
-        <view class="zan-cell__ft card_val">{{data.ss}}</view>
-      </view>
-  </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >系统压力：</view>
-        <view class="zan-cell__ft card_val">{{data.systemressure}}Mpa</view>
+        <view class="zan-cell__ft card_val">{{data.ss}}mg/L</view>
       </view>
   </view>
   <view class='card_num'>
@@ -78,40 +72,12 @@
       </view>
   </view>
   <view class='card_num'>
-     <view class="zan-cell" bindtap='simulation'>
+     <view class="zan-cell zan-cell--access" bindtap='simulation'>
         <view class="zan-cell__bd card_name" >场景模拟</view>
         <view class="zan-cell__ft"></view>
       </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell" bindtap='location'>
-        <view class="zan-cell__bd card_name" >地理位置</view>
-        <view class="zan-cell__ft"></view>
-      </view>
-  </view>
-  <view class='card' style='margin-bottom:8rpx'>
-    <view class='card_title'>
-      <view class="iconfont icon-dengpao" ></view>工作指示灯
-    </view>
-    <view class="zan-row work_light">
-        <view class="zan-col zan-col-6">
-          <view class="iconfont icon-dianji light" ></view>
-          <view class="work-name">电机</view>
-        </view>
-        <view class="zan-col zan-col-6">
-          <view class="iconfont icon-xiaofangshuibeng light" ></view>
-          <view class="work-name">1#水泵</view>
-        </view>
-        <view class="zan-col zan-col-6">
-          <view class="iconfont icon-famen01 light" ></view>
-          <view class="work-name">2#水泵</view>
-        </view>
-        <view class="zan-col zan-col-6">
-          <view class="iconfont icon-icon-test23 light" ></view>
-          <view class="work-name">提篮格栅</view>
-        </view>
-      </view>
-  </view>
+
    <view class='card'>
      <view class='card_title'>
       <view class="iconfont icon-qiwen-" ></view>天气情况

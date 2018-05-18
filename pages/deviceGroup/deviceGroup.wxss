@@ -1,10 +1,12 @@
-/* pages/setModel/setModel.wxss */
+/* pages/deviceGroup/deviceGroup.wxss */
 page{
-  background: #f3f3f3;
+  background: white;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color: #000;
 }
-
+.bg{
+  background: #f3f3f3
+}
 /* 卡片即头部样式 */
 .card{
   background: #fff;
@@ -95,7 +97,8 @@ page{
 .detail_buttom{
   padding: 22rpx;
   color: #77c0e8;
-  background:white
+  background: white;
+  margin-bottom: 48rpx;
 }
 .save{
   border-right: 1px solid #5f5f5f
@@ -126,4 +129,18 @@ slider{
   align-items:center;
   line-height:1.4;
   font-size:14px;
+}
+.my-btn{
+  margin: 88rpx 0 0 0;
+  color: white;
+  background: #5CACEE;
+  border-radius: 45px;
+}
+.chicun{
+  height:1.4rem;
+  min-height:1.4rem;
+  padding-top:4rpx;
+}
+input{
+  border-bottom:1px solid #ccc;
 }

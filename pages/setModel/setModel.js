@@ -4,12 +4,14 @@ const app = getApp()
 Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast, {
   data: {
     id: '',
-    waterPump1: {
-      checked: false
-    },
-    waterPump2: {
-      checked: true,
-    },
+    // waterPump1: {
+    //   checked: false
+    // },
+    // waterPump2: {
+    //   checked: true,
+    // },
+    bump1: { name: 'bump1', value: '1号水泵', checked:'true' },
+    bump2: { name: 'bump2', value: '2号水泵' },
     data: {},
     controls: [
       {

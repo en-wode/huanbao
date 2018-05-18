@@ -5,7 +5,10 @@
 <view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-taiyang1" ></view>排水闸开度
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">排水闸溢流高度</view>
+        <view class="zan-cell__ft"><checkbox value="{{bump1.name}}" checked="{{bump1.checked}}"></checkbox></view>
+      </view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -25,7 +28,10 @@
 
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shidu" ></view>截污闸开度
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">截污闸限流高度</view>
+        <view class="zan-cell__ft"><checkbox value="{{bump1.name}}" checked="{{bump1.checked}}"></checkbox></view>
+      </view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -54,15 +60,68 @@
   </view>
   <view class='card'>
     <view class="zan-cell switch">
-      <view class="zan-cell__bd card_name">排水阀高度设置</view>
+      <view class="zan-cell__bd card_name">秦砖</view>
       <view class="zan-cell__ft card_val">    
           <view class="section section_gap">
-            <input type="digit" placeholder="点击输入" name='paishui' />
+            <input type="digit" placeholder="点击输入" name='yuliang' />
           </view>
       </view>
     </view>
   </view>
   <view class='card'>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">1号水泵(单位：mm)</view>
+        <view class="zan-cell__ft"><checkbox value="{{bump1.name}}" checked="{{bump1.checked}}"></checkbox></view>
+      </view>
+    </view>
+    <view class="body-view">
+      <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">1#水泵停止水位</view>
+        <view class="zan-cell__ft card_val">    
+            <view class="section section_gap">
+              <input type="digit" placeholder="点击输入" name='1bumpstp' />
+            </view>
+        </view>
+      </view>
+      <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">1#水泵开启水位</view>
+        <view class="zan-cell__ft card_val">    
+            <view class="section section_gap">
+              <input type="digit" placeholder="点击输入" name='1bumpstt' />
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+    <view class='card'>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">2号水泵(单位：mm)</view>
+        <view class="zan-cell__ft"><checkbox value="{{bump2.name}}" checked="{{bump2.checked}}"></checkbox></view>
+      </view>
+    </view>
+    <view class="body-view">
+      <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">1#水泵停止水位</view>
+        <view class="zan-cell__ft card_val">    
+            <view class="section section_gap">
+              <input type="digit" placeholder="点击输入" name='2bumpstp' />
+            </view>
+        </view>
+      </view>
+      <view class="zan-cell switch">
+        <view class="zan-cell__bd card_name">1#水泵开启水位</view>
+        <view class="zan-cell__ft card_val">    
+            <view class="section section_gap">
+              <input type="digit" placeholder="点击输入" name='2bumpstt' />
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class='card'>
     <view class="zan-cell switch">
         <view class="zan-cell__bd card_name">1号水泵</view>
         <view class="zan-cell__ft card_val">    
@@ -72,17 +131,7 @@
         </view>
       </view>
   </view>
-    
-  <view class='card'>
-    <view class="zan-cell switch">
-        <view class="zan-cell__bd card_name">2号水泵</view>
-        <view class="zan-cell__ft card_val">    
-          <view class="section section_gap">
-            <template is="zan-switch" data="{{ ...waterPump2, componentId: 'waterPump2' }}"></template>
-          </view>
-        </view>
-      </view>
-  </view>
+   -->
   <view class='detail_buttom'>
     <view class="zan-row">
       <view class="zan-col zan-col-12 save" bindtap="toggleBaseDialog">

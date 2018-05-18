@@ -52,6 +52,12 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
       console.log('=== dialog ===', 'type: cancel');
     });
   },
+  location: function () {
+    let that = this;
+    wx.navigateTo({
+      url: '../location/location?id=' + that.data.id
+    });
+  },
   handleZanSwitchChange(e) {
     var componentId = e.componentId;
     var checked = e.checked;
