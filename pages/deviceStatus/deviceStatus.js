@@ -76,12 +76,17 @@ Page(Object.assign({}, Zan.TopTips, {
   },
   devicestatus: function () {
     const that = this;
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    console.log(that.data.id);
     wx.request({
       url: 'http://192.168.0.115:7001/equipmentArameters/getByEquipmentId',
       method: 'GET',
+      header: header,
       data: {
-        equipmentId: that.data.id,
-        openId: app.globalData.openId,
+        equipmentId: that.data.id
       },
       success: function (result) {
         if (result.data.code == 1) {

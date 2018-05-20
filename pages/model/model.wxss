@@ -1,50 +1,146 @@
 /* pages/model/model.wxss */
 page{
   background: #f3f3f3;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color: #000;
 }
-.edit{
-  font-size: 28rpx;
+
+/* 卡片即头部样式 */
+.card{
   background: #fff;
-  padding: 18rpx 0 18rpx 28rpx;
+  font-size: 30rpx;
+  padding: 0 0 12rpx 0;
+  margin-bottom: 18rpx;
+  font-weight: 500
 }
-.addmore{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.card_title{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 8rpx;
+  border-bottom: 4rpx solid #f3f3f3;
+  font-weight: bolder;
+  padding: 12rpx 0;
 }
-.addmore_rad{
-  font-size: 32rpx;
-  width: 168rpx;
-  height: 168rpx;
-  border-radius: 50%;
-  background: #518cf6;
-  color: white;
-  text-align: center;
-  line-height: 168rpx;
-  margin-top: 138rpx;
+.switch{
+  padding: 0 15px;
 }
-.tip_title{
-  font-size: 24rpx;
-  color: #999;
-  position: absolute;
-  bottom: 80rpx;
-  text-align: center;
-  left: 0;
-  right: 0;
+/* 卡片内部字体颜色 */
+.card_status{
+  color: #47aef3;
 }
-.zan-panel{
-  margin-bottom: 10px;
-  margin-top: 0px
+.card_status_name{
+  margin-top: 8rpx;
+  color: #5f5f5f;
+  font-size: 26rpx
+}
+
+/* 字体图标 */
+.zan-icon{
+  margin-right: 10rpx;
+  font-size: 30rpx;
 }
 .iconfont{
   display: inline-block;
   margin-right:10rpx;
   font-size:36rpx;
 }
-.hide{
- display: none;
+.icon-shezhi{
+  color: #0584d1;
 }
-.show{ 
- display: block;
- transition: 0.5s
+.zan-col{
+  padding: 12rpx;
+  text-align: center;
+}
+.icon-taiyang1{
+  color: red;
+}
+.icon-shuilongtou{
+  color: #3D8099;
+}
+.icon-shidu{
+  color: #00C1DE;
+}
+.icon-icon-test23{
+  color: #f1c232;
+}
+
+/* 工作指示灯 */
+.work_light{
+  padding: 24rpx 0;
+}
+.icon-dengpao{
+  color: #f03939
+}
+.light{
+  line-height:44rpx;
+  font-size: 58rpx!important;
+}
+.qing{
+  color: #ffe079
+}
+.xianzhi{
+  color: #09b6ba
+}
+.jiankangfengxianyufang{
+  color: #8063f7
+}
+.zidong{
+  color: #80d6fa
+}
+.yu{
+  color: #80d6fa
+}
+.work-name{
+  margin-top: 12rpx
+}
+/* slider */
+.section_gap{
+  width: 85%;
+  margin: 0 auto;
+  padding: 24rpx;
+}
+.detail_buttom{
+  padding: 40rpx;
+  color: #77c0e8;
+  background:white;
+  height:160rpx;
+}
+.save{
+  border-right: 1px solid #5f5f5f
+}
+.body-view{
+  padding: 0 10rpx
+}
+.s-con{
+  height:40rpx;
+  line-height:38rpx;
+  vertical-align:-8rpx;
+  width:40rpx;
+  display:inline-block;
+  text-align:center;
+  background:red;
+  border-radius:6rpx;
+  color:white;
+  box-shadow:#EE4000 0rpx 0rpx 4rpx ;
+}
+slider{
+  padding:0 12rpx;
+  display:inline-block;
+  width:70%
+}
+.zan-cell-my{
+  position:relative;
+  display:flex;
+  align-items:center;
+  line-height:1.4;
+  font-size:14px;
+}
+.my-btn{
+  margin: 48rpx 0 0 0;
+  color: white;
+  background: #5CACEE;
+  border-radius: 45px;
+}
+.zan-field__title{
+  min-width: 480rpx
 }

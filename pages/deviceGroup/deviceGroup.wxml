@@ -1,181 +1,111 @@
-<!--pages/deviceGroup/deviceGroup.wxml-->
 <import src="/dist/dialog/index.wxml" />
-<import src="/dist/switch/index.wxml" />
-<view class='bg'>
+<import src="/dist/toast/index.wxml" />
+<import src="/dist/field/index.wxml" />
+<view>
   <view class='card'>
-    <view class="zan-cell">
-        <view class="zan-cell__bd ">截污闸门 （单位：mm）
-        </view>
-        <view class="zan-cell__ft card_val">    
-          <checkbox-group bindchange="checkboxChange" id='drains'>
-            <checkbox value="drains" checked="{{device.drains}}"></checkbox>
-          </checkbox-group>
-        </view>
-      </view>
-       <view class="zan-row">
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入"  name='drainsWidth' disabled='{{!device.drains}}' value='{{device.drainsWidth}}' bindinput="bindKeyInput" id='drainsWidth' />
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>宽</view>    
-          </view>
-          <view class="zan-col zan-col-1">
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>×</view>    
-          </view>
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入" name='drainsHeight' disabled='{{!device.drains}}' value='{{device.drainsHeight}}' bindinput="bindKeyInput" id='drainsHeight' />
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>高</view>    
-          </view>
-        </view>
-  </view>
-  <view class='card'>
-    <view class="zan-cell">
-        <view class="zan-cell__bd">排水闸门 （单位：mm）
-        </view>
-        <view class="zan-cell__ft card_val">  
-          <checkbox-group bindchange="checkboxChange" id='sluiceGate'>
-             <checkbox value="sluiceGate" checked="{{device.sluiceGate}}"></checkbox>
-          </checkbox-group>
-        </view>
-      </view>
-       <view class="zan-row">
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入" name='sluiceGateWidth' disabled='{{!device.sluiceGate}}' value='{{device.sluiceGateWidth}}' bindinput="bindKeyInput" id='sluiceGateWidth' />
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>宽</view>    
-          </view>
-          <view class="zan-col zan-col-1">
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>×</view>    
-          </view>
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入" name='sluiceGateHeight' disabled='{{!device.sluiceGate}}' value='{{device.sluiceGateHeight}}' bindinput="bindKeyInput" id='sluiceGateHeight' />
-          </view>
-          <view class="zan-col zan-col-2">
-              <view class='chicun'>高</view>    
-          </view>
-        </view>
-  </view>
-    <view class='card'>
-    <view class="zan-cell ">
-        <view class="zan-cell__bd ">水质参数 （单位：mg/L）
-        </view>
-        <view class="zan-cell__ft card_val">  
-          <checkbox-group bindchange="checkboxChange" id='sluiceGate'>
-            <checkbox value="{{bump1.name}}" checked="{{bump1.checked}}"></checkbox>
-          </checkbox-group>
-        </view>
-      </view>
-       <view class="zan-row">
-          <view class="zan-col zan-col-1">
-          </view>
-          <view class="zan-col zan-col-3">
-            <view class='chicun'>COD</view>    
-          </view>
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入" name='cod' value="{{device.cod}}" />
-          </view>
-          <view class="zan-col zan-col-1">
-          </view>
-          <view class="zan-col zan-col-3">
-            <view class='chicun'>SS</view>    
-          </view>
-          <view class="zan-col zan-col-8">
-              <input type="digit" placeholder="点击输入" name='ss' value="{{device.ss}}"/>
-          </view>
-        </view>
-  </view>
-  <view class='card'>
-    <view class="zan-cell ">
-      <view class="zan-cell__bd ">1号水泵</view>
-      <view class="zan-cell__ft card_val">  
-        <checkbox-group bindchange="checkboxChange" id='waterPump1'>
-          <checkbox value="{{bump1.name}}" checked="{{device.waterPump1}}"></checkbox>
-        </checkbox-group>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">排水闸溢流高度</view>
+        <view class="zan-cell__ft"></view>
       </view>
     </view>
-    <view class="zan-cell switch">
-      <view class="zan-cell__bd card_name">流量计1</view>
-      <view class="zan-cell__ft card_val">    
-        <view class="section section_gap">
-          <template is="zan-switch" data="{{ ...{checked: device.flowmeter1, componentId: 'flowmeter1'} }}"></template>
-        </view>
+    <view class="section section_gap">
+      <view class="body-view">
+       <text class="s-con" data-id="drainageOverflowHeight" bindtap="minusCount">-</text>
+        <slider 
+          max="{{controls[0].max}}"
+          min='{{controls[0].min}}'
+          step="5"
+          bindchange="drainagechange" 
+          value='{{base.drainageOverflowHeight}}'
+          show-value
+        />
+         <text class="s-con" data-id="drainageOverflowHeight" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>
-   <view class='card'>
-    <view class="zan-cell ">
-        <view class="zan-cell__bd ">2号水泵</view>
-        <view class="zan-cell__ft card_val">
-        <checkbox-group bindchange="checkboxChange" id='waterPump2'>    
-          <checkbox value="{{bump1.name}}" checked="{{device.waterPump2}}"></checkbox>
-        </checkbox-group>
-        </view>
+
+  <view class='card'>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">截污闸限流高度</view>
+        <view class="zan-cell__ft"></view>
       </view>
-      <view class="zan-cell switch">
-      <view class="zan-cell__bd card_name">流量计2</view>
-      <view class="zan-cell__ft card_val">    
-        <view class="section section_gap">
-          <template is="zan-switch" data="{{ ...{checked: device.flowmeter2, componentId: 'flowmeter2'} }}"></template>
-        </view>
+    </view>
+    <view class="section section_gap">
+      <view class="body-view">
+       <text class="s-con" data-id="InterceptingLimitflowHeight" bindtap="minusCount">-</text>
+        <slider 
+          max="100"
+          min='0'
+          step="5"
+          bindchange="InterceptingLimitflowHeight" 
+          value='{{base.InterceptingLimitflowHeight}}'
+          show-value
+        />
+         <text class="s-con" data-id="InterceptingLimitflowHeight" bindtap="addCount">＋</text>
       </view>
     </view>
   </view>
+  <!-- //雨量计 -->
   <view class='card'>
-    <view class="zan-cell ">
-        <view class="zan-cell__bd ">3号水泵</view>
-        <view class="zan-cell__ft card_val">  
-        <checkbox-group bindchange="checkboxChange" id='waterPump3'>    
-          <checkbox value="{{bump1.name}}" checked="{{device.waterPump3}}"></checkbox>
-        </checkbox-group>
-        </view>
-      </view>
-      <view class="zan-cell switch">
-      <view class="zan-cell__bd card_name">流量计3</view>
-      <view class="zan-cell__ft card_val">    
-        <view class="section section_gap">
-          <template is="zan-switch" data="{{ ...{checked: device.flowmeter3, componentId: 'flowmeter3'} }}"></template>
-        </view>
+      <template is="zan-field" data="{{  ...base.yuliang, componentId: 'yuliang' }}"></template>
+  </view>
+
+  <!-- //晴转雨时间 -->
+  <view class='card'>
+      <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' }}"></template>
+  </view>
+  <!-- //警戒水位 -->
+  <view class='card'>
+      <template is="zan-field" data="{{  ...base.warning, componentId: 'warning' }}"></template>
+  </view>
+
+  <view class='card'>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">1号水泵(单位：mm)</view>
+        <view class="zan-cell__ft"></view>
       </view>
     </view>
-  </view>
-   <view class='card'>
-    <view class="zan-cell switch">
-        <view class="zan-cell__bd card_name">雨量计</view>
-        <view class="zan-cell__ft card_val">    
-          <view class="section section_gap">
-            <template is="zan-switch" data="{{ ...{checked: device.rainGauge, componentId: 'rainGauge'} }}" ></template>
-          </view>
-        </view>
-      </view>
+    <view class="body-view">
+        <!-- //1#水泵停止水位 -->
+        <template is="zan-field" data="{{  ...base.bump1st, componentId: 'bump1st' }}"></template>
+      <!-- //1#水泵开启水位 -->
+        <template is="zan-field" data="{{  ...base.bump1sp, componentId: 'bump1sp' }}"></template>
+    </view>
   </view>
   <view class='card'>
-    <view class="zan-cell switch">
-        <view class="zan-cell__bd card_name">垃圾传感器</view>
-        <view class="zan-cell__ft card_val">    
-          <view class="section section_gap">
-            <template is="zan-switch" data="{{ ...{checked: device.garbageSensor, componentId: 'garbageSensor'} }}"></template>
-          </view>
-        </view>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">2号水泵(单位：mm)</view>
+        <view class="zan-cell__ft"></view>
       </view>
+    </view>
+    <view class="body-view">
+        <!-- //2#水泵停止水位 -->
+        <template is="zan-field" data="{{  ...base.bump2st, componentId: 'bump2st' }}"></template>
+      <!-- //2#水泵开启水位 -->
+        <template is="zan-field" data="{{  ...base.bump2sp, componentId: 'bump2sp' }}"></template>
+    </view>
   </view>
+
   <view class='card'>
-    <view class="zan-cell switch">
-        <view class="zan-cell__bd card_name">设备所在地</view>
-        <view class="zan-cell__ft card_val">    
-          <view class="section section_gap">{{device.latitude}}-{{device.longitude}}</view>
-        </view>
+    <view class='card_title'>
+      <view class="zan-cell-my">
+        <view class="zan-cell__bd">水质(mg/L)</view>
+        <view class="zan-cell__ft"></view>
       </view>
+    </view>
+    <view class="body-view">
+       <template is="zan-field" data="{{  ...base.COD, componentId: 'cod' }}"></template>
+       <template is="zan-field" data="{{  ...base.SS, componentId: 'ss' }}"></template>
+    </view>
   </view>
+
   <view class='detail_buttom'>
     <button class="zan-btn my-btn" bindtap='save'>保存</button>
   </view>
-    <template is="zan-dialog" data="{{ zanDialog }}"></template>
+  <template is="zan-dialog" data="{{ zanDialog }}"></template>
+  <template is="zan-toast" data="{{ zanToast }}"></template>
 </view>
-

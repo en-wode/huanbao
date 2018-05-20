@@ -3,13 +3,18 @@
 <view>
   <view class='card_num'>
    <view class="zan-row">
-      <view class="zan-col zan-col-12 ">
-        <view class="zan-cell bdline">
+      <view class="zan-col zan-col-10 ">
+        <view class="zan-cell ">
           <view class="zan-cell__bd card_name" >井内水位：</view>
           <view class="zan-cell__ft ">{{data.wellWater}}米</view>
         </view>
       </view>
-      <view class="zan-col zan-col-12">
+      <view class="zan-col zan-col-2 bdline">
+        <view style='height:94rpx'></view>
+      </view>
+      <view class="zan-col zan-col-1">
+      </view>
+      <view class="zan-col zan-col-10">
         <view class="zan-cell">
           <view class="zan-cell__bd card_name">河道水位：</view>
           <view class="zan-cell__ft ">{{data.riverWater}}米</view>
@@ -47,28 +52,76 @@
       </view>
     </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >COD浓度：</view>
-        <view class="zan-cell__ft card_val">{{data.COD}}mg/L</view>
+  <view class='card' style='padding:0'>
+    <view class='card_title'>
+      水质mg/L
+    </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-10 ">
+          <view class="zan-cell ">
+            <view class="zan-cell__bd card_name" >SS悬浮物:</view>
+            <view class="zan-cell__ft ">{{data.wellWater}}mg/L</view>
+          </view>
+        </view>
+        <view class="zan-col zan-col-2 bdline">
+          <view style='height:94rpx'></view>
+        </view>
+        <view class="zan-col zan-col-1">
+        </view>
+        <view class="zan-col zan-col-10">
+          <view class="zan-cell">
+            <view class="zan-cell__bd card_name">COD浓度:</view>
+            <view class="zan-cell__ft ">{{data.riverWater}}mg/L</view>
+          </view>
+        </view>
       </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >SS悬浮物：</view>
-        <view class="zan-cell__ft card_val">{{data.ss}}mg/L</view>
+  <view class='card' style='padding:0'>
+    <view class='card_title'>
+      管道污水累计流量m³/h
+    </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-10 ">
+          <view class="zan-cell ">
+            <view class="zan-cell__bd card_name" >1#累计流量:</view>
+            <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+          </view>
+        </view>
+        <view class="zan-col zan-col-2 bdline">
+          <view style='height:94rpx'></view>
+        </view>
+        <view class="zan-col zan-col-1">
+        </view>
+        <view class="zan-col zan-col-10">
+          <view class="zan-cell">
+            <view class="zan-cell__bd card_name">2#累计流量:</view>
+            <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+          </view>
+        </view>
       </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >管道污水累计流量：</view>
-        <view class="zan-cell__ft card_val">{{data.flow}}m³/h</view>
-      </view>
-  </view>
-  <view class='card_num'>
-     <view class="zan-cell">
-        <view class="zan-cell__bd card_name" >管道污水瞬时流量：</view>
-        <view class="zan-cell__ft card_val">{{data.flow}}m³/h</view>
+  <view class='card' style='padding:0'>
+    <view class='card_title'>
+      管道污水瞬时流量m³/h
+    </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-10 ">
+          <view class="zan-cell ">
+            <view class="zan-cell__bd card_name" >1#瞬时流量:</view>
+            <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+          </view>
+        </view>
+        <view class="zan-col zan-col-2 bdline">
+          <view style='height:94rpx'></view>
+        </view>
+        <view class="zan-col zan-col-1">
+        </view>
+        <view class="zan-col zan-col-10">
+          <view class="zan-cell">
+            <view class="zan-cell__bd card_name">2#瞬时流量:</view>
+            <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+          </view>
+        </view>
       </view>
   </view>
   <view class='card_num'>

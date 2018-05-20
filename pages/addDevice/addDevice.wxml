@@ -1,12 +1,22 @@
 <!--pages/addDevice/addDevice.wxml-->
+<import src="/dist/toptips/index.wxml" />
+
 <view >
   <view class="zan-panel">
     <view class="zan-cell">
       <view class="zan-cell__bd" >用户</view>
-      <view class="zan-cell__ft" bindtap='addmore'>添加新设备</view>
     </view>
   </view>
-  <view >
+    <view class="item-box" wx:if="{{device.length > 0}}">
+      <view class="items" >
+        <view  wx:for="{{device}}"  wx:for-item="item" wx:key="item.id" id = '{{item.id}}' class="item">
+          <view bindtap="detail"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}"class="inner txt" id = '{{item.id}}' >
+          {{item.equipmentName}}号设备 <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;color:#B5B5B5'></text></view>
+          <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+        </view>
+      </view>
+    </view>
+  <!-- <view >
     <view class="zan-panel" bindtap="detail" >
       <view class="zan-cell zan-cell--access">
         <view class="zan-cell__bd">第一台设备测试</view>
@@ -26,6 +36,7 @@
     <view class='addmore_rad'>
       添加设备
     </view>
-  </view>
+  </view> -->
   <view class='tip_title'>欢迎使用蓝翔环保管理小程序</view>
+    <template is="zan-toptips" data="{{ zanTopTips }}"></template>
 </view>

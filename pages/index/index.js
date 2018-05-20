@@ -31,18 +31,12 @@ Page(Object.assign({}, Zan.Field,{
   onLoad: function () {
     var userName = wx.getStorageSync('userName');
     var userPassword = wx.getStorageSync('userPassword');
-      console.log(userName);
-      console.log(userPassword);
       if (userName) {
         this.setData({ usname: userName });
       }
       if (userPassword) {
         this.setData({ uspassword: userPassword });
       }
-    // socket.emit('index', '123456');
-    // socket.on('res', msg => {
-    //   console.log('res from server: %s!', msg);
-    // });
   },
   editpassword: function () {
     wx.navigateTo({
@@ -50,7 +44,6 @@ Page(Object.assign({}, Zan.Field,{
     })
   },
   formSubmit: function (event) {
-    console.log(event.detail.value);
     const that = this;
     if (!event.detail.value.name || !event.detail.value.password) {
       that.setData({
@@ -65,7 +58,6 @@ Page(Object.assign({}, Zan.Field,{
           password: event.detail.value.password
         },
         success: function (result) {
-          console.log(result)
           wx.setStorageSync("sessionid", result.header["set-cookie"])
           wx.setStorageSync("userName", event.detail.value.name);
           wx.setStorageSync("userPassword", event.detail.value.password);
@@ -74,7 +66,7 @@ Page(Object.assign({}, Zan.Field,{
               message: '登录成功'
             })
             wx.navigateTo({
-              url: '../addDevice/addDevice'
+              url: '../addDevice/addDevice?id=' + result.data.result.userId
             })
           } else {
             that.setData({

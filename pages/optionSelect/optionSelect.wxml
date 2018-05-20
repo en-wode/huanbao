@@ -12,10 +12,10 @@
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='2'>
           <view class="iconfont icon-shezhi de-caozuo" ></view>
-          设备操作
+          设备报修
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='3'>
-          <view class="iconfont icon-video-surveillance de-check" ></view>
+          <view class="iconfont icon-caozuomoshiqiehuan de-check" ></view>
           情景模式
         </view>
         <view class="zan-col zan-col-12" bindtap='optionSelect' id='4'>

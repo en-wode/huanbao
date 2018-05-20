@@ -1,146 +1,237 @@
-// pages/deviceGroup/deviceGroup.js
 const Zan = require('../../dist/index');
 const app = getApp()
 
-Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast, {
+Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, {
   data: {
-    device: {
-      equipmentId: '',
-      drains: true,
-      sluiceGate: false,
-      sluiceGateWidth: 0,
-      sluiceGateHeight: 0,
-      drainsWidth: 0,
-      drainsHeight: 0,
-      cod:0,
-      ss: 0,
-      garbageSensor: true,
-      rainGauge: false,
-      waterPump1: false,
-      flowmeter1: false,
-      waterPump2: false,
-      flowmeter2: false,
-      waterPump3: false,
-      flowmeter3: false
+    id: '',
+    base: {
+      drainageOverflowHeight: 0,
+      InterceptingLimitflowHeight: 0,
+      yuliang: {
+        title: '雨量计',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'yuliang'
+      },
+      sunnyToRain: {
+        title: '晴转雨时间',
+        placeholder: '请输入数值',
+        componentId: 'sunnyToRain'
+      },
+      warning: {
+        title: '警戒水位',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'warning'
+      },
+      bump1st: {
+        title: '1#水泵停止水位',
+        inputType: 'digit',
+        placeholder: '请输入数值',
+        componentId: 'bump1st'
+      },
+      bump1sp: {
+        title: '1#水泵开启水位',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'bump1sp'
+      },
+      bump2st: {
+        title: '2#水泵停止水位',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'bump2st'
+      },
+      bump2sp: {
+        title: '2#水泵开启水位',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'bump2sp'
+      },
+      COD: {
+        title: 'COD浓度',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'cod'
+      },
+      SS: {
+        title: 'SS悬浮物',
+        placeholder: '请输入数值',
+        inputType: 'digit',
+        componentId: 'ss'
+      }
     },
-    devices: {
-      equipmentId: '',
-      drains: 1,
-      sluiceGate: 0,
-      sluiceGateWidth: 0,
-      sluiceGateHeight: 0,
-      drainsWidth: 0,
-      drainsHeight: 0,
-      cod: 0,
-      ss: 0,
-      garbageSensor: 1,
-      rainGauge: 0,
-      waterPump1: 0,
-      flowmeter1: 0,
-      waterPump2: 0,
-      flowmeter2: 0,
-      waterPump3: 0,
-      flowmeter3: 0,
-      latitude: 0,
-      longitude: 0
-    }
+    controls: [
+      {
+        id: 'drainage',
+        name: '功能一',
+        min: 0,
+        max: 80
+      },
+      {
+        id: 'InterceptingPollution',
+        name: '功能二',
+        value: 0,
+        max: 100
+      },
+      {
+        id: 'garbage',
+        name: '功能三',
+        min: 0,
+        max: 100
+      }
+    ],
+    data: {}
   },
-  bindKeyInput: function (e) {
-    console.log(e);
-    this.setData({
-      [`device.${e.currentTarget.id}`]: e.detail.value
-    })
-    this.setData({
-      [`devices.${e.currentTarget.id}`]: e.detail.value
-    })
-  },
-  checkboxChange: function (e) {
-    const that = this;
-    var val = e.currentTarget.id
-    var mark = 0
-    if (that.data.device[val]) {
-      mark = 0
-    } else {
-      mark = 1
-    }
-    that.setData({
-      [`device.${val}`]: !that.data.device[val]
-    })
-    that.setData({
-      [`devices.${val}`]: mark
-    })
-  },
-  // bindKeyInput: function (e) {
-  //   this.setData({
-  //     inputValue: e.detail.value
-  //   })
-  // },
   onLoad: function (options) {
     var that = this;
     console.log(options)
     that.setData({
-      [`device.equipmentId`]: options.deviceId
+      id: options.id
     })
-    that.setData({
-      [`devices.equipmentId`]: options.deviceId
-    })
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        that.setData({
-          [`device.latitude`]: res.latitude,
-          [`device.longitude`]: res.longitude,
-        })
-      }
-    })
-    // that.getdata();
   },
-  save() {
+  toggleBaseDialog() {
     const that = this;
     that.showZanDialog({
       title: '设备管理操作',
-      content: '请确保参数正确,将影响后续产品使用',
+      content: '请确认是否保存操作',
       showCancel: true
     }).then(() => {
-      that.getdata();
+      that.setdata();
     }).catch(() => {
       console.log('=== dialog ===', 'type: cancel');
     });
   },
   handleZanSwitchChange(e) {
     var componentId = e.componentId;
-    console.log(e)
-    var marks = 0
-    if (e.checked) {
-      marks = 1
+    var checked = e.checked;
+    var datacheck = 0;
+    if (checked == true) {
+      datacheck = 1
     } else {
-      marks = 0
+      datacheck = 0
     }
-    // 同步开关
-    this.setData({
-      [`device.${componentId}`]: e.checked
-    });
-    this.setData({
-      [`devices.${componentId}`]: marks
+    console.log(e)
+    if (componentId == 'waterPump1') {
+      // 同步开关
+      this.setData({
+        [`${componentId}.checked`]: checked,
+        [`data.${componentId}`]: datacheck
+      });
+    } else if (componentId == 'waterPump2') {
+      // 异步开关
+      this.setData({
+        [`${componentId}.checked`]: checked,
+        [`data.${componentId}`]: datacheck
+      });
+    }
+  },
+  garbagechange: function (value) {
+    const that = this
+    that.setData({
+      [`data.garbage`]: value.detail.value
     });
   },
-  getdata: function () {
+  InterceptingLimitflowHeight: function (value) {
+    const that = this
+    that.setData({
+      [`base.InterceptingLimitflowHeight`]: value.detail.value
+    });
+  },
+  addCount: function (event) {
     const that = this;
-    console.log(that.data.device)
-    console.log(that.data.devices.drains)
-    var header = {
-      'content-type': 'application/json',
-      'cookie': wx.getStorageSync("sessionid")//读取cookie
-    };
+    let compontId = event.currentTarget.dataset.id
+    console.log(event)
+    console.log(compontId)
+    console.log(that.data.base.InterceptingLimitflowHeight);
+    // let controls = that.data.base.controls[data.id];
+    switch (parseInt(compontId)) {
+      case 'InterceptingLimitflowHeight':
+        if (that.data.data.drainage >= controls.max) {
+          return
+        } else {
+          that.setData({
+            [`data.base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight + 5
+          });
+          console.log(that.data.data)
+        }
+        break
+      case 1:
+        if (that.data.data.InterceptingPollution >= controls.max) {
+          return
+        } else {
+          that.setData({
+            [`data.base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight + 5
+          });
+        }
+        break
+      case 2:
+        if (that.data.data.garbage >= controls.max) {
+          return
+        } else {
+          that.setData({
+            [`data.InterceptingLimitflowHeight`]: that.data.data.garbage + 5
+          });
+        }
+        break
+    }
+  },
+  minusCount: function (event) {
+    const that = this;
+    let data = event.currentTarget.dataset
+    let controls = that.data.controls[data.id];
+    switch (parseInt(data.id)) {
+      case 0:
+        if (that.data.data.drainage <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.drainage`]: that.data.data.drainage - 5
+          });
+          console.log(that.data.data)
+        }
+        break
+      case 1:
+        if (that.data.data.InterceptingPollution <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.InterceptingPollution`]: that.data.data.InterceptingPollution - 5
+          });
+        }
+        break
+      case 2:
+        if (that.data.data.garbage <= controls.min) {
+          return
+        } else {
+          that.setData({
+            [`data.garbage`]: that.data.data.garbage - 5
+          });
+        }
+        break
+    }
+  },
+  drainagechange: function (value) {
+    const that = this
+    that.setData({
+      [`data.drainage`]: value.detail.value
+    });
+  },
+  setdata: function () {
+    const that = this;
+    console.log(that.data.data)
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentPort/addEquipmentPort',
+      url: 'http://192.168.0.115:7001/equipmentArameters/setEquipment',
       method: 'POST',
-      header: header,
       data: {
-        device: that.data.devices
+        data: that.data.data
       },
       success: function (result) {
-        console.log(result);
+        if (result.data.code == 1) {
+          that.showZanToast('保存成功');
+        } else {
+          that.showZanToast('请提供设备ID');
+        }
       }
     })
   }

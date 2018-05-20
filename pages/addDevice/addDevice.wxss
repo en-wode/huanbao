@@ -26,3 +26,58 @@ page{
   left: 0;
   right: 0;
 }
+
+.item-box{
+    margin: 0 auto;
+    padding: 12rpx 0;
+}
+
+.items{
+    width: 100%;
+}
+
+.item{
+    position:relative;
+    border-top:2rpx solid#eee;
+    height:90rpx;
+    line-height:90rpx;
+    overflow:hidden;
+    background:white;
+    font-size:32rpx;
+
+}
+
+.item:last-child{
+
+    border-bottom: 2rpx solid#eee;
+
+}
+
+.inner{
+    position: absolute;
+    top:0;
+}
+
+.inner.txt{
+    background-color: #fff;
+    width: 100%;
+    z-index: 5;
+    padding:0 0rpx 0 20rpx;
+    transition: left0.2s ease-in-out;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.inner.del{
+    background-color: #e64340;
+    width: 180rpx;text-align: center;
+    z-index: 4;
+    right: 0;
+    color: #fff
+
+}
+.item-icon{
+    width: 64rpx;
+    vertical-align: middle;
+    margin-right: 16rpx
+}

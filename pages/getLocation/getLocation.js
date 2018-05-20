@@ -1,8 +1,8 @@
-// pages/location/location.js
+// pages/getlocation/getLocation.js
 const Zan = require('../../dist/index');
 
 var app = getApp()
-Page(Object.assign({}, Zan.Field,{
+Page(Object.assign({}, Zan.Field, {
   data: {
     map_width: 380,
     map_height: 380,
@@ -50,8 +50,8 @@ Page(Object.assign({}, Zan.Field,{
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          map_width: res.windowWidth/1.2
-          , map_height: res.windowWidth/1.2
+          map_width: res.windowWidth / 1.2
+          , map_height: res.windowWidth / 1.2
           // , controls: [{
           //   id: 1,
           //   iconPath: '../../assets/images/ic_location.png',

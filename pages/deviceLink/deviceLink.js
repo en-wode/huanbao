@@ -9,13 +9,19 @@ function IsTel(s) {
     }
   }
 }
-
 Page({
   data: {
     disabled: true,  //是否可用  
     opacity: 0.4,
     show: "",
-    msg: ' ' 
+    msg: ' ',
+    userId: '' 
+  },
+  onLoad: function (options) {
+    console.log(options);
+    this.setData({
+      userId: options.userId
+    })
   },
   //手机的输入框  
   phone: function (e) {
@@ -53,7 +59,7 @@ Page({
         data: {
           equipmentName: e.detail.value.equipmentName,
           equipmentPassword: e.detail.value.equipmentPassword,
-          userId : '1'
+          userId : that.data.userId
         },
         success: function (res) {
           console.log(res);

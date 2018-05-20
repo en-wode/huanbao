@@ -1,4 +1,4 @@
-<!--pages/location/location.wxml-->
+<!--pages/getlocation/getLocation.wxml-->
 <import src="/dist/field/index.wxml" />
 <view class='contain'>
   <picker bindchange="bindPickertype" value="{{typeindex}}" range="{{questiontype}}">
