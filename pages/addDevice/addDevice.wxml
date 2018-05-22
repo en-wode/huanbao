@@ -5,6 +5,12 @@
   <view class="zan-panel">
     <view class="zan-cell">
       <view class="zan-cell__bd" >用户</view>
+      <view class="zan-cell__ft" bindtap='message'>
+        <view class="demo__icon zan-badge">
+        消息
+          <view class="zan-badge__count">9</view>
+        </view>
+      </view>
     </view>
   </view>
     <view class="item-box" wx:if="{{device.length > 0}}">

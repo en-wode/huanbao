@@ -152,17 +152,17 @@ Page(extend({}, Tab, {
         name: '成交量1',
         data: [0.15, 0.2, 0.45, 0.37, 0.4, 0.8],
         format: function (val) {
-          return val.toFixed(2) + '万';
+          return val.toFixed(2) + 'm³/h';
         }
       }, {
         name: '成交量2',
         data: [0.30, 0.37, 0.65, 0.78, 0.69, 0.94],
         format: function (val) {
-          return val.toFixed(2) + '万';
+          return val.toFixed(2) + 'm³/h';
         }
       }],
       yAxis: {
-        title: '成交金额 (万元)',
+        title: '流量 (m³/h)',
         format: function (val) {
           return val.toFixed(2);
         },

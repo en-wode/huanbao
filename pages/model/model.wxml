@@ -4,150 +4,162 @@
 <import src="/dist/select/index.wxml" />
 <import src="/dist/field/index.wxml" />
 <view >
-<form bindsubmit="toggleBaseDialog" >
   <view class='card'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">排水闸溢流高度(单位：mm)</view>
-        <view class="zan-cell__ft"></view>
+    <view class="zan-cell  ">
+      <view class="zan-cell__bd" >井底标高：  {{(devices.bottomHoleHeight-10000)/100}}米</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        </view>
       </view>
     </view>
-    <view class="section section_gap">
+  </view>
+  <form bindsubmit="toggleBaseDialog" >
+    <view class='card'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">排水闸溢流高度(单位：mm)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
+      </view>
+      <view class="section section_gap">
+        <view class="body-view">
+        <text class="s-con" data-id="0" bindtap="minusCount">-</text>
+          <slider 
+            max="{{controls[0].max}}"
+            min='{{controls[0].min}}'
+            step="5"
+            bindchange="drainageOverflowHeight" 
+            value='{{base.drainageOverflowHeight}}'
+            show-value
+          />
+          <text class="s-con" data-id="0" bindtap="addCount">＋</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='card'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">截污闸限流高度(单位：mm)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
+      </view>
+      <view class="section section_gap">
+        <view class="body-view">
+        <text class="s-con" data-id="1" bindtap="minusCount">-</text>
+          <slider 
+            max="{{controls[1].max}}"
+            min='{{controls[1].min}}'
+            step="5"
+            bindchange="InterceptingLimitflowHeight" 
+            value='{{base.InterceptingLimitflowHeight}}'
+            show-value
+          />
+          <text class="s-con" data-id="1" bindtap="addCount">＋</text>
+        </view>
+      </view>
+    </view>
+    <!-- //雨量计 -->
+    <view class='card'>
+        <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge}}"></template>
+    </view>
+
+    <!-- //晴转雨时间 -->
+    <view class='card'>
+        <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' , value: devices.sunnyToRain}}"></template>
+    </view>
+    <!-- //警戒水位 -->
+    <view class='card'>
+        <template is="zan-field" data="{{  ...base.vigilance, componentId: 'vigilance' , value: devices.vigilance}}"></template>
+    </view>
+    <!-- //闸门雨水位要求高度差 -->
+    <view class='card'>
+        <template is="zan-field" data="{{  ...base.seaLevel, componentId: 'seaLevel' , value: devices.seaLevel}}"></template>
+    </view>
+    <view class='card'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">1号水泵(单位：m)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
+      </view>
       <view class="body-view">
-       <text class="s-con" data-id="0" bindtap="minusCount">-</text>
-        <slider 
-          max="{{controls[0].max}}"
-          min='{{controls[0].min}}'
-          step="5"
-          bindchange="drainageOverflowHeight" 
-          value='{{base.drainageOverflowHeight}}'
-          show-value
-        />
-         <text class="s-con" data-id="0" bindtap="addCount">＋</text>
+          <!-- //1#水泵停止水位 -->
+          <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1', value: devices.stopWaterLevel1 }}"></template>
+        <!-- //1#水泵开启水位 -->
+          <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1}}"></template>
       </view>
     </view>
-  </view>
-
-  <view class='card'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">截污闸限流高度(单位：mm)</view>
-        <view class="zan-cell__ft"></view>
+    <view class='card'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">2号水泵(单位：m)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
       </view>
-    </view>
-    <view class="section section_gap">
       <view class="body-view">
-       <text class="s-con" data-id="1" bindtap="minusCount">-</text>
-        <slider 
-          max="{{controls[1].max}}"
-          min='{{controls[1].min}}'
-          step="5"
-          bindchange="InterceptingLimitflowHeight" 
-          value='{{base.InterceptingLimitflowHeight}}'
-          show-value
-        />
-         <text class="s-con" data-id="1" bindtap="addCount">＋</text>
+          <!-- //2#水泵停止水位 -->
+          <template is="zan-field" data="{{  ...base.stopWaterLevel2, componentId: 'stopWaterLevel2' , value: devices.stopWaterLevel2 }}"></template>
+        <!-- //2#水泵开启水位 -->
+          <template is="zan-field" data="{{  ...base.startWaterLevel2, componentId: 'startWaterLevel2', value: devices.startWaterLevel2 }}"></template>
       </view>
     </view>
-  </view>
-  <!-- //雨量计 -->
-  <view class='card'>
-      <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge}}"></template>
-  </view>
-
-  <!-- //晴转雨时间 -->
-  <view class='card'>
-      <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' , value: devices.sunnyToRain}}"></template>
-  </view>
-  <!-- //警戒水位 -->
-  <view class='card'>
-      <template is="zan-field" data="{{  ...base.vigilance, componentId: 'vigilance' , value: devices.vigilance}}"></template>
-  </view>
-
-  <view class='card'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">1号水泵(单位：m)</view>
-        <view class="zan-cell__ft"></view>
+  <view class='card' style='display: none'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">3号水泵(单位：m)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
+      </view>
+      <view class="body-view">
+          <!-- //3#水泵停止水位 -->
+          <template is="zan-field" data="{{  ...base.stopWaterLevel3, componentId: 'stopWaterLevel3' }}"></template>
+        <!-- //3#水泵开启水位 -->
+          <template is="zan-field" data="{{  ...base.startWaterLevel3, componentId: 'startWaterLevel3' }}"></template>
       </view>
     </view>
-    <view class="body-view">
-        <!-- //1#水泵停止水位 -->
-        <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1', value: devices.stopWaterLevel1 }}"></template>
-      <!-- //1#水泵开启水位 -->
-        <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1}}"></template>
-    </view>
-  </view>
-  <view class='card'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">2号水泵(单位：m)</view>
-        <view class="zan-cell__ft"></view>
+    <view class='card'>
+      <view class='card_title'>
+        <view class="zan-cell-my">
+          <view class="zan-cell__bd">水质(mg/L)</view>
+          <view class="zan-cell__ft"></view>
+        </view>
+      </view>
+      <view class="body-view">
+        <template is="zan-field" data="{{  ...base.COD, componentId: 'cod', value: devices.cod }}"></template>
+        <template is="zan-field" data="{{  ...base.SS, componentId: 'ss', value: devices.ss}}"></template>
       </view>
     </view>
-    <view class="body-view">
-        <!-- //2#水泵停止水位 -->
-        <template is="zan-field" data="{{  ...base.stopWaterLevel2, componentId: 'stopWaterLevel2' , value: devices.stopWaterLevel2 }}"></template>
-      <!-- //2#水泵开启水位 -->
-        <template is="zan-field" data="{{  ...base.startWaterLevel2, componentId: 'startWaterLevel2', value: devices.startWaterLevel2 }}"></template>
-    </view>
-  </view>
- <view class='card' style='display: none'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">3号水泵(单位：m)</view>
-        <view class="zan-cell__ft"></view>
+    <view class='card' style='margin-bottom:8rpx'>
+      <view class='card_title'>
+        <view class="iconfont icon-dengpao" ></view>工作模式
+      </view>
+      <view class="zan-row work_light">
+          <view class="zan-col zan-col-12" bindtap='model' id='0'>
+            <view class="iconfont icon-zidong light {{work == 0 ? 'zidong' : ''}}" ></view>
+            <view class="work-name">自动值守</view>
+          </view>
+          <view class="zan-col zan-col-12" bindtap='model' id='1'>
+            <view class="iconfont icon-jiankangfengxianyufang light {{work == 1 ? 'jiankangfengxianyufang' : ''}}" ></view>
+            <view class="work-name">防倒灌</view>
+          </view>
+          <view class="zan-col zan-col-8" bindtap='model' id='2'>
+          <view class="iconfont icon-qing light {{work == 2 ? 'qing' : ''}}" ></view>
+            <view class="work-name">晴天截流</view>
+          </view>
+          <view class="zan-col zan-col-8" bindtap='model' id='3'>
+            <view class="iconfont icon-xianzhi light {{work == 3 ? 'xianzhi' : ''}}" ></view>
+            <view class="work-name">初雨限流</view>
+          </view>
+          <view class="zan-col zan-col-8" bindtap='model' id='4'>
+            <view class="iconfont icon-yu light {{work == 4 ? 'yu' : ''}}" ></view>
+            <view class="work-name">暴雨</view>
+          </view>
       </view>
     </view>
-    <view class="body-view">
-        <!-- //3#水泵停止水位 -->
-        <template is="zan-field" data="{{  ...base.stopWaterLevel3, componentId: 'stopWaterLevel3' }}"></template>
-      <!-- //3#水泵开启水位 -->
-        <template is="zan-field" data="{{  ...base.startWaterLevel3, componentId: 'startWaterLevel3' }}"></template>
+    <view class='detail_buttom'>
+      <button class="zan-btn my-btn" formType='submit'>保存</button>
     </view>
-  </view>
-  <view class='card'>
-    <view class='card_title'>
-      <view class="zan-cell-my">
-        <view class="zan-cell__bd">水质(mg/L)</view>
-        <view class="zan-cell__ft"></view>
-      </view>
-    </view>
-    <view class="body-view">
-       <template is="zan-field" data="{{  ...base.COD, componentId: 'cod', value: devices.cod }}"></template>
-       <template is="zan-field" data="{{  ...base.SS, componentId: 'ss', value: devices.ss}}"></template>
-    </view>
-  </view>
-  <view class='card' style='margin-bottom:8rpx'>
-    <view class='card_title'>
-      <view class="iconfont icon-dengpao" ></view>工作模式
-    </view>
-    <view class="zan-row work_light">
-        <view class="zan-col zan-col-12" bindtap='model' id='1'>
-          <view class="iconfont icon-zidong light {{work == 1 ? 'zidong' : ''}}" ></view>
-          <view class="work-name">自动值守</view>
-        </view>
-         <view class="zan-col zan-col-12" bindtap='model' id='2'>
-          <view class="iconfont icon-jiankangfengxianyufang light {{work == 2 ? 'jiankangfengxianyufang' : ''}}" ></view>
-          <view class="work-name">防倒灌</view>
-        </view>
-        <view class="zan-col zan-col-8" bindtap='model' id='3'>
-         <view class="iconfont icon-qing light {{work == 3 ? 'qing' : ''}}" ></view>
-          <view class="work-name">晴天截流</view>
-        </view>
-        <view class="zan-col zan-col-8" bindtap='model' id='4'>
-          <view class="iconfont icon-xianzhi light {{work == 4 ? 'xianzhi' : ''}}" ></view>
-          <view class="work-name">初雨限流</view>
-        </view>
-        <view class="zan-col zan-col-8" bindtap='model' id='5'>
-          <view class="iconfont icon-yu light {{work == 5 ? 'yu' : ''}}" ></view>
-          <view class="work-name">暴雨</view>
-        </view>
-    </view>
-  </view>
-  <view class='detail_buttom'>
-    <button class="zan-btn my-btn" formType='submit'>保存</button>
-  </view>
   </form>
   <template is="zan-dialog" data="{{ zanDialog }}"></template>
   <template is="zan-toast" data="{{ zanToast }}"></template>

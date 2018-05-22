@@ -1,9 +1,11 @@
 // pages/deviceStatus/deviceStatus.js
 var bmap = require('../../utils/bmap-wx.min.js');
 const Zan = require('../../dist/index');
+const io = require('../../utils/socket/weapp.socket.io.js')
+const socket = io('http://192.168.0.115:7001')
 const app = getApp()
 
-Page(Object.assign({}, Zan.TopTips, {
+Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
 
   /**
    * 页面的初始数据
@@ -11,7 +13,17 @@ Page(Object.assign({}, Zan.TopTips, {
   data: {
     weatherData: [],
     id: '',
-    data: {}
+    data: {},
+    tab1: {
+      list: [{
+        id: 'shuju',
+        title: '数据显示'
+      }, {
+        id: 'moni',
+        title: '设备模拟'
+      }],
+      selectedId: 'shuju'
+    },
   },
 
   /**
@@ -19,10 +31,10 @@ Page(Object.assign({}, Zan.TopTips, {
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options.equipid)
     that.setData({
-      id: options.id
+      id: options.equipid
     }) 
-    that.devicestatus();
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
@@ -43,6 +55,20 @@ Page(Object.assign({}, Zan.TopTips, {
       fail: fail,
       success: success
     });
+    socket.on('connect', function () {
+      console.log('connected')
+    });
+    let name = 'res' + options.equipid
+    socket.on(name, d => {
+      that.setData({
+        data: d,
+      });
+      console.log('received news: ', d)
+    })
+    socket.emit('index', {
+      equipmentId: '22'
+    })
+    
   },
 
   /**
@@ -50,6 +76,14 @@ Page(Object.assign({}, Zan.TopTips, {
    */
   onReady: function () {
   
+  },
+  handleZanTabChange(e) {
+    var componentId = e.componentId;
+    var selectedId = e.selectedId;
+
+    this.setData({
+      [`${componentId}.selectedId`]: selectedId
+    });
   },
   simulation: function () {
     let that = this;

@@ -14,7 +14,8 @@
     "pages/optionSelect/optionSelect",
     "pages/chartList/chartList",
     "pages/editPassword/editPassword",
-    "pages/getlocation/getLocation"
+    "pages/getLocation/getLocation",
+    "pages/message/message"
   ],
   "window": {
     "backgroundTextStyle": "light",

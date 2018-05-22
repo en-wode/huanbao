@@ -7,9 +7,9 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     equipid: '',
     base: {
       drainageOverflowHeight: 0,
-      InterceptingLimitflowHeight: 0,
+      InterceptingL0imitflowHeight: 0,
       rainGauge: {
-        title: '雨量计(单位：L)',
+        title: '大雨雨量(单位：mL/h)',
         placeholder: '请输入数值',
         inputType: 'digit',
         componentId: 'rainGauge'
@@ -23,49 +23,57 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       vigilance: {
         title: '警戒水位(单位：m)',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'vigilance',
+        value: ''
+      },
+      seaLevel: {
+        title: '初雨初始高度(单位：m)',
+        placeholder: '请输入数值',
+        inputType: 'text',
+        componentId: 'seaLevel',
         value: ''
       },
       stopWaterLevel1: {
         title: '1#水泵停止水位',
-        inputType: 'digit',
+        inputType: 'text',
         placeholder: '请输入数值',
         componentId: 'stopWaterLevel1',
+        maxlength: 5,
         value: ''
       },
       startWaterLevel1: {
         title: '1#水泵开启水位',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'startWaterLevel1',
         value: ''
       },
       stopWaterLevel2: {
         title: '2#水泵停止水位',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'stopWaterLevel2',
         value: ''
       },
       startWaterLevel2: {
         title: '2#水泵开启水位',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'startWaterLevel2',
         value: ''
       },
       stopWaterLevel3: {
         title: '3#水泵停止水位',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'stopWaterLevel2',
         value: '0'
       },
       startWaterLevel3: {
         title: '3#水泵开启水位',
         placeholder: '请输入数值',
-        inputType: 'digit',
+        inputType: 'text',
         componentId: 'startWaterLevel2',
         value: '0'
       },
@@ -74,6 +82,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         placeholder: '请输入数值',
         inputType: 'digit',
         componentId: 'cod',
+        maxlength: 5,
         value: ''
       },
       SS: {
@@ -84,7 +93,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       }
     },
     value: '23',
-    work: 1,
+    work: 0,
     controls: [
       {
         id: 'InterceptingLimitflowHeight',
@@ -109,7 +118,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   model: function (e) {
     this.setData({
-      work: e.currentTarget.id
+      work: e.currentTarget.id,
     })
   },
   // toggleBaseDialog() {
@@ -123,6 +132,10 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   //   }).catch(() => {
   //   });
   // },
+  handleZanFieldChange: function (e) {
+    const that = this
+    console.log(e);
+  },
   garbagechange: function (value) {
     const that = this
     that.setData({
@@ -176,11 +189,11 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         }
         break
       case 1:
-        if (that.data.data.InterceptingPollution <= controls.min) {
+        if (that.data.base.InterceptingLimitflowHeight <= controls.min) {
           return
         } else {
           that.setData({
-            [`base.InterceptingLimitflowHeight`]: that.data.data.InterceptingPollution - 5,
+            [`base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight - 5,
           });
         }
         break
@@ -199,6 +212,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`devices.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight,
       [`devices.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight,
       [`devices.equipmentId`]: that.data.equipid,
+      [`devices.pattern`]: that.data.work,
     })
     console.log(event)
     console.log(that.data.devices)
@@ -250,15 +264,25 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         equipmentId: that.data.equipid
       },
       success: function (result) {
+        console.log(result)
         if (result.data.result) {
           that.setData({
             devices: result.data.result,
             [`base.drainageOverflowHeight`]: result.data.result.drainageOverflowHeight,
             [`base.InterceptingLimitflowHeight`]: result.data.result.InterceptingLimitflowHeight,
+            work: result.data.result.pattern,
           })
         }
         console.log(that.data.devices)
       }
     })
+  },
+  getcount: function (value) {
+    let grt = (value - 10000)/100;
+    return grt
+  },
+  setcount: function (value) {
+    let srt = value*100 + 10000;
+    return srt
   }
 }));

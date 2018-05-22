@@ -2,8 +2,6 @@
 //获取应用实例
 const app = getApp()
 const Zan = require('../../dist/index');
-// const io = require('../../utils/socket/weapp.socket.io.js')
-// const socket = io('http://192.168.0.115:7001')
 Page(Object.assign({}, Zan.Field,{
   data: {
     message: '',

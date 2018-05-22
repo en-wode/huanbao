@@ -1,54 +1,59 @@
 <!--pages/deviceStatus/deviceStatus.wxml-->
 <import src="/dist/toptips/index.wxml" />
+<import src="../../dist/tab/index.wxml" />
 <view>
+ <view >
+    <!-- <template
+      is="zan-tab"
+      data="{{ ...tab1, componentId: 'tab1' }}"></template> -->
+      {{data.creatTime}}
+  </view>
   <view class='card_num'>
    <view class="zan-row">
-      <view class="zan-col zan-col-10 ">
+      <view class="zan-col zan-col-11 ">
         <view class="zan-cell ">
           <view class="zan-cell__bd card_name" >井内水位：</view>
-          <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+          <view class="zan-cell__ft " style='min-width:0'>{{data.waterLevelInWell}}米</view>
         </view>
       </view>
-      <view class="zan-col zan-col-2 bdline">
+      <view class="zan-col zan-col-1 bdline">
         <view style='height:94rpx'></view>
       </view>
-      <view class="zan-col zan-col-1">
-      </view>
-      <view class="zan-col zan-col-10">
+      <view class="zan-col zan-col-11">
         <view class="zan-cell">
           <view class="zan-cell__bd card_name">河道水位：</view>
-          <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+          <view class="zan-cell__ft " style='min-width:0'>{{data.waterLevelOfSewagePipe}}米</view>
         </view>
       </view>
     </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>排水闸门开度 {{data.drainage}}%
+      <view class="iconfont icon-shuilongtou" ></view>排水闸门开度 {{data.sluiceOpeningDegree}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.drainage}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceOpeningDegree}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-shuilongtou1" ></view>截污闸门开度 {{data.InterceptingPollution}}%
+      <view class="iconfont icon-shuilongtou1" ></view>截污闸门开度 {{data.sluiceSluiceOpeningDegree}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.InterceptingPollution}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceSluiceOpeningDegree}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
   <view class='card'>
     <view class='card_title'>
-      <view class="iconfont icon-jishuidian" ></view>垃圾高度 {{data.garbage}}%
+      <view class="iconfont icon-jishuidian" ></view>垃圾高度 {{data.garbageHeight}}%
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.garbage}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.garbageHeight}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
@@ -59,8 +64,8 @@
       <view class="zan-row">
         <view class="zan-col zan-col-10 ">
           <view class="zan-cell ">
-            <view class="zan-cell__bd card_name" >SS悬浮物:</view>
-            <view class="zan-cell__ft ">{{data.wellWater}}mg/L</view>
+            <view class="zan-cell__bd card_name" >SS:</view>
+            <view class="zan-cell__ft ">{{data.ss}}</view>
           </view>
         </view>
         <view class="zan-col zan-col-2 bdline">
@@ -70,8 +75,8 @@
         </view>
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
-            <view class="zan-cell__bd card_name">COD浓度:</view>
-            <view class="zan-cell__ft ">{{data.riverWater}}mg/L</view>
+            <view class="zan-cell__bd card_name">COD:</view>
+            <view class="zan-cell__ft ">{{data.cod}}mg/L</view>
           </view>
         </view>
       </view>
@@ -83,8 +88,8 @@
       <view class="zan-row">
         <view class="zan-col zan-col-10 ">
           <view class="zan-cell ">
-            <view class="zan-cell__bd card_name" >1#累计流量:</view>
-            <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+            <view class="zan-cell__bd card_name" >1#:</view>
+            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage1}}米</view>
           </view>
         </view>
         <view class="zan-col zan-col-2 bdline">
@@ -94,8 +99,8 @@
         </view>
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
-            <view class="zan-cell__bd card_name">2#累计流量:</view>
-            <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+            <view class="zan-cell__bd card_name">2#:</view>
+            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage2}}米</view>
           </view>
         </view>
       </view>
@@ -107,8 +112,8 @@
       <view class="zan-row">
         <view class="zan-col zan-col-10 ">
           <view class="zan-cell ">
-            <view class="zan-cell__bd card_name" >1#瞬时流量:</view>
-            <view class="zan-cell__ft ">{{data.wellWater}}米</view>
+            <view class="zan-cell__bd card_name" >1#:</view>
+            <view class="zan-cell__ft ">{{data.sewageFlow1}}米</view>
           </view>
         </view>
         <view class="zan-col zan-col-2 bdline">
@@ -118,8 +123,8 @@
         </view>
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
-            <view class="zan-cell__bd card_name">2#瞬时流量:</view>
-            <view class="zan-cell__ft ">{{data.riverWater}}米</view>
+            <view class="zan-cell__bd card_name">2#:</view>
+            <view class="zan-cell__ft ">{{data.sewageFlow2}}米</view>
           </view>
         </view>
       </view>

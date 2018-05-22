@@ -55,6 +55,9 @@ page{
   color: #5f5f5f;
   font-size: 26rpx
 }
+.zan-cell__ft{
+  min-width: 130rpx
+}
 
 /* 字体图标 */
 .zan-icon{
@@ -142,4 +145,7 @@ page{
 }
 .today{
   font-weight: 700
+}
+.zan-tab__title{
+  width: 100%
 }

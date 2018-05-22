@@ -11,18 +11,18 @@
     <view class='title'>流量记录</view>
       <view class="zan-row">
         <view class="zan-col zan-col-12">
-          最高：16.8 m/h
+          最高：16.8 m³/h
         </view>
         <view class="zan-col zan-col-12">
-          最低：16.8 m/h
+          最低：16.8 m³/h
         </view>
       </view>
     <view class="zan-row">
       <view class="zan-col zan-col-12">
-        平均: 8 m/h
+        平均: 8 m³/h
       </view>
       <view class="zan-col zan-col-12">
-        瞬时: 8
+        瞬时: 8 m³/h
       </view>
     </view>
   </view>

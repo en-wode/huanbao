@@ -204,6 +204,11 @@ Page(Object.assign({}, Zan.TopTips,{
   },
   showTopTips(data) {
     this.showZanTopTips(data);
+  },
+  message: function () {
+    wx.navigateTo({
+      url: '../message/message',
+    })
   }
 }))
 
