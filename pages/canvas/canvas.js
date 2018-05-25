@@ -46,6 +46,7 @@ Page({
     app.socket().emit('index', {
       equipmentId: option.id
     })
+    that.sheb()
     that.drawClock();
     // 每40ms执行一次drawClock()，人眼看来就是流畅的画面
     start = setInterval(that.drawClock, 40);
@@ -64,17 +65,17 @@ Page({
     ctx.setFillStyle('#D3D3D3')
     ctx.fillRect(50, wxH - 350, wxW - 100, 300);
     //水流
-    ctx.beginPath();
-    const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
-    wrd.addColorStop(0, '#63B8FF');
-    wrd.addColorStop(0.6, '#1C86EE');
-    wrd.addColorStop(1, '#0000FF');
-    ctx.setFillStyle(wrd);
+    // ctx.beginPath();
+    // const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
+    // wrd.addColorStop(0, '#63B8FF');
+    // wrd.addColorStop(0.6, '#1C86EE');
+    // wrd.addColorStop(1, '#0000FF');
+    // ctx.setFillStyle(wrd);
 
-    ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300))); 
-    ctx.fillRect(0, wxH - 250, 50, 75);
-    ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
-    ctx.stroke();
+    // ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300))); 
+    // ctx.fillRect(0, wxH - 250, 50, 75);
+    // ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+    // ctx.stroke();
 
     ctx.beginPath()
     ctx.setLineWidth(10)
@@ -106,26 +107,26 @@ Page({
     ctx.moveTo(50, wxH - 50)
     ctx.lineTo(wxW - 50, wxH - 50)
     ctx.stroke();
-    ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 50, 220);
+    // ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 50, 220);
 
-    //水流方向
-    ctx.drawImage("/assets/images/right.png", 10, wxH - 220, 36, 26);
-    ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 220, 36, 26);
-    //水泵水流方向
-    ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
+    // //水流方向
+    // ctx.drawImage("/assets/images/right.png", 10, wxH - 220, 36, 26);
+    // ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 220, 36, 26);
+    // //水泵水流方向
+    // ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
 
-    //水泵 阀门 提篮
-    ctx.drawImage("/assets/images/shuibeng.png", 110, wxH - 135, 50, 80);
-    ctx.drawImage("/assets/images/shuibeng.png", 180, wxH - 135, 50, 80);
-    ctx.drawImage("/assets/images/jiewu.png", 240, wxH - 190, 45, 135);
+    // //水泵 阀门 提篮
+    // ctx.drawImage("/assets/images/shuibeng.png", 110, wxH - 135, 50, 80);
+    // ctx.drawImage("/assets/images/shuibeng.png", 180, wxH - 135, 50, 80);
+    // ctx.drawImage("/assets/images/jiewu.png", 240, wxH - 190, 45, 135);
 
-    //测量计
-    ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
-    ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
-    ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
+    // //测量计
+    // ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
+    // ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
+    // ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
 
-    //右侧排水阀门
-    ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 274, 24, 190);
+    // //右侧排水阀门
+    // ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 274, 24, 190);
 
     //主机
     ctx.drawImage("/assets/images/zhuji.png", wxW - 85, wxH - 350, 30, 30);
@@ -151,29 +152,7 @@ Page({
     ctx.lineTo(wxW - 55, wxH - 316);
     ctx.stroke();
 
-    //水泵管道
-    ctx.beginPath();
-    ctx.setLineWidth(10);
-    ctx.setLineJoin('round');
-    ctx.setStrokeStyle('white');
-    ctx.moveTo(226, wxH - 100);
-    ctx.lineTo(226, wxH - 286);
-    ctx.lineTo(50, wxH - 286);
-    ctx.moveTo(155, wxH - 100);
-    ctx.lineTo(155, wxH - 286);
-    ctx.stroke();
 
-    //水位计工作
-    ctx.beginPath();
-    ctx.setLineWidth(1);
-    ctx.setLineJoin('round');
-    ctx.setStrokeStyle('black');
-    ctx.moveTo(wxW - 162, wxH - 325);
-    ctx.lineTo(wxW - 162, wxH - 290);
-    ctx.lineTo(wxW - 156, wxH - 295);
-    ctx.moveTo(wxW - 162, wxH - 290);
-    ctx.lineTo(wxW - 168, wxH - 295);
-    ctx.stroke();
     //草坪
     ctx.beginPath();
     ctx.setLineWidth(1);
@@ -223,6 +202,65 @@ Page({
     ctx.fillText('一体化智能截污井', 114, 40)
     ctx.draw()
 
+  },
+  sheb: function() {
+    const that = this
+    var ctx = wx.createCanvasContext('five');
+    var wxH = wx.getSystemInfoSync().windowHeight;
+    var wxW = wx.getSystemInfoSync().windowWidth;
+
+    //水泵管道
+    ctx.beginPath();
+    ctx.setLineWidth(10);
+    ctx.setLineJoin('round');
+    ctx.setStrokeStyle('white');
+    ctx.moveTo(226, wxH - 100);
+    ctx.lineTo(226, wxH - 286);
+    ctx.lineTo(50, wxH - 286);
+    ctx.moveTo(155, wxH - 100);
+    ctx.lineTo(155, wxH - 286);
+    ctx.stroke();
+
+    //水位计工作
+    ctx.beginPath();
+    ctx.setLineWidth(1);
+    ctx.setLineJoin('round');
+    ctx.setStrokeStyle('black');
+    ctx.moveTo(wxW - 162, wxH - 325);
+    ctx.lineTo(wxW - 162, wxH - 290);
+    ctx.lineTo(wxW - 156, wxH - 295);
+    ctx.moveTo(wxW - 162, wxH - 290);
+    ctx.lineTo(wxW - 168, wxH - 295);
+    ctx.stroke();
+
+    ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 50, 220);
+
+    //水流方向
+    ctx.drawImage("/assets/images/right.png", 10, wxH - 220, 36, 26);
+    ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 220, 36, 26);
+    //水泵水流方向
+    ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
+
+    //水泵 阀门 提篮
+    ctx.drawImage("/assets/images/shuibeng.png", 110, wxH - 135, 50, 80);
+    ctx.drawImage("/assets/images/shuibeng.png", 180, wxH - 135, 50, 80);
+    ctx.drawImage("/assets/images/jiewu.png", 240, wxH - 190, 45, 135);
+
+    //测量计
+    ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", 12, wxH - 253, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", wxW - 30, wxH - 253, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
+
+    //右侧排水阀门
+    ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 274, 24, 190);
+
+    //设备名称
+    ctx.setFontSize(12)
+    ctx.setFillStyle('black')
+    ctx.fillText('水流方向', 8, wxH - 225)
+    ctx.draw()
   },
   wind: function () {
     /*Javascript代码片段*/
@@ -425,20 +463,6 @@ Page({
     var ctx = wx.createCanvasContext('four');
     var wxH = wx.getSystemInfoSync().windowHeight;
     var wxW = wx.getSystemInfoSync().windowWidth;
-    if (that.data.water >= 190 || that.data.water <= 120) {
-    } else if (that.data.out == '高于') {
-      that.setData({
-        water: that.data.water + 1
-      })
-    } else if (that.data.out == '等于') {
-      that.setData({
-        water: that.data.water - 1
-      })
-    } else if (that.data.out == '低于') {
-      that.setData({
-        water: that.data.water - 1
-      })
-    }
 
     function water() {
       ctx.beginPath();
@@ -448,16 +472,41 @@ Page({
       wrd.addColorStop(1, '#0000FF');
       ctx.setFillStyle(wrd);
       if (that.data.out == '高于'){
+        if (that.data.water >= 290 || that.data.water <= 120) {
+        }else{
+          that.setData({
+            water: that.data.water + 1
+          })
+        }
         ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
         ctx.fillRect(0, wxH - 250, 50, 75);
         ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+      } else if (that.data.out == '停止'){
+        if (that.data.water <= 180) {
+        } else {
+          that.setData({
+            water: that.data.water - 1
+          })
+        }
+        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
+
+        ctx.fillRect(0, wxH - that.data.water, 50, that.data.water - 180);
+        ctx.fillRect(wxW - 50, wxH - that.data.water, 50, that.data.water - 180);
+      } else if (that.data.out == '低于'){
+        if (that.data.water <= 100) {
+        } else {
+          that.setData({
+            water: that.data.water - 1
+          })
+        }
+        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
       }
       // ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300)));
 
       // ctx.fillRect(0, wxH - 250, 50, 75);
       // ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
       ctx.stroke();
-      ctx.draw(true)
+      ctx.draw()
     }
     water()
   },
@@ -470,7 +519,7 @@ Page({
       // 实时获取各个参数
 
       // 依次执行各个方法
-      // that.drawwater(); //水位高度
+      that.drawwater(); //水位高度
       that.drawtilan(ctx, wxH, wxW);    //tilan
       that.drawpaishui(ctx, wxW, wxH); //排水阀门
       that.drawwrite(ctx);    //数据显示

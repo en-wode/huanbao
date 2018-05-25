@@ -8,6 +8,9 @@
     <!-- 水动画 -->
      <canvas canvas-id='four' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:2"></canvas> 
 
+    <!-- 水下设备及说明 -->
+     <canvas canvas-id='five' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:3"></canvas> 
+
     <!-- 云及提篮 排水阀动画 -->
      <canvas canvas-id='first' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:4"></canvas> 
 
