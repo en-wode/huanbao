@@ -15,24 +15,36 @@ Page(Object.assign({}, Zan.TopTips,{
     that.setData({
       userId: options.id
     })
-    var header = {
-      'content-type': 'application/x-www-form-urlencoded',
-      'cookie': wx.getStorageSync("sessionid")//读取cookie
-    };
-    wx.request({
-      url: 'http://192.168.0.115:7001/equipment/list',
-      method: 'GET',
-      header: header,
-      data: {
-        userId: options.id
-      },
-      success: function (result) {
-        console.log(result)
-        that.setData({
-          device: result.data.result
+    wx.getStorage({
+      key: 'sessionid',
+      success: function (res) {
+        console.log(res.data)
+        var header = {
+          'content-type': 'application/json',
+          'cookie': res.data//读取cookie
+        };
+        wx.request({
+          url: 'http://192.168.0.115:7001/equipment/list',
+          method: 'GET',
+          header: header,
+          data: {
+            userId: options.id
+          },
+          success: function (result) {
+            console.log(result.data.result)
+            if (result.data.code == 0 && result.data.msg == 2000) {
+              wx.navigateTo({
+                url: '../index/index'
+              })
+            }
+            that.setData({
+              device: result.data.result
+            })
+          }
         })
       }
     })
+    
   },
   touchS: function (e) {
 

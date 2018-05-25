@@ -28,7 +28,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         value: ''
       },
       seaLevel: {
-        title: '初雨初始高度(单位：m)',
+        title: '初雨初始高度(单位：mm)',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'seaLevel',
@@ -96,17 +96,18 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     work: 0,
     controls: [
       {
-        id: 'InterceptingLimitflowHeight',
+        id: 'drainageOverflowHeight',
         min: 0,
         max: 80
       },
       {
         id: 'InterceptingLimitflowHeight',
-        value: 0,
+        min: 0,
         max: 100
       }
     ],
-    devices: {}
+    devices: {},
+    device: {},
   },
   onLoad: function (options) {
     var that = this;
@@ -147,6 +148,13 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     console.log(value)
     that.setData({
       [`base.InterceptingLimitflowHeight`]: value.detail.value
+    });
+  },
+  drainageOverflowHeight: function (value) {
+    const that = this
+    console.log(value)
+    that.setData({
+      [`base.drainageOverflowHeight`]: value.detail.value
     });
   },
   addCount: function (event) {
@@ -207,15 +215,23 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   toggleBaseDialog:function(event) {
     const that = this;
+    console.log(that.data.devices.ss)
     that.setData({
-      devices: event.detail.value,
-      [`devices.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight,
-      [`devices.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight,
-      [`devices.equipmentId`]: that.data.equipid,
-      [`devices.pattern`]: that.data.work,
+      device: event.detail.value,
+      [`device.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight,
+      [`device.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight,
+      [`device.equipmentId`]: that.data.equipid,
+      [`device.pattern`]: that.data.work,
+      [`device.startWaterLevel1`]: that.setcountxs(event.detail.value.startWaterLevel1, that.data.devices.bottomHoleHeight),
+      [`device.startWaterLevel2`]: that.setcountxs(event.detail.value.startWaterLevel2, that.data.devices.bottomHoleHeight),
+      [`device.stopWaterLevel1`]: that.setcountxs(event.detail.value.stopWaterLevel1, that.data.devices.bottomHoleHeight),
+      [`device.stopWaterLevel2`]: that.setcountxs(event.detail.value.stopWaterLevel2, that.data.devices.bottomHoleHeight),
+      [`device.vigilance`]: that.setcountxs(event.detail.value.vigilance, that.data.devices.bottomHoleHeight),
+      [`device.cod`]: that.signFigures(event.detail.value.cod * 100),
+      [`device.ss`]: that.signFigures(event.detail.value.ss * 100),
     })
-    console.log(event)
-    console.log(that.data.devices)
+    console.log(that.data.device)
+    console.log(that.data.device.ss)
     that.showZanDialog({
       title: '参数修改',
       content: '请确认是否保存操作',
@@ -231,13 +247,13 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.devices);
+    console.log(that.data.device)
     wx.request({
       url: 'http://192.168.0.115:7001/equipmentPort/addEquipmentPort',
       method: 'POST',
       header: header,
       data: {
-        device: that.data.devices
+        device: that.data.device
       },
       success: function (result) {
         console.log(result)
@@ -264,12 +280,18 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         equipmentId: that.data.equipid
       },
       success: function (result) {
-        console.log(result)
+        if (result.data.msg == 2000 && result.data.code == 0) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }
         if (result.data.result) {
           that.setData({
             devices: result.data.result,
             [`base.drainageOverflowHeight`]: result.data.result.drainageOverflowHeight,
             [`base.InterceptingLimitflowHeight`]: result.data.result.InterceptingLimitflowHeight,
+            [`controls[0].max`]: result.data.result.sewerageSluice,
+            [`controls[1].max`]: result.data.result.sluiceHeight,
             work: result.data.result.pattern,
           })
         }
@@ -277,12 +299,26 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       }
     })
   },
-  getcount: function (value) {
-    let grt = (value - 10000)/100;
-    return grt
-  },
-  setcount: function (value) {
-    let srt = value*100 + 10000;
+  setcountxs: function (value, bt) {
+    console.log(bt)
+    var srt = value * 100 - bt + 10000;
+    console.log(srt)
     return srt
+  },
+  signFigures: function (num, rank = 6) {
+    if (!num) return (0);
+    const sign = num / Math.abs(num);
+    const number = num * sign;
+    const temp = rank - 1 - Math.floor(Math.log10(number));
+    let ans;
+    if (temp > 0) {
+      ans = parseFloat(number.toFixed(temp));
+    } else if (temp < 0) {
+      const temp = Math.pow(10, temp);
+      ans = Math.round(number / temp) * temp;
+    } else {
+      ans = Math.round(number);
+    }
+    return (ans * sign);
   }
 }));

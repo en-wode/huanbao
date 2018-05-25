@@ -43,6 +43,7 @@ Page(Object.assign({}, Zan.Field,{
   },
   formSubmit: function (event) {
     const that = this;
+    console.log(event)
     if (!event.detail.value.name || !event.detail.value.password) {
       that.setData({
         message: '请输入帐号密码'
@@ -56,7 +57,18 @@ Page(Object.assign({}, Zan.Field,{
           password: event.detail.value.password
         },
         success: function (result) {
-          wx.setStorageSync("sessionid", result.header["set-cookie"])
+          if (result.header["set-cookie"]){
+            wx.setStorage({
+              key: "sessionid",
+              data: result.header["set-cookie"]
+            })
+          } else {
+            wx.setStorage({
+              key: "sessionid",
+              data: result.header["Set-Cookie"]
+            })
+          }
+          wx.setStorageSync("userId", result.data.result.userId)
           wx.setStorageSync("userName", event.detail.value.name);
           wx.setStorageSync("userPassword", event.detail.value.password);
           if (result.data.code == 1) {
@@ -72,9 +84,12 @@ Page(Object.assign({}, Zan.Field,{
             })
           }
         },
+        fail: function (res) {
+          console.log(JSON.stringify(res));
+        },
       })
     }
-    console.log()
+    console.log(213)
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;

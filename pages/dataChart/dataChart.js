@@ -11,18 +11,21 @@ Page(extend({}, Tab, {
   data: {
     id: '',
     datalist: '',
+    week: ['一', '二', '三', '四', '五', '六', '日'],
+    month: ['5', '10', '15', '20', '25', '30'],
+    year: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     tab1: {
       list: [{
-        id: 'month',
-        title: '月'
-      }, {
         id: 'week',
         title: '周'
       }, {
-        id: 'day',
-        title: '天'
+        id: 'month',
+        title: '月'
+      },  {
+        id: 'year',
+        title: '年'
       }],
-      selectedId: 'month'
+      selectedId: 'week'
     },
   },
 
@@ -49,14 +52,24 @@ Page(extend({}, Tab, {
   },
   getdata: function () {
     var that = this;
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentArametersHistory/getByEquipmentId',
+      url: 'http://47.98.162.168/equipmentArametersHistory/getByEquipmentId',
       method: 'GET',
+      header: header,
       data: {
         equipmentId: that.data.id,
-        openId: app.globalData.openId,
+        title: that.data.datalist,
       },
       success: function (result) {
+        if (result.data.msg == 2000 && result.data.code == 0) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }
         console.log(result)
       }
     })
@@ -89,59 +102,57 @@ Page(extend({}, Tab, {
   graphShow: function () {
     let that = this
     that.lineShow();
-    that.pieShow();
-    that.barShow();
   },
 
-  pieShow: function () {
-    let pie = {
-      canvasId: 'pieGraph',
-      type: 'pie',
-      series: [{
-        name: 'cat1',
-        data: 50,
-      }, {
-        name: 'cat2',
-        data: 30,
-      }, {
-        name: 'cat3',
-        data: 1,
-      }, {
-        name: 'cat4',
-        data: 1,
-      }, {
-        name: 'cat5',
-        data: 46,
-      }],
-      width: 360,
-      height: 300,
-      dataLabel: true
-    }
-    new _wxcharts(pie)
-  },
+  // pieShow: function () {
+  //   let pie = {
+  //     canvasId: 'pieGraph',
+  //     type: 'pie',
+  //     series: [{
+  //       name: 'cat1',
+  //       data: 50,
+  //     }, {
+  //       name: 'cat2',
+  //       data: 30,
+  //     }, {
+  //       name: 'cat3',
+  //       data: 1,
+  //     }, {
+  //       name: 'cat4',
+  //       data: 1,
+  //     }, {
+  //       name: 'cat5',
+  //       data: 46,
+  //     }],
+  //     width: 360,
+  //     height: 300,
+  //     dataLabel: true
+  //   }
+  //   new _wxcharts(pie)
+  // },
 
-  barShow: function () {
-    let bar = {
-      canvasId: 'barGraph',
-      type: 'column',
-      categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
-      series: [{
-        name: '成交量1',
-        data: [15, 20, 45, 37, 4, 80]
-      }, {
-        name: '成交量2',
-        data: [70, 40, 65, 100, 34, 18]
-      }],
-      yAxis: {
-        format: function (val) {
-          return val + '万';
-        }
-      },
-      width: 320,
-      height: 200
-    }
-    new _wxcharts(bar)
-  },
+  // barShow: function () {
+  //   let bar = {
+  //     canvasId: 'barGraph',
+  //     type: 'column',
+  //     categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
+  //     series: [{
+  //       name: '成交量1',
+  //       data: [15, 20, 45, 37, 4, 80]
+  //     }, {
+  //       name: '成交量2',
+  //       data: [70, 40, 65, 100, 34, 18]
+  //     }],
+  //     yAxis: {
+  //       format: function (val) {
+  //         return val + '万';
+  //       }
+  //     },
+  //     width: 320,
+  //     height: 200
+  //   }
+  //   new _wxcharts(bar)
+  // },
 
   lineShow: function () {
     let line = {
@@ -173,32 +184,32 @@ Page(extend({}, Tab, {
     }
     new _wxcharts(line)
   },
-  areaShow: function () {
-    let area = {
-      canvasId: 'areaGraph',
-      type: 'area',
-      categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
-      series: [{
-        name: '成交量1',
-        data: [70, 40, 65, 100, 34, 18],
-        format: function (val) {
-          return val.toFixed(2) + '万';
-        }
-      }, {
-        name: '成交量2',
-        data: [15, 20, 45, 37, 4, 80],
-        format: function (val) {
-          return val.toFixed(2) + '万';
-        }
-      }],
-      yAxis: {
-        format: function (val) {
-          return val + '万';
-        }
-      },
-      width: 320,
-      height: 200
-    }
-    new _wxcharts(area)
-  }
+  // areaShow: function () {
+  //   let area = {
+  //     canvasId: 'areaGraph',
+  //     type: 'area',
+  //     categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
+  //     series: [{
+  //       name: '成交量1',
+  //       data: [70, 40, 65, 100, 34, 18],
+  //       format: function (val) {
+  //         return val.toFixed(2) + '万';
+  //       }
+  //     }, {
+  //       name: '成交量2',
+  //       data: [15, 20, 45, 37, 4, 80],
+  //       format: function (val) {
+  //         return val.toFixed(2) + '万';
+  //       }
+  //     }],
+  //     yAxis: {
+  //       format: function (val) {
+  //         return val + '万';
+  //       }
+  //     },
+  //     width: 320,
+  //     height: 200
+  //   }
+  //   new _wxcharts(area)
+  // }
 }))

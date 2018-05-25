@@ -8,8 +8,7 @@
     <view class="zan-cell  ">
       <view class="zan-cell__bd" >井底标高：  {{(devices.bottomHoleHeight-10000)/100}}米</view>
       <view class="zan-cell__ft">
-        <view class="demo__icon zan-badge">
-        </view>
+        以下数据取小数点后俩位有效数字
       </view>
     </view>
   </view>

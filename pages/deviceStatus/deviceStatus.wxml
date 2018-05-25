@@ -3,10 +3,12 @@
 <import src="../../dist/tab/index.wxml" />
 <view>
  <view >
-    <!-- <template
-      is="zan-tab"
-      data="{{ ...tab1, componentId: 'tab1' }}"></template> -->
-      {{data.creatTime}}
+  <view class='card_num'>
+     <view class="zan-cell zan-cell--access" bindtap='simulation'>
+        <view class="zan-cell__bd card_name" >场景模拟</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+  </view>
   </view>
   <view class='card_num'>
    <view class="zan-row">
@@ -22,14 +24,34 @@
       <view class="zan-col zan-col-11">
         <view class="zan-cell">
           <view class="zan-cell__bd card_name">河道水位：</view>
-          <view class="zan-cell__ft " style='min-width:0'>{{data.waterLevelOfSewagePipe}}米</view>
+          <view class="zan-cell__ft " style='min-width:0'>{{data.riveRaterLevel}}米</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+   <view class="zan-row">
+      <view class="zan-col zan-col-11 ">
+        <view class="zan-cell ">
+          <view class="zan-cell__bd card_name" >水泵1：</view>
+          <view class="zan-cell__ft " style='min-width:0'>{{data.waterPump1}}</view>
+        </view>
+      </view>
+      <view class="zan-col zan-col-1 bdline">
+        <view style='height:94rpx'></view>
+      </view>
+      <view class="zan-col zan-col-11">
+        <view class="zan-cell">
+          <view class="zan-cell__bd card_name">水泵2：</view>
+          <view class="zan-cell__ft " style='min-width:0'>{{data.waterPump2}}</view>
         </view>
       </view>
     </view>
   </view>
   <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-shuilongtou" ></view>排水闸门开度 {{data.sluiceOpeningDegree}}%
+    <view class="zan-cell">
+      <view class="zan-cell__bd"> 排水闸门开度 {{data.sluiceOpeningDegree}}%</view>
+      <view class="zan-cell__ft">{{data.sluiceSwitch}}</view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -38,8 +60,9 @@
     </view>
   </view>
   <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-shuilongtou1" ></view>截污闸门开度 {{data.sluiceSluiceOpeningDegree}}%
+    <view class="zan-cell">
+      <view class="zan-cell__bd"> 截污闸门开度 {{data.sluiceSluiceOpeningDegree}}%</view>
+      <view class="zan-cell__ft">{{data.sluiceSluiceSwitch}}</view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
@@ -47,16 +70,130 @@
       </view>
     </view>
   </view>
-  <view class='card'>
-    <view class='card_title'>
-      <view class="iconfont icon-jishuidian" ></view>垃圾高度 {{data.garbageHeight}}%
+  <!-- 垃圾高度没有传感器 -->
+  <!-- <view class='card'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd"> 垃圾高度 {{data.garbageHeight}}%</view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
            <wxc-progress percent="{{data.garbageHeight}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
+  </view> -->
+    <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >截污管水位：</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{data.rainfall}}米
+        </view>
+      </view>
+    </view>
   </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >浮球</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.fuqiu}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >设备门警报</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.shebmen}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >水泵电机1</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.shuibeng1}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >水泵电机2</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.shuibeng2}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >压力电机</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.yalidianji}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >是否停电</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{weiyu.tingdian}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >液压泵站电机</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{data.hydraulicPumpMotor}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >设备工作状态</view>
+      <view class="zan-cell__ft" >
+        <view class="demo__icon zan-badge">
+        {{weiyu.workstatus}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >提篮格栅升降 </view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{data.liftingGrid}}
+        <!-- 高度暂时不显示 没有实际数据 -->
+        <!-- {{data.basketGrille}} -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >雨量（单位：ml/h）</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{data.rainfall}}
+        </view>
+      </view>
+    </view>
+  </view>
+
   <view class='card' style='padding:0'>
     <view class='card_title'>
       水质mg/L
@@ -76,20 +213,21 @@
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
             <view class="zan-cell__bd card_name">COD:</view>
-            <view class="zan-cell__ft ">{{data.cod}}mg/L</view>
+            <view class="zan-cell__ft ">{{data.cod}}</view>
           </view>
         </view>
       </view>
   </view>
+
   <view class='card' style='padding:0'>
     <view class='card_title'>
-      管道污水累计流量m³/h
+      管道污水累计流量m³
     </view>
       <view class="zan-row">
         <view class="zan-col zan-col-10 ">
           <view class="zan-cell ">
             <view class="zan-cell__bd card_name" >1#:</view>
-            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage1}}米</view>
+            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage1}}m³</view>
           </view>
         </view>
         <view class="zan-col zan-col-2 bdline">
@@ -100,7 +238,7 @@
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
             <view class="zan-cell__bd card_name">2#:</view>
-            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage2}}米</view>
+            <view class="zan-cell__ft ">{{data.totalDischargeOfSewage2}}m³</view>
           </view>
         </view>
       </view>
@@ -113,7 +251,7 @@
         <view class="zan-col zan-col-10 ">
           <view class="zan-cell ">
             <view class="zan-cell__bd card_name" >1#:</view>
-            <view class="zan-cell__ft ">{{data.sewageFlow1}}米</view>
+            <view class="zan-cell__ft ">{{data.sewageFlow1}}m³/h</view>
           </view>
         </view>
         <view class="zan-col zan-col-2 bdline">
@@ -124,17 +262,12 @@
         <view class="zan-col zan-col-10">
           <view class="zan-cell">
             <view class="zan-cell__bd card_name">2#:</view>
-            <view class="zan-cell__ft ">{{data.sewageFlow2}}米</view>
+            <view class="zan-cell__ft ">{{data.sewageFlow2}}m³/h</view>
           </view>
         </view>
       </view>
   </view>
-  <view class='card_num'>
-     <view class="zan-cell zan-cell--access" bindtap='simulation'>
-        <view class="zan-cell__bd card_name" >场景模拟</view>
-        <view class="zan-cell__ft"></view>
-      </view>
-  </view>
+
 
    <view class='card'>
      <view class='card_title'>
@@ -165,8 +298,8 @@
       <view class="iconfont icon-video-surveillance" ></view>监控
     </view>
     <view class='zan-row monitor'>
-        <view class="zan-col zan-col-12 bdline" bindtap='monitor' id='1'>井内监控</view>
-        <view class="zan-col zan-col-12" bindtap='monitor' id='2'>井外监控</view>
+        <view class="zan-col zan-col-12 bdline" bindtap='monitor' id='0'>井内监控</view>
+        <view class="zan-col zan-col-12" bindtap='monitor' id='1'>井外监控</view>
     </view>
   </view>
   <template is="zan-toptips" data="{{ zanTopTips }}"></template>

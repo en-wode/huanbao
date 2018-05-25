@@ -1,8 +1,9 @@
 <!--pages/optionSelect/optionSelect.wxml-->
 <view class="option-contain">
   <view class="userinfo">
-    <open-data type="userAvatarUrl" class='userAvatarUrl'></open-data>
-    <open-data type="userNickName" lang="zh_CN"></open-data>
+    <image src='../../assets/images/1.png'></image> 
+    <!-- <open-data type="userAvatarUrl" class='userAvatarUrl'></open-data>
+    <open-data type="userNickName" lang="zh_CN"></open-data> -->
   </view>
   <view class="usermotto">
     <view class="zan-row option-bottom">

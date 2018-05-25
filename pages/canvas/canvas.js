@@ -19,7 +19,11 @@ Page({
     wtheight: 1,
     paishui: 1,
     socketdata: {},
-    canw: wx.getSystemInfoSync().windowHeight
+    canw: wx.getSystemInfoSync().windowHeight,
+    tilan: 150,
+    paishui: 150,
+    water: 250,
+    out: '高于',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -27,6 +31,10 @@ Page({
   onLoad: function (option) {
     const that = this;
     // 连接socket
+    
+    var start = null;
+    that.tree(); //基础图案
+    that.wind();
     app.socket().open();
     let name = 'res' + option.id
     app.socket().on(name, d => {
@@ -35,19 +43,16 @@ Page({
       })
       that.startcanvas()
     })
-    that.wind();
     app.socket().emit('index', {
       equipmentId: option.id
     })
-    if (that.data.socketdata){
-      console.log(1)
-      that.write()
-      that.tree();
-    }
+    that.drawClock();
+    // 每40ms执行一次drawClock()，人眼看来就是流畅的画面
+    start = setInterval(that.drawClock, 40);
   },
-  tree: function () {
+  tree: function (ctx, wxH, wxW) {
     const that = this
-    var ctx = wx.createCanvasContext('first');
+    var ctx = wx.createCanvasContext('two');
     var wxH = wx.getSystemInfoSync().windowHeight;
     var wxW = wx.getSystemInfoSync().windowWidth;
     //封顶
@@ -65,29 +70,12 @@ Page({
     wrd.addColorStop(0.6, '#1C86EE');
     wrd.addColorStop(1, '#0000FF');
     ctx.setFillStyle(wrd);
-    ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300)));
+
+    ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300))); 
     ctx.fillRect(0, wxH - 250, 50, 75);
     ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
     ctx.stroke();
 
-
-      ctx.moveTo(75, wxH - 335);
-      ctx.lineTo(75, wxH - 290);
-      ctx.stroke();
-      ctx.drawImage("/assets/images/basket.png", 60, wxH - 300, 30, 30);
-
-    // 提篮线条
-    // if (basket){
-    //   ctx.moveTo(75, wxH - 335);
-    //   ctx.lineTo(75, basket);
-    //   ctx.stroke();
-    //   ctx.drawImage("/assets/images/basket.png", 60, basket, 30, 30);
-    // } else {
-    //   ctx.moveTo(75, wxH - 335);
-    //   ctx.lineTo(75, wxH - 290);
-    //   ctx.stroke();
-    //   ctx.drawImage("/assets/images/basket.png", 60, wxH - 300, 30, 30);
-    // }
     ctx.beginPath()
     ctx.setLineWidth(10)
     ctx.setStrokeStyle('#A6A6A6')
@@ -175,15 +163,6 @@ Page({
     ctx.lineTo(155, wxH - 286);
     ctx.stroke();
 
-    ctx.beginPath();
-    ctx.setLineWidth(4);
-    ctx.setLineJoin('round');
-    ctx.setStrokeStyle('black');
-    //右侧阀门拦截
-    ctx.moveTo(wxW - 64, wxH - 154);
-    ctx.lineTo(wxW - 64, wxH - 230);
-    ctx.stroke();
-
     //水位计工作
     ctx.beginPath();
     ctx.setLineWidth(1);
@@ -239,28 +218,9 @@ Page({
     ctx.fillText('物位计', 86, wxH - 334)
     ctx.fillText('主机', 245, wxH - 334)
 
-    //设备参数显示
-    // if (that.data.socketdata.waterPump1 && that.data.socketdata.sluiceSwitch){
-      // ctx.fillText('1#水泵：' , 66, 70)
-      // ctx.fillText('2#水泵：' , 166, 70)
-      // ctx.fillText('主机：' , 266, 70)
-      // ctx.fillText('提篮格栅：' ,66, 100)
-      // ctx.fillText('截污阀：' , 166, 100)
-      // ctx.fillText('排水阀门：' , 266, 100)
-
-      // ctx.fillText('1#水泵：' + that.data.socketdata.waterPump1, 66, 70)
-      // ctx.fillText('2#水泵：' + that.data.socketdata.waterPump2, 166, 70)
-      // ctx.fillText('主机：' + that.data.socketdata.hydraulicPumpMotor, 266, 70)
-      // ctx.fillText('提篮格栅：' + that.data.socketdata.liftingGrid, 66, 100)
-      // ctx.fillText('截污阀：' + that.data.socketdata.sluiceSluiceSwitch, 166, 100)
-      // ctx.fillText('排水阀门：' + that.data.socketdata.sluiceSwitch, 266, 100)
-    // }
-
-
-    // ctx.fillText('截污体系', 215, wxH - 190)
     ctx.fillText('水位监控', 160, wxH - 300)
     ctx.setFontSize(18)
-    ctx.fillText('一体化智能截污井', 100, 40)
+    ctx.fillText('一体化智能截污井', 114, 40)
     ctx.draw()
 
   },
@@ -318,25 +278,14 @@ Page({
     let numl2 = 226;
     let timer1 = null;
     let timer2 = null;
-    let timer3 = null; //提篮
-    let timer4 = null;//数字
-    let basket = wxH - 300;
     let st1 = 0;   //是否启动动画水泵1
     let st2 = 0;    //是否启动动画水泵2
 
-    let tilan = 250; //提篮位置
-    let shuzi = 250; //提篮位置
-    console.log(that.data.socketdata)
-    // if(){
-    //   that.write();
-    // }
-    if (that.data.shuibeng1 !== that.data.socketdata.waterPump1){
-      console.log(that.data.shuibeng1);
+    if (that.data.shuibeng1 !== that.data.socketdata.waterPump1) {
       that.setData({
         shuibeng1: that.data.socketdata.waterPump1,
       })
-      console.log(that.data.shuibeng1);
-      if (that.data.shuibeng1 == '开'){
+      if (that.data.shuibeng1 == '开') {
         st1 = 1;
       } else {
         st1 = 0;
@@ -352,7 +301,7 @@ Page({
         st2 = 0
       }
     }
-    if (st1 == 0){
+    if (st1 == 1) {
       timer1 = setInterval(() => {
         if (numH1 === 286 && numW1 <= 50) {
           clearInterval(timer1);
@@ -364,41 +313,24 @@ Page({
         that.water(numW1, numH1, numl1)
       }, 1000 / 60)
     }
-    if (st2 == 0) {
+    if (st2 == 1) {
       timer2 = setInterval(() => {
-          if (numH2 === 286 && numW2 <= 50) {
-            clearInterval(timer2);
-          } else if (numH2 === 286 && numW2 > 50) {
-            numW2--
-          } else {
-            numH2++
-          }
-          that.water(numW2, numH2, numl2)
+        if (numH2 === 286 && numW2 <= 50) {
+          clearInterval(timer2);
+        } else if (numH2 === 286 && numW2 > 50) {
+          numW2--
+        } else {
+          numH2++
+        }
+        that.water(numW2, numH2, numl2)
       }, 1000 / 60)
     }
-
-    timer3 = setInterval(() => {
-      if (tilan <= 150) {
-        clearInterval(timer3);
-      } else{
-        tilan--
-      }
-      that.tilan(tilan)
-    }, 1000 / 60)
-    timer4 = setInterval(() => {
-      if (tilan <= 150) {
-        clearInterval(timer4);
-      } else{
-        tilan--
-      }
-      that.write()
-    }, 1000 / 60)
   },
-  water(numW, numH, numl){
+  water(numW, numH, numl) {
     const that = this;
     function showwater() {
       //创建画布设置画布属性
-      const ctx = wx.createCanvasContext('first');
+      const ctx = wx.createCanvasContext('three');
       drawwater(ctx, numW, numH, numl);
     }
     function drawwater(ctx, numW, numH, numl) {
@@ -417,55 +349,63 @@ Page({
     }
     showwater()
   },
-  tilan(lanH) {
+  drawtilan(ctx, wxH, wxW) {
     const that = this;
-    function tilanf() {
-      //创建画布设置画布属性
-      const ctx = wx.createCanvasContext('first');
-      drawwater(ctx, lanH);
+    if (that.data.tilan >= 300 || that.data.tilan<=100){
+    } else if (that.data.socketdata.liftingGrid == '升'){
+      that.setData({
+        tilan: that.data.tilan + 1
+      })
+    } else if (that.data.socketdata.liftingGrid == '降'){
+      that.setData({
+        tilan: that.data.tilan - 1
+      })
+    } else if (that.data.socketdata.liftingGrid == '停') {
+      // that.setData({
+      //   tilan: that.data.tilan + 1
+      // })
     }
-    function drawwater(ctx, lanH) {
-      ctx.stroke();
+    function drawwater(ctx, wxH, wxW) {
       ctx.beginPath();
       ctx.setLineWidth(1);
       ctx.setLineJoin('round');
       ctx.setStrokeStyle('black');
-      ctx.moveTo(75, that.data.canw - 335);
-      ctx.lineTo(75, that.data.canw - lanH);
-      ctx.stroke();
-      ctx.drawImage("/assets/images/basket.png", 60, that.data.canw - lanH, 30, 30);
-      ctx.stroke();
-      ctx.closePath();
-      ctx.save()
-      ctx.draw(true)
-    }
-    tilanf()
-  },
-  paishui(lanH) {
-    const that = this;
-    function paishuif() {
-      //创建画布设置画布属性
-      const ctx = wx.createCanvasContext('first');
-      drawpaishui(ctx, lanH);
-    }
-    function drawpaishui(ctx, lanH) {
-      ctx.beginPath();
-      ctx.moveTo(wxW - 64, that.data.canw - 154);
-      ctx.lineTo(wxW - 64, that.data.canw - 230);
+      ctx.moveTo(75, wxH - 335);
+      ctx.lineTo(75, wxH - that.data.tilan);
+      ctx.drawImage("/assets/images/basket.png", 60, wxH - that.data.tilan, 30, 30);
       ctx.stroke();
       ctx.closePath();
-      ctx.restore();
-      // ctx.draw(true)
     }
-    paishuif()
+    drawwater(ctx, wxH, wxW)
   },
-  write() {
+  drawpaishui(ctx, wxW, wxH) {
     const that = this;
-    function writef() {
-      //创建画布设置画布属性
-      const ctx = wx.createCanvasContext('first');
-      drawwrite(ctx);
+    if (that.data.paishui >= 190 || that.data.paishui <= 120) {
+    } else if (that.data.socketdata.sluiceSwitch == '关') {
+      that.setData({
+        paishui: that.data.paishui + 1
+      })
+    } else if (that.data.socketdata.sluiceSwitch == '开') {
+      that.setData({
+        paishui: that.data.paishui - 1
+      })
+    } else if (that.data.socketdata.sluiceSwitch == '停') {
+      // that.setData({
+      //   paishui: that.data.paishui - 1
+      // })
     }
+    function drawpaishui(ctx, wxW, wxH) {
+      ctx.beginPath(); //that.data.paishui -  154  that.data.paishui - 230
+      ctx.setLineWidth(4);
+      ctx.moveTo(wxW - 61, wxH - that.data.paishui + 20);
+      ctx.lineTo(wxW - 61, wxH - that.data.paishui - 70);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    drawpaishui(ctx, wxW, wxH)
+  },
+  drawwrite(ctx) {
+    const that = this;
     function drawwrite(ctx) {
       ctx.beginPath();
       ctx.restore()
@@ -477,10 +417,68 @@ Page({
       ctx.fillText('提篮格栅：' + that.data.socketdata.liftingGrid, 66, 100)
       ctx.fillText('截污阀：' + that.data.socketdata.sluiceSluiceSwitch, 166, 100)
       ctx.fillText('排水阀门：' + that.data.socketdata.sluiceSwitch, 266, 100)
-      ctx.save()
+    }
+    drawwrite(ctx)
+  },
+  drawwater: function (){
+    const that = this;
+    var ctx = wx.createCanvasContext('four');
+    var wxH = wx.getSystemInfoSync().windowHeight;
+    var wxW = wx.getSystemInfoSync().windowWidth;
+    if (that.data.water >= 190 || that.data.water <= 120) {
+    } else if (that.data.out == '高于') {
+      that.setData({
+        water: that.data.water + 1
+      })
+    } else if (that.data.out == '等于') {
+      that.setData({
+        water: that.data.water - 1
+      })
+    } else if (that.data.out == '低于') {
+      that.setData({
+        water: that.data.water - 1
+      })
+    }
+
+    function water() {
+      ctx.beginPath();
+      const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
+      wrd.addColorStop(0, '#63B8FF');
+      wrd.addColorStop(0.6, '#1C86EE');
+      wrd.addColorStop(1, '#0000FF');
+      ctx.setFillStyle(wrd);
+      if (that.data.out == '高于'){
+        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
+        ctx.fillRect(0, wxH - 250, 50, 75);
+        ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+      }
+      // ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300)));
+
+      // ctx.fillRect(0, wxH - 250, 50, 75);
+      // ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+      ctx.stroke();
       ctx.draw(true)
     }
-    writef()
+    water()
+  },
+  drawClock: function (){
+    const that = this
+    var ctx = wx.createCanvasContext('first');
+    var wxH = wx.getSystemInfoSync().windowHeight;
+    var wxW = wx.getSystemInfoSync().windowWidth;
+    function Clock(ctx, wxH, wxW) {
+      // 实时获取各个参数
+
+      // 依次执行各个方法
+      // that.drawwater(); //水位高度
+      that.drawtilan(ctx, wxH, wxW);    //tilan
+      that.drawpaishui(ctx, wxW, wxH); //排水阀门
+      that.drawwrite(ctx);    //数据显示
+      // 微信小程序要多个draw才会画出来，所以在最后画出
+      ctx.draw();
+    }
+    // 执行Clock这个方法，实际上执行了所有步骤
+    Clock(ctx, wxH, wxW);
   },
   onUnload: function () {
     app.socket().close();

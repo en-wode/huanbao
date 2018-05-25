@@ -174,7 +174,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
   getdata: function () {
     const that = this;
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentArameters/getByEquipmentId',
+      url: 'http://47.98.162.168/equipmentArameters/getByEquipmentId',
       method: 'GET',
       data: {
         equipmentId: that.data.id,
@@ -219,7 +219,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Switch, Zan.Toast,{
     const that = this;
     console.log(that.data.data)
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentArameters/setEquipment',
+      url: 'http://47.98.162.168/equipmentArameters/setEquipment',
       method: 'POST',
       data: {
         data: that.data.data

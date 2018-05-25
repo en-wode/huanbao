@@ -1,21 +1,22 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/model/model",
+    "pages/optionSelect/optionSelect",
     "pages/simulation/simulation",
+    "pages/video/video",
+    "pages/model/model",
     "pages/location/location",
     "pages/deviceStatus/deviceStatus",
     "pages/deviceGroup/deviceGroup",
     "pages/addDevice/addDevice",
-    "pages/video/video",
     "pages/deviceDetail/deviceDetail",
     "pages/deviceLink/deviceLink",
     "pages/dataChart/dataChart",
-    "pages/optionSelect/optionSelect",
     "pages/chartList/chartList",
     "pages/editPassword/editPassword",
     "pages/getLocation/getLocation",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/canvas/canvas"
   ],
   "window": {
     "backgroundTextStyle": "light",

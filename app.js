@@ -1,5 +1,7 @@
 //app.js
 var util = require('utils/util')
+const io = require('utils/socket/weapp.socket.io.js');
+const socket = io('http://192.168.0.115:7001');
 App({
   onLaunch1: function () {
     // 展示本地存储能力
@@ -36,5 +38,8 @@ App({
   header: {
     'content-type': 'application/x-www-form-urlencoded',
     'cookie': wx.getStorageSync("sessionid")//读取cookie
+  },
+  socket(){
+    return socket;
   }
 })

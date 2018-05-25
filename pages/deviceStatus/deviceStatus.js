@@ -1,9 +1,8 @@
 // pages/deviceStatus/deviceStatus.js
 var bmap = require('../../utils/bmap-wx.min.js');
 const Zan = require('../../dist/index');
-const io = require('../../utils/socket/weapp.socket.io.js')
-const socket = io('http://192.168.0.115:7001')
-const app = getApp()
+
+const app = getApp();
 
 Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
 
@@ -14,6 +13,15 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     weatherData: [],
     id: '',
     data: {},
+    weiyu:{
+      shuibeng1: '',
+      shuibeng2: '',
+      yalidianji: '',
+      tingdian: '',
+      fuqiu: '',
+      shebmen: '',
+      workstatus: ''
+    },
     tab1: {
       list: [{
         id: 'shuju',
@@ -30,11 +38,13 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     var that = this;
     console.log(options.equipid)
     that.setData({
       id: options.equipid
     }) 
+    console.log(wx.getStorageSync('userId'));
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
@@ -55,20 +65,94 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       fail: fail,
       success: success
     });
-    socket.on('connect', function () {
+    app.socket().open();
+    app.socket().on('connect', function () {
+      that.showTopTips('刷新成功')
       console.log('connected')
     });
+    
     let name = 'res' + options.equipid
-    socket.on(name, d => {
+    app.socket().on(name, d => {
+      if (d.keyboardStatus == 7) {
+        that.setData({
+          [`weiyu.workstatus`]: '自动'
+        })
+      } else if (d.keyboardStatus == 3){
+        that.setData({
+          [`weiyu.workstatus`]: '手动'
+        })
+      } else {
+        that.setData({
+          [`weiyu.workstatus`]: '远程'
+        })
+      }
+      if ((d.callThePolice & 1) == 0) {
+        that.setData({
+          [`weiyu.shuibeng2`]: '错误'
+        }) 
+      } else {
+       that.setData({
+          [`weiyu.shuibeng2`]: '正常'
+        }) 
+      }
+      if ((d.callThePolice & 2) == 0) {
+        that.setData({
+          [`weiyu.shuibeng1`]: '错误'
+        }) 
+      } else {
+        that.setData({
+          [`weiyu.shuibeng1`]: '正常'
+        }) 
+      }
+      if ((d.callThePolice & 4) == 0) {
+        that.setData({
+          [`weiyu.yalidianji`]: '错误'
+        }) 
+      } else {
+        that.setData({
+          [`weiyu.yalidianji`]: '正常'
+        }) 
+      }
+      if ((d.callThePolice & 128) == 0) {
+        that.setData({
+          [`weiyu.tingdian`]: '停电'
+        }) 
+      } else {
+        that.setData({
+          [`weiyu.tingdian`]: '正常'
+        }) 
+      }
+      if ((d.floatingBall & 1) == 0) {
+        that.setData({
+          [`weiyu.shebmen`]: '打开'
+        }) 
+      } else {
+        that.setData({
+          [`weiyu.shebmen`]: '关闭'
+        }) 
+      }
+      if ((d.floatingBall & 2) == 0) {
+        that.setData({
+          [`weiyu.fuqiu`]: '下限'
+        }) 
+      } else if ((d.floatingBall & 4) == 0){
+        that.setData({
+          [`weiyu.fuqiu`]: '上限'
+        }) 
+      } else {
+        that.setData({
+          [`weiyu.fuqiu`]: '非上下限'
+        }) 
+      }
       that.setData({
         data: d,
       });
-      console.log('received news: ', d)
+      console.log(d);
     })
-    socket.emit('index', {
-      equipmentId: '22'
+    app.socket().emit('index', {
+      equipmentId: options.equipid
     })
-    
+
   },
 
   /**
@@ -76,6 +160,32 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
    */
   onReady: function () {
   
+  },
+  getlv: function() {
+    const that = this;
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: 'http://192.168.0.115:7001/user/isWatch',
+      method: 'GET',
+      header: header,
+      data: {
+        userId: wx.getStorageSync('userId')
+      },
+      success: function (result) {
+        if (result.data.code == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }
+        console.log(result.data.code)
+      },
+      fail: function (res) {
+        console.log(JSON.stringify(res));
+      },
+    })
   },
   handleZanTabChange(e) {
     var componentId = e.componentId;
@@ -88,54 +198,55 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
   simulation: function () {
     let that = this;
     wx.navigateTo({
-      url: '../simulation/simulation?id=' + that.data.id
+      url: '../canvas/canvas?id=' + that.data.id
     });
   },
 
   monitor: function (options) {
     let that = this;
     let targetid = options.currentTarget.id;
-    switch (Number(targetid)) {
-      case 1:
-        wx.navigateTo({
-          url: '../video/video?id=' + that.data.id
-        });
-        break;
-      case 2:
-        wx.navigateTo({
-          url: '../video/video?id=' + that.data.id
-        });
-        break;
-    };
-  },
-  devicestatus: function () {
-    const that = this;
     var header = {
-      'content-type': 'application/x-www-form-urlencoded',
+      'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     console.log(that.data.id);
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentArameters/getByEquipmentId',
+      url: 'http://192.168.0.115:7001/user/isWatch',
       method: 'GET',
       header: header,
       data: {
+        userId: wx.getStorageSync('userId'),
         equipmentId: that.data.id
       },
       success: function (result) {
-        if (result.data.code == 1) {
-          that.showTopTips('刷新成功')
-          that.setData({
-            data: result.data.result,
-          });
-          console.log(result.data.result);
-        } else {
-          that.showTopTips(result.data.msg)
+        if (result.data.code == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
         }
-      }
+        if (result.data.code == 0){
+          that.showTopTips(result.data.msg)
+        } else if (result.data.code == 1){
+          wx.navigateTo({
+            url: '../video/video?equipid=' + that.data.id + '&id=' + targetid
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(JSON.stringify(res));
+      },
     })
+
   },
   showTopTips(data) {
     this.showZanTopTips(data);
+  },
+  onUnload: function () {
+    console.log(1);
+    app.socket().close();
+  },
+  onHide: function () {
+    console.log(2);
+    app.socket().close();
   }
 }))

@@ -1,4 +1,4 @@
 <!--pages/video/video.wxml-->
 <view>
-  <live-player src="rtmp://rtmp.open.ys7.com/openlive/a9fe4976784b4c7d9685061238d2a261" mode="live" autoplay="true" orientation='vertical' object-fit='contain' class='video' />
+  <live-player src="{{videosrc}}" mode="live" autoplay="true" orientation='vertical' object-fit='contain' class='video' />
 </view>

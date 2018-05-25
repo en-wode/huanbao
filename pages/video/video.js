@@ -5,14 +5,46 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    id: '',
+    where: '',
+    videosrc: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-
+  onLoad: function (options) {
+    var that = this;
+    console.log(options)
+    that.setData({
+      id: options.equipid,
+      where: options.id
+    }) 
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: 'http://47.98.162.168/video/userWatchVideos',
+      method: 'GET',
+      header: header,
+      data: {
+        equipmentId: that.data.id,
+        where: that.data.where,
+      },
+      success: function (result) {
+        if (result.data.code == 1){
+          that.setData({
+            videosrc: result.data.result.link
+          })
+        } else {
+          that.showTopTips('获取视频失败')
+        }
+      },
+      fail: function (res) {
+        console.log(JSON.stringify(res));
+      },
+    })
   },
 
   /**

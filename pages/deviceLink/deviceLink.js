@@ -53,7 +53,7 @@ Page({
         'cookie': wx.getStorageSync("sessionid")//读取cookie
       };
       wx.request({
-        url: 'http://192.168.0.115:7001/equipment/matching',
+        url: 'http://47.98.162.168/equipment/matching',
         method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
         header: header,
         data: {

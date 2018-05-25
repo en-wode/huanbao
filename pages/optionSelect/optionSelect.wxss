@@ -13,12 +13,14 @@ page{
   color: black;
 }
 .userinfo {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  height:38vh;
+  height:48vh;
 }
-
+image {
+  height:48vh;
+  width:40vh;
+}
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
@@ -29,16 +31,14 @@ page{
 .userinfo-nickname {
   color: #fff;
 }
-.option-bottom{
-  margin-top:30px;
-}
+
 .zan-col{
   margin-top: 68rpx;
 }
 .usermotto {
   width:100%;
   text-align: center;
-  height: 62vh;
+  height: 54vh;
   background: linear-gradient(#87d1d2,#d9bba3);
   color: #727171;
 }

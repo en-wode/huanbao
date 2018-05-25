@@ -43,7 +43,7 @@ Page(Object.assign({}, Zan.Field,{
     const that = this;
     console.log(event);
     wx.request({
-      url: 'http://192.168.0.115:7001/user/modifyPassword',
+      url: 'http://47.98.162.168/user/modifyPassword',
       method: 'POST',
       data: {
         name: event.detail.value.name,

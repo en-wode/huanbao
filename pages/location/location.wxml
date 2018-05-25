@@ -22,10 +22,10 @@
     controls="{{controls}}">
   </map>
   <view class='card'>
-    <template is="zan-field" data="{{  ...question, componentId: 'question' }}"></template>
+    <template is="zan-field" data="{{  ...questionwt, componentId: 'question' }}"></template>
   </view>
   <view class='card'>
-    <template is="zan-field" data="{{  ...tel, componentId: 'tel' }}"></template>
+    <template is="zan-field" data="{{  ...telwt, componentId: 'tel' }}"></template>
   </view>
-  <button class='submit'>提交</button>
+  <button class='submit' bindtap='submit'>提交</button>
 </view>
