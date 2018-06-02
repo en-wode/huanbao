@@ -148,7 +148,7 @@ Page(Object.assign({}, Zan.Field,{
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: 'http://47.98.162.168/equipment/update',
+            url: app.globalData.url + 'equipment/update',
             method: 'POST',
             header: header,
             data: {
@@ -182,7 +182,7 @@ Page(Object.assign({}, Zan.Field,{
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     wx.request({
-      url: 'http://47.98.162.168/equipment/getById',
+      url: app.globalData.url + 'equipment/getById',
       method: 'GET',
       header: header,
       data: {
@@ -216,7 +216,7 @@ Page(Object.assign({}, Zan.Field,{
     });
 
     wx.request({
-      url: 'http://47.98.162.168/questionType/getQuestionType',
+      url: app.globalData.url + 'questionType/getQuestionType',
       method: 'GET',
       header: header,
       success: function (result) {
@@ -233,7 +233,7 @@ Page(Object.assign({}, Zan.Field,{
       }
     })
     wx.request({
-      url: 'http://47.98.162.168/questionLevel/getQuestionLevel',
+      url: app.globalData.url + 'questionLevel/getQuestionLevel',
       method: 'GET',
       header: header,
       success: function (result) {
@@ -255,7 +255,7 @@ Page(Object.assign({}, Zan.Field,{
     console.log(that.data.typeindex+1)
     console.log(that.data.levelindex+1)
     wx.request({
-      url: 'http://47.98.162.168/equipmentMaintenance/addQuestion',
+      url: app.globalData.url + 'equipmentMaintenance/addQuestion',
       method: 'POST',
       header: header,
       data: {

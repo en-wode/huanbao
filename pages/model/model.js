@@ -249,7 +249,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     };
     console.log(that.data.device)
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentPort/addEquipmentPort',
+      url: app.globalData.url + 'equipmentPort/addEquipmentPort',
       method: 'POST',
       header: header,
       data: {
@@ -273,7 +273,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     };
     console.log(that.data.devices);
     wx.request({
-      url: 'http://192.168.0.115:7001/equipmentPort/getEquipmentPort',
+      url: app.globalData.url + 'equipmentPort/getEquipmentPort',
       method: 'GET',
       header: header,
       data: {

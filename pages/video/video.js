@@ -1,4 +1,6 @@
 // pages/video/video.js
+const app = getApp()
+
 Page({
 
   /**
@@ -25,7 +27,7 @@ Page({
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     wx.request({
-      url: 'http://47.98.162.168/video/userWatchVideos',
+      url: app.globalData.url + 'video/userWatchVideos',
       method: 'GET',
       header: header,
       data: {

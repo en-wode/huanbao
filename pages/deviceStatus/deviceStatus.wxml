@@ -81,12 +81,12 @@
       </view>
     </view>
   </view> -->
-    <view class='card_num'>
+  <view class='card_num'>
     <view class="zan-cell">
       <view class="zan-cell__bd" >截污管水位：</view>
       <view class="zan-cell__ft">
         <view class="demo__icon zan-badge">
-        {{data.rainfall}}米
+        {{data.waterLevelOfSewagePipe}}米
         </view>
       </view>
     </view>

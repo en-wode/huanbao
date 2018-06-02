@@ -1,5 +1,6 @@
 // pages/dataChart/dataChart.js
 var _wxcharts = require('../../utils/wxcharts')
+var getDate = require('../../utils/getDate.js');  
 const { Tab, extend } = require('../../dist/index');
 const app = getApp()
 
@@ -27,6 +28,14 @@ Page(extend({}, Tab, {
       }],
       selectedId: 'week'
     },
+    check: ['一', '二', '三', '四', '五', '六', '日'],
+    hisdata: [],
+    name: '',
+    unit: '',
+    max: '',
+    min: '',
+    dates: '2018-04-12',
+    endDate: ''
   },
 
   /**
@@ -34,21 +43,53 @@ Page(extend({}, Tab, {
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options);
+    var danwei = '';
+    var nameshow = '';
+    if (options.datalist == 'ss' || options.datalist == 'cod'){
+      danwei = 'mg/L'
+    } else if (options.datalist == 'rainfall'){
+      danwei = 'ml/h'
+    } else if (options.datalist == 'totalDischargeOfSewage'){
+      danwei = 'm³'
+    } else if (options.datalist == 'waterLevelInWell' || options.datalist == 'riveRaterLevel'){
+      danwei = 'm'
+    }
+    if (options.datalist == 'ss' || options.datalist == 'cod') {
+      nameshow = options.datalist
+    } else if (options.datalist == 'rainfall') {
+      nameshow = '雨量'
+    } else if (options.datalist == 'totalDischargeOfSewage') {
+      nameshow = '污水总流量'
+    } else if (options.datalist == 'waterLevelInWell') {
+      nameshow = '井内水位'
+    } else if (options.datalist == 'riveRaterLevel'){
+      nameshow = '河道水位'
+    }
     that.setData({
       id: options.id,
-      datalist: options.datalist
+      datalist: options.datalist,
+      unit: danwei,
+      name: nameshow
     }) 
     that.getdata()
+    //获取今年时间
+    var time = getDate.formatTime(new Date());  
+    that.setData({
+      endDate: time
+    }) 
   },
-
+  bindDateChange: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      dates: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     // 页面渲染完成
     this.getDeviceInfo()
-    this.graphShow()
   },
   getdata: function () {
     var that = this;
@@ -57,7 +98,7 @@ Page(extend({}, Tab, {
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     wx.request({
-      url: 'http://47.98.162.168/equipmentArametersHistory/getByEquipmentId',
+      url: app.globalData.url + 'equipmentArametersHistory/getByEquipmentId',
       method: 'GET',
       header: header,
       data: {
@@ -71,6 +112,12 @@ Page(extend({}, Tab, {
           })
         }
         console.log(result)
+        console.log(that.data.datalist)
+        console.log(result.data.result.map(v => v[that.data.datalist]).slice(0, 4))
+        that.setData({
+          hisdata: result.data.result.map(v => v[that.data.datalist]).slice(0, 4)
+        })
+        that.graphShow()
       }
     })
   },
@@ -89,12 +136,17 @@ Page(extend({}, Tab, {
     })
   },
   handleZanTabChange(e) {
+    const that = this;
     var componentId = e.componentId;
     var selectedId = e.selectedId;
-
-    this.setData({
+    that.setData({
       [`${componentId}.selectedId`]: selectedId
     });
+    console.log(that.data[selectedId])
+    that.setData({
+      check: that.data[selectedId]
+    });
+    that.lineShow();
   },
   /**
   * @Explain：初始化静态图表
@@ -155,25 +207,22 @@ Page(extend({}, Tab, {
   // },
 
   lineShow: function () {
+    const that = this
+    console.log(that.data.check)
+    console.log(that.data.hisdata)
     let line = {
       canvasId: 'lineGraph',
       type: 'line',
-      categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
+      categories: that.data.check,//周 月 年
       series: [{
-        name: '成交量1',
-        data: [0.15, 0.2, 0.45, 0.37, 0.4, 0.8],
+        name: that.data.name,
+        data: that.data.hisdata,
         format: function (val) {
-          return val.toFixed(2) + 'm³/h';
-        }
-      }, {
-        name: '成交量2',
-        data: [0.30, 0.37, 0.65, 0.78, 0.69, 0.94],
-        format: function (val) {
-          return val.toFixed(2) + 'm³/h';
+          return val.toFixed(2);
         }
       }],
       yAxis: {
-        title: '流量 (m³/h)',
+        title: that.data.name + '(' + that.data.unit + ')',
         format: function (val) {
           return val.toFixed(2);
         },

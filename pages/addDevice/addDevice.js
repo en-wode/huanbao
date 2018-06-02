@@ -1,5 +1,6 @@
 // pages/addDevice/addDevice.js
 const Zan = require('../../dist/index');
+var app = getApp()
 
 Page(Object.assign({}, Zan.TopTips,{
   data: {
@@ -18,20 +19,18 @@ Page(Object.assign({}, Zan.TopTips,{
     wx.getStorage({
       key: 'sessionid',
       success: function (res) {
-        console.log(res.data)
         var header = {
           'content-type': 'application/json',
           'cookie': res.data//读取cookie
         };
         wx.request({
-          url: 'http://192.168.0.115:7001/equipment/list',
+          url: app.globalData.url + 'equipment/list',
           method: 'GET',
           header: header,
           data: {
             userId: options.id
           },
           success: function (result) {
-            console.log(result.data.result)
             if (result.data.code == 0 && result.data.msg == 2000) {
               wx.navigateTo({
                 url: '../index/index'
@@ -197,7 +196,7 @@ Page(Object.assign({}, Zan.TopTips,{
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     wx.request({
-      url: 'http://192.168.0.115:7001/equipment/delete',
+      url: app.globalData.url + 'equipment/delete',
       method: 'POST',
       header: header,
       data: {

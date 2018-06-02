@@ -43,14 +43,13 @@ Page(Object.assign({}, Zan.Field,{
   },
   formSubmit: function (event) {
     const that = this;
-    console.log(event)
     if (!event.detail.value.name || !event.detail.value.password) {
       that.setData({
         message: '请输入帐号密码'
       })
     }else{
       wx.request({
-        url: 'http://192.168.0.115:7001/user/login',
+        url: app.globalData.url + 'user/login',
         method: 'POST',
         data: {
           name: event.detail.value.name,
@@ -89,7 +88,6 @@ Page(Object.assign({}, Zan.Field,{
         },
       })
     }
-    console.log(213)
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;

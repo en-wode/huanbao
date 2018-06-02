@@ -40,11 +40,9 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
   onLoad: function (options) {
 
     var that = this;
-    console.log(options.equipid)
     that.setData({
       id: options.equipid
     }) 
-    console.log(wx.getStorageSync('userId'));
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
@@ -59,7 +57,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       that.setData({
         weatherData: weatherData,
       });
-      console.log(weatherData)
     }
     BMap.weather({
       fail: fail,
@@ -68,7 +65,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     app.socket().open();
     app.socket().on('connect', function () {
       that.showTopTips('刷新成功')
-      console.log('connected')
     });
     
     let name = 'res' + options.equipid
@@ -131,6 +127,8 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
           [`weiyu.shebmen`]: '关闭'
         }) 
       }
+      console.log(d.floatingBall & 2)
+      console.log(d.floatingBall & 4)
       if ((d.floatingBall & 2) == 0) {
         that.setData({
           [`weiyu.fuqiu`]: '下限'
@@ -168,7 +166,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     wx.request({
-      url: 'http://192.168.0.115:7001/user/isWatch',
+      url: app.globalData.url + 'user/isWatch',
       method: 'GET',
       header: header,
       data: {
@@ -180,7 +178,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
             url: '../index/index'
           })
         }
-        console.log(result.data.code)
       },
       fail: function (res) {
         console.log(JSON.stringify(res));

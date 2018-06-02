@@ -7,7 +7,22 @@
       data="{{ ...tab1, componentId: 'tab1' }}"></template>
   </view>
   <canvas class="canvas" canvas-id="lineGraph"></canvas>
-  <view class='contain'>
+  <view class="section">  
+    <picker mode="date" value="{{date}}" start="2018-01-01" end="{{endDate}}" bindchange="bindDateChange">  
+      <view class="zan-cell">
+        <view class="zan-cell__bd" >日期选择:</view>
+          <view class="zan-cell__ft" bindtap='message'>
+            <view class="demo__icon zan-badge">
+            {{dates}} 
+            </view>
+        </view>
+      </view>
+      <!-- <view class="picker">  
+        日期:  
+      </view>   -->
+    </picker>  
+  </view>  
+  <!-- <view class='contain'>
     <view class='title'>流量记录</view>
       <view class="zan-row">
         <view class="zan-col zan-col-12">
@@ -25,5 +40,5 @@
         瞬时: 8 m³/h
       </view>
     </view>
-  </view>
+  </view> -->
 </view>

@@ -23,7 +23,8 @@ Page({
     tilan: 150,
     paishui: 150,
     water: 250,
-    out: '高于',
+    out: '',
+    start: null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,7 +33,7 @@ Page({
     const that = this;
     // 连接socket
     
-    var start = null;
+    var starta = null;
     that.tree(); //基础图案
     that.wind();
     app.socket().open();
@@ -47,9 +48,10 @@ Page({
       equipmentId: option.id
     })
     that.sheb()
-    that.drawClock();
     // 每40ms执行一次drawClock()，人眼看来就是流畅的画面
-    start = setInterval(that.drawClock, 40);
+    setTimeout(function(){
+      that.data.start = setInterval(that.drawClock, 40);
+    },1000)
   },
   tree: function (ctx, wxH, wxW) {
     const that = this
@@ -64,18 +66,6 @@ Page({
     ctx.setGlobalAlpha(0.8);
     ctx.setFillStyle('#D3D3D3')
     ctx.fillRect(50, wxH - 350, wxW - 100, 300);
-    //水流
-    // ctx.beginPath();
-    // const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
-    // wrd.addColorStop(0, '#63B8FF');
-    // wrd.addColorStop(0.6, '#1C86EE');
-    // wrd.addColorStop(1, '#0000FF');
-    // ctx.setFillStyle(wrd);
-
-    // ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300))); 
-    // ctx.fillRect(0, wxH - 250, 50, 75);
-    // ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
-    // ctx.stroke();
 
     ctx.beginPath()
     ctx.setLineWidth(10)
@@ -107,26 +97,6 @@ Page({
     ctx.moveTo(50, wxH - 50)
     ctx.lineTo(wxW - 50, wxH - 50)
     ctx.stroke();
-    // ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 50, 220);
-
-    // //水流方向
-    // ctx.drawImage("/assets/images/right.png", 10, wxH - 220, 36, 26);
-    // ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 220, 36, 26);
-    // //水泵水流方向
-    // ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
-
-    // //水泵 阀门 提篮
-    // ctx.drawImage("/assets/images/shuibeng.png", 110, wxH - 135, 50, 80);
-    // ctx.drawImage("/assets/images/shuibeng.png", 180, wxH - 135, 50, 80);
-    // ctx.drawImage("/assets/images/jiewu.png", 240, wxH - 190, 45, 135);
-
-    // //测量计
-    // ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
-    // ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
-    // ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
-
-    // //右侧排水阀门
-    // ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 274, 24, 190);
 
     //主机
     ctx.drawImage("/assets/images/zhuji.png", wxW - 85, wxH - 350, 30, 30);
@@ -363,6 +333,21 @@ Page({
         that.water(numW2, numH2, numl2)
       }, 1000 / 60)
     }
+
+    //井内水位
+    if (that.data.socketdata.waterLevelInWell - that.data.socketdata.riveRaterLevel){
+      that.setData({
+        out: '高于'
+      })
+    } else if (that.data.socketdata.waterLevelInWell == that.data.socketdata.riveRaterLevel){
+      that.setData({
+        out: '停止'
+      })
+    } else{
+      that.setData({
+        out: '低于'
+      })
+    }
   },
   water(numW, numH, numl) {
     const that = this;
@@ -500,11 +485,12 @@ Page({
           })
         }
         ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
-      }
-      // ctx.fillRect(50, wxH - 300, wxW - 100, 300 + (wxH - 350 - (wxH - 300)));
 
-      // ctx.fillRect(0, wxH - 250, 50, 75);
-      // ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+        if (that.data.water >= 180){
+          ctx.fillRect(0, wxH - that.data.water, 50, that.data.water - 180);
+          ctx.fillRect(wxW - 50, wxH - that.data.water, 50, that.data.water - 180);
+        }
+      }
       ctx.stroke();
       ctx.draw()
     }
@@ -530,9 +516,13 @@ Page({
     Clock(ctx, wxH, wxW);
   },
   onUnload: function () {
+    const that = this;
+    clearInterval(that.data.start);
     app.socket().close();
   },
   onHide: function () {
+    const that = this;
+    clearInterval(that.data.start);
     app.socket().close();
   }
 })

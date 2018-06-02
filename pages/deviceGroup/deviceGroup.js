@@ -221,7 +221,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, {
     const that = this;
     console.log(that.data.data)
     wx.request({
-      url: 'http://47.98.162.168/equipmentArameters/setEquipment',
+      url: app.globalData.url + 'equipmentArameters/setEquipment',
       method: 'POST',
       data: {
         data: that.data.data
