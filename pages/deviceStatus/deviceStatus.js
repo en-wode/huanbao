@@ -208,7 +208,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     };
     console.log(that.data.id);
     wx.request({
-      url: 'http://192.168.0.115:7001/user/isWatch',
+      url: app.globalData.url + 'user/isWatch',
       method: 'GET',
       header: header,
       data: {
@@ -216,6 +216,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
         equipmentId: that.data.id
       },
       success: function (result) {
+        console.log
         if (result.data.code == 2000) {
           wx.navigateTo({
             url: '../index/index'
