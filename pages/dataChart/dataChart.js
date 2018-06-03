@@ -71,6 +71,9 @@ Page(extend({}, Tab, {
       unit: danwei,
       name: nameshow
     }) 
+    wx.setNavigationBarTitle({
+      title: options.name + '号历史记录'
+    })
     that.getdata()
     //获取今年时间
     var time = getDate.formatTime(new Date());  

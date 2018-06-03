@@ -16,7 +16,7 @@
     <view class="item-box" wx:if="{{device.length > 0}}">
       <view class="items" >
         <view  wx:for="{{device}}"  wx:for-item="item" wx:key="item.id" id = '{{item.id}}' class="item">
-          <view bindtap="detail"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}"class="inner txt" id = '{{item.id}}' >
+          <view bindtap="detail"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}"class="inner txt" id = '{{item.id}}' data-name = '{{item.equipmentName}}'>
           {{item.equipmentName}}号设备 <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;color:#B5B5B5'></text></view>
           <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
         </view>

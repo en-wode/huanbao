@@ -208,9 +208,11 @@ Page(Object.assign({}, Zan.TopTips,{
     })
   },
   detail: function (event) {
+    const that = this;
     let devideId = event.currentTarget.id;
+    let devideName = event.currentTarget.dataset.name;
     wx.navigateTo({
-      url: '../optionSelect/optionSelect?equipid=' + devideId
+      url: '../optionSelect/optionSelect?equipid=' + devideId + '&equipname=' + devideName
     })
   },
   showTopTips(data) {

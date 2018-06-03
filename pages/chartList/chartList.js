@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: ''
+    id: '',
+    name: ''
   },
   /**
    * 事件处理函数
@@ -14,7 +15,7 @@ Page({
     const that = this;
     let devideId = event.currentTarget.id;
     wx.navigateTo({
-      url: '../dataChart/dataChart?id=' + that.data.id + '&datalist=' + devideId
+      url: '../dataChart/dataChart?id=' + that.data.id + '&datalist=' + devideId + '&name=' + that.data.name
     })
   },
   /**
@@ -23,7 +24,8 @@ Page({
   onLoad: function (options) {
     const that = this;
     that.setData({
-      id: options.equipid
+      id: options.equipid,
+      name: options.equipname
     }) 
   },
   /**

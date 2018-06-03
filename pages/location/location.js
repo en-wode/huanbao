@@ -38,6 +38,9 @@ Page(Object.assign({}, Zan.Field,{
     that.setData({
       id: options.equipid
     }) 
+    wx.setNavigationBarTitle({
+      title: options.equipname + '号设备报修'
+    })
     that.getData();
     // 获取定位，并把位置标示出来
 
@@ -225,7 +228,7 @@ Page(Object.assign({}, Zan.Field,{
             url: '../index/index'
           })
         }
-        console.log(result)
+        console.log(result.data.result.map(v => v.type))
         that.setData({
           questiontype: result.data.result.map(v => v.type)
         })

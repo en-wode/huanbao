@@ -8,11 +8,13 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    equipid: ''
+    equipid: '',
+    equipname: ''
   },
   onLoad: function (options) {
     this.setData({
-      equipid: options.equipid
+      equipid: options.equipid,
+      equipname: options.equipname
     })
   },
   //事件处理函数
@@ -23,22 +25,22 @@ Page({
     switch (Number(targetid)) {
       case 1:
         wx.navigateTo({
-          url: '../deviceStatus/deviceStatus?equipid=' + that.data.equipid
+          url: '../deviceStatus/deviceStatus?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
         });
         break;
       case 2:
         wx.navigateTo({
-          url: '../location/location?equipid=' + that.data.equipid
+          url: '../location/location?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
         });
         break;
       case 3:
         wx.navigateTo({
-          url: '../model/model?equipid=' + that.data.equipid
+          url: '../model/model?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
         });
         break;
       case 4:
         wx.navigateTo({
-          url: '../chartList/chartList?equipid=' + that.data.equipid
+          url: '../chartList/chartList?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
         });
         break;
     };

@@ -111,9 +111,11 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   onLoad: function (options) {
     var that = this;
-    console.log(options)
     that.setData({
       equipid: options.equipid
+    })
+    wx.setNavigationBarTitle({
+      title: options.equipname + '号情景模式'
     })
     that.getdata();
   },

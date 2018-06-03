@@ -41,8 +41,11 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
 
     var that = this;
     that.setData({
-      id: options.equipid
+      id: options.equipid,
     }) 
+    wx.setNavigationBarTitle({
+      title: options.equipname + '号设备实况'
+    })
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
@@ -127,8 +130,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
           [`weiyu.shebmen`]: '关闭'
         }) 
       }
-      console.log(d.floatingBall & 2)
-      console.log(d.floatingBall & 4)
       if ((d.floatingBall & 2) == 0) {
         that.setData({
           [`weiyu.fuqiu`]: '下限'
@@ -145,7 +146,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       that.setData({
         data: d,
       });
-      console.log(d);
     })
     app.socket().emit('index', {
       equipmentId: options.equipid

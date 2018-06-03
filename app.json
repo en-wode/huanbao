@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/optionSelect/optionSelect",
-    "pages/simulation/simulation",
     "pages/dataChart/dataChart",
     "pages/video/video",
     "pages/model/model",
@@ -14,7 +13,6 @@
     "pages/deviceLink/deviceLink",
     "pages/chartList/chartList",
     "pages/editPassword/editPassword",
-    "pages/getLocation/getLocation",
     "pages/message/message",
     "pages/canvas/canvas"
   ],

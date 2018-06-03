@@ -1,5 +1,0 @@
-<!--pages/simulation/simulation.wxml-->
-<view class='wrap'>
-    <!-- <view><text>sass</text></view> -->
-     <canvas canvas-id='first' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;"></canvas> 
-</view>
