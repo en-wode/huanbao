@@ -147,14 +147,12 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   InterceptingLimitflowHeight: function (value) {
     const that = this
-    console.log(value)
     that.setData({
       [`base.InterceptingLimitflowHeight`]: value.detail.value
     });
   },
   drainageOverflowHeight: function (value) {
     const that = this
-    console.log(value)
     that.setData({
       [`base.drainageOverflowHeight`]: value.detail.value
     });
@@ -217,7 +215,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   toggleBaseDialog:function(event) {
     const that = this;
-    console.log(that.data.devices.ss)
     that.setData({
       device: event.detail.value,
       [`device.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight,
@@ -232,8 +229,11 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`device.cod`]: that.signFigures(event.detail.value.cod * 100),
       [`device.ss`]: that.signFigures(event.detail.value.ss * 100),
     })
-    console.log(that.data.device)
-    console.log(that.data.device.ss)
+    for (const key in this.data.device){
+      if (this.data.device[key]===''){
+        this.data.device[key] = null;  
+      }
+    }
     that.showZanDialog({
       title: '参数修改',
       content: '请确认是否保存操作',
@@ -249,7 +249,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.device)
     wx.request({
       url: app.globalData.url + 'equipmentPort/addEquipmentPort',
       method: 'POST',
@@ -258,7 +257,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         device: that.data.device
       },
       success: function (result) {
-        console.log(result)
         if (result.data.code == 1) {
           that.showZanToast('保存成功');
         } else {
@@ -273,7 +271,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.devices);
     wx.request({
       url: app.globalData.url + 'equipmentPort/getEquipmentPort',
       method: 'GET',
@@ -297,7 +294,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
             work: result.data.result.pattern,
           })
         }
-        console.log(that.data.devices)
       }
     })
   },

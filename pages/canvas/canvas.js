@@ -37,12 +37,18 @@ Page({
     that.tree(); //基础图案
     that.wind();
     app.socket().open();
-    let name = 'res' + option.id
+    let name = 'online'
     app.socket().on(name, d => {
-      that.setData({
-        socketdata: d
-      })
-      that.startcanvas()
+      if (d.equipmentId != option.id ) {
+        return
+      } else {
+        console.log(1)
+        that.setData({
+          socketdata: d
+        })
+        that.startcanvas()
+      }
+      
     })
     app.socket().emit('index', {
       equipmentId: option.id

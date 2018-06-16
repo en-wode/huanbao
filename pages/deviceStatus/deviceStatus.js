@@ -65,87 +65,97 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       fail: fail,
       success: success
     });
+
     app.socket().open();
     app.socket().on('connect', function () {
       that.showTopTips('刷新成功')
     });
-    
-    let name = 'res' + options.equipid
-    app.socket().on(name, d => {
-      if (d.keyboardStatus == 7) {
-        that.setData({
-          [`weiyu.workstatus`]: '自动'
-        })
-      } else if (d.keyboardStatus == 3){
-        that.setData({
-          [`weiyu.workstatus`]: '手动'
-        })
-      } else {
-        that.setData({
-          [`weiyu.workstatus`]: '远程'
-        })
-      }
-      if ((d.callThePolice & 1) == 0) {
-        that.setData({
-          [`weiyu.shuibeng2`]: '错误'
-        }) 
-      } else {
-       that.setData({
-          [`weiyu.shuibeng2`]: '正常'
-        }) 
-      }
-      if ((d.callThePolice & 2) == 0) {
-        that.setData({
-          [`weiyu.shuibeng1`]: '错误'
-        }) 
-      } else {
-        that.setData({
-          [`weiyu.shuibeng1`]: '正常'
-        }) 
-      }
-      if ((d.callThePolice & 4) == 0) {
-        that.setData({
-          [`weiyu.yalidianji`]: '错误'
-        }) 
-      } else {
-        that.setData({
-          [`weiyu.yalidianji`]: '正常'
-        }) 
-      }
-      if ((d.callThePolice & 128) == 0) {
-        that.setData({
-          [`weiyu.tingdian`]: '停电'
-        }) 
-      } else {
-        that.setData({
-          [`weiyu.tingdian`]: '正常'
-        }) 
-      }
-      if ((d.floatingBall & 1) == 0) {
-        that.setData({
-          [`weiyu.shebmen`]: '打开'
-        }) 
-      } else {
-        that.setData({
-          [`weiyu.shebmen`]: '关闭'
-        }) 
-      }
-      if ((d.floatingBall & 2) == 0) {
-        that.setData({
-          [`weiyu.fuqiu`]: '下限'
-        }) 
-      } else if ((d.floatingBall & 4) == 0){
-        that.setData({
-          [`weiyu.fuqiu`]: '上限'
-        }) 
-      } else {
-        that.setData({
-          [`weiyu.fuqiu`]: '非上下限'
-        }) 
-      }
-      that.setData({
-        data: d,
-      });
+    app.socket().on('disconnect', function () {
+      console.log('断开');
+    });
+    // let name = 'res22' + options.equipid
+    let name = 'online';
+      app.socket().on(name, d => {
+        console.log(d)
+        if (d.equipmentId != that.data.id ) {
+          return
+        } else {
+          if (d.keyboardStatus == 7) {
+            that.setData({
+              [`weiyu.workstatus`]: '自动'
+            })
+          } else if (d.keyboardStatus == 3) {
+            that.setData({
+              [`weiyu.workstatus`]: '手动'
+            })
+          } else {
+            that.setData({
+              [`weiyu.workstatus`]: '远程'
+            })
+          }
+          if ((d.callThePolice & 1) == 0) {
+            that.setData({
+              [`weiyu.shuibeng2`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shuibeng2`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 2) == 0) {
+            that.setData({
+              [`weiyu.shuibeng1`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shuibeng1`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 4) == 0) {
+            that.setData({
+              [`weiyu.yalidianji`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.yalidianji`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 128) == 0) {
+            that.setData({
+              [`weiyu.tingdian`]: '停电'
+            })
+          } else {
+            that.setData({
+              [`weiyu.tingdian`]: '正常'
+            })
+          }
+          if ((d.floatingBall & 1) == 0) {
+            that.setData({
+              [`weiyu.shebmen`]: '打开'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shebmen`]: '关闭'
+            })
+          }
+          if ((d.floatingBall & 2) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '下限'
+            })
+          } else if ((d.floatingBall & 4) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '上限'
+            })
+          } else {
+            that.setData({
+              [`weiyu.fuqiu`]: '非上下限'
+            })
+          }
+          that.setData({
+            data: d,
+          });
+        }
+      
     })
     app.socket().emit('index', {
       equipmentId: options.equipid
@@ -216,7 +226,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
         equipmentId: that.data.id
       },
       success: function (result) {
-        console.log
         if (result.data.code == 2000) {
           wx.navigateTo({
             url: '../index/index'
@@ -241,10 +250,10 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
   },
   onUnload: function () {
     console.log(1);
-    app.socket().close();
+    // app.socket().close();
   },
   onHide: function () {
     console.log(2);
-    app.socket().close();
+    // app.socket().close();
   }
 }))

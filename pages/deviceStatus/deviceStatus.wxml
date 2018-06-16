@@ -50,23 +50,23 @@
   </view>
   <view class='card'>
     <view class="zan-cell">
-      <view class="zan-cell__bd"> 排水闸门开度 {{data.sluiceOpeningDegree}}%</view>
+      <view class="zan-cell__bd"> 排水闸门开度 {{data.sluiceOpeningDegree}}mm</view>
       <view class="zan-cell__ft">{{data.sluiceSwitch}}</view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.sluiceOpeningDegree}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceOpeningDegree/data.sluiceHeight*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
   <view class='card'>
     <view class="zan-cell">
-      <view class="zan-cell__bd"> 截污闸门开度 {{data.sluiceSluiceOpeningDegree}}%</view>
+      <view class="zan-cell__bd"> 截污闸门开度 {{data.sluiceSluiceOpeningDegree}}mm</view>
       <view class="zan-cell__ft">{{data.sluiceSluiceSwitch}}</view>
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.sluiceSluiceOpeningDegree}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceSluiceOpeningDegree/data.sewerageSluice*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
