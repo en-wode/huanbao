@@ -138,21 +138,21 @@
             <view class="iconfont icon-zidong light {{work == 0 ? 'zidong' : ''}}" ></view>
             <view class="work-name">自动值守</view>
           </view>
-          <view class="zan-col zan-col-12" bindtap='model' id='1'>
-            <view class="iconfont icon-jiankangfengxianyufang light {{work == 1 ? 'jiankangfengxianyufang' : ''}}" ></view>
+          <view class="zan-col zan-col-12" bindtap='model' id='4'>
+            <view class="iconfont icon-jiankangfengxianyufang light {{work == 4 ? 'jiankangfengxianyufang' : ''}}" ></view>
             <view class="work-name">防倒灌</view>
           </view>
-          <view class="zan-col zan-col-8" bindtap='model' id='2'>
-          <view class="iconfont icon-qing light {{work == 2 ? 'qing' : ''}}" ></view>
+          <view class="zan-col zan-col-8" bindtap='model' id='1'>
+          <view class="iconfont icon-qing light {{work == 1 ? 'qing' : ''}}" ></view>
             <view class="work-name">晴天截流</view>
           </view>
-          <view class="zan-col zan-col-8" bindtap='model' id='3'>
-            <view class="iconfont icon-xianzhi light {{work == 3 ? 'xianzhi' : ''}}" ></view>
+          <view class="zan-col zan-col-8" bindtap='model' id='2'>
+            <view class="iconfont icon-xianzhi light {{work == 2 ? 'xianzhi' : ''}}" ></view>
             <view class="work-name">初雨限流</view>
           </view>
-          <view class="zan-col zan-col-8" bindtap='model' id='4'>
-            <view class="iconfont icon-yu light {{work == 4 ? 'yu' : ''}}" ></view>
-            <view class="work-name">暴雨</view>
+          <view class="zan-col zan-col-8" bindtap='model' id='3'>
+            <view class="iconfont icon-yu light {{work == 3 ? 'yu' : ''}}" ></view>
+            <view class="work-name">暴雨排涝</view>
           </view>
       </view>
     </view>

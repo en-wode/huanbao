@@ -9,7 +9,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       drainageOverflowHeight: 0,
       InterceptingL0imitflowHeight: 0,
       rainGauge: {
-        title: '大雨雨量(单位：mL/h)',
+        title: '大雨雨量(单位：mm/h)',
         placeholder: '请输入数值',
         inputType: 'digit',
         componentId: 'rainGauge'
@@ -28,7 +28,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         value: ''
       },
       seaLevel: {
-        title: '初雨初始高度(单位：mm)',
+        title: '预警水位(单位：m)',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'seaLevel',
@@ -226,6 +226,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`device.stopWaterLevel1`]: that.setcountxs(event.detail.value.stopWaterLevel1, that.data.devices.bottomHoleHeight),
       [`device.stopWaterLevel2`]: that.setcountxs(event.detail.value.stopWaterLevel2, that.data.devices.bottomHoleHeight),
       [`device.vigilance`]: that.setcountxs(event.detail.value.vigilance, that.data.devices.bottomHoleHeight),
+      [`device.seaLevel`]: that.setcountxs(event.detail.value.seaLevel, that.data.devices.bottomHoleHeight),
       [`device.cod`]: that.signFigures(event.detail.value.cod * 100),
       [`device.ss`]: that.signFigures(event.detail.value.ss * 100),
     })
@@ -234,6 +235,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         this.data.device[key] = null;  
       }
     }
+    
     that.showZanDialog({
       title: '参数修改',
       content: '请确认是否保存操作',
@@ -249,6 +251,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
+    console.log(that.data.device)
     wx.request({
       url: app.globalData.url + 'equipmentPort/addEquipmentPort',
       method: 'POST',
@@ -299,6 +302,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   },
   setcountxs: function (value, bt) {
     console.log(bt)
+    console.log(value)
     var srt = value * 100 - bt + 10000;
     console.log(srt)
     return srt

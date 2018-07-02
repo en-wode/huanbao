@@ -3,6 +3,16 @@
 <import src="../../dist/tab/index.wxml" />
 <view>
  <view >
+ <view class='card_num'>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" >更新时间</view>
+      <view class="zan-cell__ft">
+        <view class="demo__icon zan-badge">
+        {{data.creatTime}}
+        </view>
+      </view>
+    </view>
+  </view>
   <view class='card_num'>
      <view class="zan-cell zan-cell--access" bindtap='simulation'>
         <view class="zan-cell__bd card_name" >场景模拟</view>
@@ -55,7 +65,7 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.sluiceOpeningDegree/data.sluiceHeight*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceOpeningDegree/data.sewerageSluice*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
@@ -66,7 +76,7 @@
     </view>
     <view class="section section_gap">
       <view class="body-view">
-           <wxc-progress percent="{{data.sluiceSluiceOpeningDegree/data.sewerageSluice*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
+           <wxc-progress percent="{{data.sluiceSluiceOpeningDegree/data.sluiceHeight*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
       </view>
     </view>
   </view>
@@ -185,7 +195,7 @@
   </view>
   <view class='card_num'>
     <view class="zan-cell">
-      <view class="zan-cell__bd" >雨量（单位：ml/h）</view>
+      <view class="zan-cell__bd" >雨量（单位：mm/h）</view>
       <view class="zan-cell__ft">
         <view class="demo__icon zan-badge">
         {{data.rainfall}}

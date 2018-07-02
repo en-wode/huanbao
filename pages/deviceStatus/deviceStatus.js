@@ -84,7 +84,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
             that.setData({
               [`weiyu.workstatus`]: '自动'
             })
-          } else if (d.keyboardStatus == 3) {
+          } else if (d.keyboardStatus == 6) {
             that.setData({
               [`weiyu.workstatus`]: '手动'
             })
@@ -138,13 +138,13 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
               [`weiyu.shebmen`]: '关闭'
             })
           }
-          if ((d.floatingBall & 2) == 0) {
-            that.setData({
-              [`weiyu.fuqiu`]: '下限'
-            })
-          } else if ((d.floatingBall & 4) == 0) {
+          if ((d.floatingBall & 4) == 0) {
             that.setData({
               [`weiyu.fuqiu`]: '上限'
+            })
+          } else if ((d.floatingBall & 2) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '下限'
             })
           } else {
             that.setData({
@@ -216,7 +216,6 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.id);
     wx.request({
       url: app.globalData.url + 'user/isWatch',
       method: 'GET',
@@ -249,11 +248,9 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     this.showZanTopTips(data);
   },
   onUnload: function () {
-    console.log(1);
-    // app.socket().close();
+    app.socket().close();
   },
   onHide: function () {
-    console.log(2);
-    // app.socket().close();
+    app.socket().close();
   }
 }))
