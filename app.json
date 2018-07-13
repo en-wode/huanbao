@@ -13,8 +13,8 @@
     "pages/deviceLink/deviceLink",
     "pages/chartList/chartList",
     "pages/editPassword/editPassword",
-    "pages/message/message",
-    "pages/canvas/canvas"
+    "pages/canvas/canvas",
+    "pages/message/message"
   ],
   "window": {
     "backgroundTextStyle": "light",

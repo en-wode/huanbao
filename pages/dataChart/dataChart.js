@@ -3,7 +3,8 @@ var _wxcharts = require('../../utils/wxcharts')
 var getDate = require('../../utils/getDate.js');  
 const { Tab, extend } = require('../../dist/index');
 const app = getApp()
-
+var lineChart = null;
+var startPos = null;
 Page(extend({}, Tab, {
 
   /**
@@ -13,18 +14,18 @@ Page(extend({}, Tab, {
     id: '',
     datalist: '',
     week: ['一', '二', '三', '四', '五', '六', '日'],
-    month: ['5', '10', '15', '20', '25', '30'],
+    month: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22' ,'23', '24', '25', '26', '27', '28'],
     year: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     tab1: {
       list: [{
         id: 'week',
-        title: '周'
+        title: '最近一周'
       }, {
         id: 'month',
-        title: '月'
+        title: '最近一月'
       },  {
         id: 'year',
-        title: '年'
+        title: '最近一年'
       }],
       selectedId: 'week'
     },
@@ -37,7 +38,31 @@ Page(extend({}, Tab, {
     dates: '2018-04-12',
     endDate: ''
   },
-
+  touchHandler: function (e) {
+    lineChart.scrollStart(e);
+  },
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
+    lineChart.showToolTip(e, {
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+  createSimulationData: function () {
+    const that = this;
+    var categories = [];
+    var data = [];
+    categories = that.data.check;
+    data = that.data.hisdata;
+    return {
+      categories: categories,
+      data: data
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -65,6 +90,7 @@ Page(extend({}, Tab, {
     } else if (options.datalist == 'riveRaterLevel'){
       nameshow = '河道水位'
     }
+    
     that.setData({
       id: options.id,
       datalist: options.datalist,
@@ -115,10 +141,9 @@ Page(extend({}, Tab, {
           })
         }
         console.log(result)
-        console.log(that.data.datalist)
-        console.log(result.data.result.map(v => v[that.data.datalist]).slice(0, 4))
         that.setData({
           hisdata: result.data.result.map(v => v[that.data.datalist]).slice(0, 4)
+          // hisdata: result.data.result.map(v => v[that.data.datalist]).slice(0, 4)
         })
         that.graphShow()
       }
@@ -140,75 +165,38 @@ Page(extend({}, Tab, {
   },
   handleZanTabChange(e) {
     const that = this;
+    var Mday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var date = new Date();
+    var m
+    var month1 = date.getMonth(); //Mday[month]
+    console.log(that.data.month.length)
+    console.log(Mday[month1])
+    if (Mday[month1] > 28 && that.data.month.length < Mday[month1]) {
+      for (var i = 29; i <= Mday[month1];i++){
+        m = i.toString()
+        that.data.month.push(m)
+      }
+    }
+
+    console.log(that.data.month);
     var componentId = e.componentId;
     var selectedId = e.selectedId;
     that.setData({
       [`${componentId}.selectedId`]: selectedId
     });
-    console.log(that.data[selectedId])
     that.setData({
-      check: that.data[selectedId]
+      check: that.data[selectedId],
+      month: that.data.month
     });
-    that.lineShow();
+    that.lineCanvas();
   },
   /**
   * @Explain：初始化静态图表
   */
   graphShow: function () {
     let that = this
-    that.lineShow();
+    that.lineCanvas();
   },
-
-  // pieShow: function () {
-  //   let pie = {
-  //     canvasId: 'pieGraph',
-  //     type: 'pie',
-  //     series: [{
-  //       name: 'cat1',
-  //       data: 50,
-  //     }, {
-  //       name: 'cat2',
-  //       data: 30,
-  //     }, {
-  //       name: 'cat3',
-  //       data: 1,
-  //     }, {
-  //       name: 'cat4',
-  //       data: 1,
-  //     }, {
-  //       name: 'cat5',
-  //       data: 46,
-  //     }],
-  //     width: 360,
-  //     height: 300,
-  //     dataLabel: true
-  //   }
-  //   new _wxcharts(pie)
-  // },
-
-  // barShow: function () {
-  //   let bar = {
-  //     canvasId: 'barGraph',
-  //     type: 'column',
-  //     categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
-  //     series: [{
-  //       name: '成交量1',
-  //       data: [15, 20, 45, 37, 4, 80]
-  //     }, {
-  //       name: '成交量2',
-  //       data: [70, 40, 65, 100, 34, 18]
-  //     }],
-  //     yAxis: {
-  //       format: function (val) {
-  //         return val + '万';
-  //       }
-  //     },
-  //     width: 320,
-  //     height: 200
-  //   }
-  //   new _wxcharts(bar)
-  // },
-
   lineShow: function () {
     const that = this
     console.log(that.data.check)
@@ -236,32 +224,46 @@ Page(extend({}, Tab, {
     }
     new _wxcharts(line)
   },
-  // areaShow: function () {
-  //   let area = {
-  //     canvasId: 'areaGraph',
-  //     type: 'area',
-  //     categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
-  //     series: [{
-  //       name: '成交量1',
-  //       data: [70, 40, 65, 100, 34, 18],
-  //       format: function (val) {
-  //         return val.toFixed(2) + '万';
-  //       }
-  //     }, {
-  //       name: '成交量2',
-  //       data: [15, 20, 45, 37, 4, 80],
-  //       format: function (val) {
-  //         return val.toFixed(2) + '万';
-  //       }
-  //     }],
-  //     yAxis: {
-  //       format: function (val) {
-  //         return val + '万';
-  //       }
-  //     },
-  //     width: 320,
-  //     height: 200
-  //   }
-  //   new _wxcharts(area)
-  // }
+  lineCanvas: function() {
+    const that = this;
+    var windowWidth = 320;
+    try {
+      var res = wx.getSystemInfoSync();
+      windowWidth = res.windowWidth;
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
+    }
+    var simulationData = this.createSimulationData();
+    lineChart = new _wxcharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      categories: simulationData.categories,
+      animation: false,
+      series: [{
+        name: that.data.name,
+        data: simulationData.data,
+        format: function (val, name) {
+          return val.toFixed(2) + that.data.unit;
+        }
+      }],
+      xAxis: {
+        disableGrid: false
+      },
+      yAxis: {
+        title: that.data.name,
+        format: function (val) {
+          return val.toFixed(2);
+        },
+        min: 0
+      },
+      width: windowWidth,
+      height: 200,
+      dataLabel: true,
+      dataPointShape: true,
+      enableScroll: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
+  }
 }))

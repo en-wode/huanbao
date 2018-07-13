@@ -152,3 +152,7 @@ page{
 .zan-col{
   padding: 0
 }
+
+.procolor{
+  color: #666
+}

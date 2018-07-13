@@ -257,13 +257,18 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       method: 'POST',
       header: header,
       data: {
+        userId: wx.getStorageSync('userId'),
         device: that.data.device
       },
       success: function (result) {
-        if (result.data.code == 1) {
+        if (result.data.code == 0 && result.data.msg == 2000){
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }else if (result.data.code == 1) {
           that.showZanToast('保存成功');
         } else {
-          that.showZanToast('请提供设备ID');
+          that.showZanToast(result.data.msg);
         }
       }
     })
@@ -301,10 +306,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     })
   },
   setcountxs: function (value, bt) {
-    console.log(bt)
-    console.log(value)
     var srt = value * 100 - bt + 10000;
-    console.log(srt)
     return srt
   },
   signFigures: function (num, rank = 6) {

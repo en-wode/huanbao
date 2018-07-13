@@ -135,7 +135,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
             })
           } else {
             that.setData({
-              [`weiyu.shebmen`]: '关闭'
+              [`weiyu.shebmen`]: '无'
             })
           }
           if ((d.floatingBall & 4) == 0) {
@@ -150,6 +150,9 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
             that.setData({
               [`weiyu.fuqiu`]: '非上下限'
             })
+          }
+          if (d.waterLevelOfSewagePipe === '???') {
+            d.waterLevelOfSewagePipe = '未检测'
           }
           that.setData({
             data: d,

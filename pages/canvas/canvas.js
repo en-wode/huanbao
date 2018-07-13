@@ -39,19 +39,19 @@ Page({
     app.socket().open();
     let name = 'online'
     app.socket().on(name, d => {
-      if (d.equipmentId != option.id ) {
+      if (d.equipmentId != 22 ) {
         return
       } else {
-        console.log(1)
+        console.log(d)
         that.setData({
           socketdata: d
         })
         that.startcanvas()
       }
-      
     })
     app.socket().emit('index', {
-      equipmentId: option.id
+      // equipmentId: option.id
+      equipmentId: 22
     })
     that.sheb()
     // 每40ms执行一次drawClock()，人眼看来就是流畅的画面
@@ -77,45 +77,51 @@ Page({
     ctx.setLineWidth(10)
     ctx.setStrokeStyle('#A6A6A6')
     //左侧管道
-    ctx.moveTo(0, wxH - 300 / 2 - 100);
-    ctx.lineTo(54, wxH - 300 / 2 - 100);
-    ctx.moveTo(0, wxH - 300 / 2 - 25);
-    ctx.lineTo(54, wxH - 300 / 2 - 25);
+    ctx.moveTo(30, wxH - 300 / 2 - 100);
+    ctx.lineTo(74, wxH - 300 / 2 - 100);
+    ctx.moveTo(30, wxH - 300 / 2 - 25);
+    ctx.lineTo(74, wxH - 300 / 2 - 25);
     //左侧墙壁
-    ctx.moveTo(50, wxH - 300 - 50);
-    ctx.lineTo(50, wxH - 300 / 2 - 100);
-    ctx.moveTo(50, wxH - 300 / 2 - 25);
-    ctx.lineTo(50, wxH - 50);
+    ctx.moveTo(70, wxH - 300 - 50);
+    ctx.lineTo(70, wxH - 300 / 2 - 100);
+    ctx.moveTo(70, wxH - 300 / 2 - 25);
+    ctx.lineTo(70, wxH - 50);
 
     //右侧管道
-    ctx.moveTo(wxW - 54, wxH - 300 / 2 - 100);
-    ctx.lineTo(wxW, wxH - 300 / 2 - 100);
-    ctx.moveTo(wxW - 54, wxH - 300 / 2 - 25);
-    ctx.lineTo(wxW, wxH - 300 / 2 - 25);
+    ctx.moveTo(wxW - 74, wxH - 300 / 2 - 100);
+    ctx.lineTo(wxW-30, wxH - 300 / 2 - 100);
+    ctx.moveTo(wxW - 74, wxH - 300 / 2 - 25);
+    ctx.lineTo(wxW-30, wxH - 300 / 2 - 25);
     //右侧墙壁
-    ctx.moveTo(wxW - 50, wxH - 300 - 50);
-    ctx.lineTo(wxW - 50, wxH - 300 / 2 - 100);
-    ctx.moveTo(wxW - 50, wxH - 300 / 2 - 25);
-    ctx.lineTo(wxW - 50, wxH - 50);
+    ctx.moveTo(wxW - 70, wxH - 300 - 50);
+    ctx.lineTo(wxW - 70, wxH - 300 / 2 - 100);
+    ctx.moveTo(wxW - 70, wxH - 300 / 2 - 25);
+    ctx.lineTo(wxW - 70, wxH - 50);
 
 
     //封底
+    ctx.moveTo(0, wxH - 50)
+    ctx.lineTo(30, wxH - 50)
+
     ctx.moveTo(50, wxH - 50)
     ctx.lineTo(wxW - 50, wxH - 50)
+
+    ctx.moveTo(wxW - 50, wxH - 50)
+    ctx.lineTo(wxW, wxH - 50)
     ctx.stroke();
 
     //主机
-    ctx.drawImage("/assets/images/zhuji.png", wxW - 85, wxH - 350, 30, 30);
+    ctx.drawImage("/assets/images/zhuji.png", wxW - 105, wxH - 350, 30, 30);
 
     //树
     ctx.drawImage("/assets/images/tree.jpg", 300, wxH - 456, 66, 106);
     ctx.drawImage("/assets/images/tree3.jpg", 5, wxH - 450, 66, 106);
 
     //土壤
-    ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 350, 50, 100);
-    ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 350, 50, 100);
-    ctx.drawImage("/assets/images/soil.jpg", 0, wxH - 300 / 2 - 25, 50, 130);
-    ctx.drawImage("/assets/images/soil.jpg", wxW - 50, wxH - 300 / 2 - 25, 50, 130);
+    ctx.drawImage("/assets/images/soil.jpg", 30, wxH - 350, 40, 100);
+    ctx.drawImage("/assets/images/soil.jpg", wxW - 70, wxH - 350, 40, 100);
+    ctx.drawImage("/assets/images/soil.jpg", 30, wxH - 300 / 2 - 25, 40, 130);
+    ctx.drawImage("/assets/images/soil.jpg", wxW - 70, wxH - 300 / 2 - 25, 40, 130);
     // ctx.drawImage("/assets/images/soil.jpg", 0, wxH-50, wxW, 50);
 
     //主机箱
@@ -123,9 +129,9 @@ Page({
     ctx.setLineWidth(5);
     ctx.setLineJoin('round');
     ctx.setStrokeStyle('white');
-    ctx.moveTo(wxW - 88, wxH - 350);
-    ctx.lineTo(wxW - 88, wxH - 316);
-    ctx.lineTo(wxW - 55, wxH - 316);
+    ctx.moveTo(wxW - 108, wxH - 350);
+    ctx.lineTo(wxW - 108, wxH - 316);
+    ctx.lineTo(wxW - 75, wxH - 316);
     ctx.stroke();
 
 
@@ -170,7 +176,7 @@ Page({
     ctx.fillText('截污阀', 240, wxH - 30)
     ctx.fillText('排水阀门', 290, wxH - 30)
     ctx.fillText('水位计', 168, wxH - 334)
-    ctx.fillText('物位计', 86, wxH - 334)
+    ctx.fillText('物位计', 106, wxH - 334)
     ctx.fillText('主机', 245, wxH - 334)
 
     ctx.fillText('水位监控', 160, wxH - 300)
@@ -190,11 +196,11 @@ Page({
     ctx.setLineWidth(10);
     ctx.setLineJoin('round');
     ctx.setStrokeStyle('white');
-    ctx.moveTo(226, wxH - 100);
-    ctx.lineTo(226, wxH - 286);
-    ctx.lineTo(50, wxH - 286);
-    ctx.moveTo(155, wxH - 100);
-    ctx.lineTo(155, wxH - 286);
+    ctx.moveTo(246, wxH - 100);
+    ctx.lineTo(246, wxH - 286);
+    ctx.lineTo(70, wxH - 286);
+    ctx.moveTo(175, wxH - 100);
+    ctx.lineTo(175, wxH - 286);
     ctx.stroke();
 
     //水位计工作
@@ -209,28 +215,28 @@ Page({
     ctx.lineTo(wxW - 168, wxH - 295);
     ctx.stroke();
 
-    ctx.drawImage("/assets/images/tilan.png", 55, wxH - 270, 50, 220);
+    ctx.drawImage("/assets/images/tilan.png", 75, wxH - 270, 50, 220);
 
     //水流方向
-    ctx.drawImage("/assets/images/right.png", 10, wxH - 220, 36, 26);
-    ctx.drawImage("/assets/images/right.png", wxW - 30, wxH - 220, 36, 26);
+    ctx.drawImage("/assets/images/right.png", 30, wxH - 220, 36, 26);
+    ctx.drawImage("/assets/images/right.png", wxW - 60, wxH - 220, 36, 26);
     //水泵水流方向
     ctx.drawImage("/assets/images/upward.png", 190, wxH - 210, 22, 46);
 
     //水泵 阀门 提篮
-    ctx.drawImage("/assets/images/shuibeng.png", 110, wxH - 135, 50, 80);
-    ctx.drawImage("/assets/images/shuibeng.png", 180, wxH - 135, 50, 80);
-    ctx.drawImage("/assets/images/jiewu.png", 240, wxH - 190, 45, 135);
+    ctx.drawImage("/assets/images/shuibeng.png", 130, wxH - 135, 50, 80);
+    ctx.drawImage("/assets/images/shuibeng.png", 200, wxH - 135, 50, 80);
+    ctx.drawImage("/assets/images/jiewu.png", 260, wxH - 190, 45, 135);
 
     //测量计
-    ctx.drawImage("/assets/images/camera.png", 62, wxH - 352, 26, 26);
-    ctx.drawImage("/assets/images/survey.png", 62, wxH - 352, 26, 26);
-    ctx.drawImage("/assets/images/survey.png", 12, wxH - 253, 26, 26);
-    ctx.drawImage("/assets/images/survey.png", wxW - 30, wxH - 253, 26, 26);
+    ctx.drawImage("/assets/images/camera.png", 82, wxH - 352, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", 82, wxH - 352, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", 32, wxH - 253, 26, 26);
+    ctx.drawImage("/assets/images/survey.png", wxW - 60, wxH - 253, 26, 26);
     ctx.drawImage("/assets/images/survey.png", 200, wxH - 352, 26, 26);
 
     //右侧排水阀门
-    ctx.drawImage("/assets/images/paishui.png", wxW - 74, wxH - 274, 24, 190);
+    ctx.drawImage("/assets/images/paishui.png", wxW - 94, wxH - 274, 24, 190);
 
     //设备名称
     ctx.setFontSize(12)
@@ -288,8 +294,8 @@ Page({
     let numW2 = 222;
     let numW1 = 150;
 
-    let numl1 = 155;
-    let numl2 = 226;
+    let numl1 = 175;
+    let numl2 = 246;
     let timer1 = null;
     let timer2 = null;
     let st1 = 0;   //是否启动动画水泵1
@@ -317,9 +323,9 @@ Page({
     }
     if (st1 == 1) {
       timer1 = setInterval(() => {
-        if (numH1 === 286 && numW1 <= 50) {
+        if (numH1 === 286 && numW1 <= 70) {
           clearInterval(timer1);
-        } else if (numH1 === 286 && numW1 > 50) {
+        } else if (numH1 === 286 && numW1 > 70) {
           numW1--
         } else {
           numH1++
@@ -329,9 +335,9 @@ Page({
     }
     if (st2 == 1) {
       timer2 = setInterval(() => {
-        if (numH2 === 286 && numW2 <= 50) {
+        if (numH2 === 286 && numW2 <= 70) {
           clearInterval(timer2);
-        } else if (numH2 === 286 && numW2 > 50) {
+        } else if (numH2 === 286 && numW2 > 70) {
           numW2--
         } else {
           numH2++
@@ -399,9 +405,9 @@ Page({
       ctx.setLineWidth(1);
       ctx.setLineJoin('round');
       ctx.setStrokeStyle('black');
-      ctx.moveTo(75, wxH - 335);
-      ctx.lineTo(75, wxH - that.data.tilan);
-      ctx.drawImage("/assets/images/basket.png", 60, wxH - that.data.tilan, 30, 30);
+      ctx.moveTo(95, wxH - 335);
+      ctx.lineTo(95, wxH - that.data.tilan);
+      ctx.drawImage("/assets/images/basket.png", 80, wxH - that.data.tilan, 30, 30);
       ctx.stroke();
       ctx.closePath();
     }
@@ -426,8 +432,8 @@ Page({
     function drawpaishui(ctx, wxW, wxH) {
       ctx.beginPath(); //that.data.paishui -  154  that.data.paishui - 230
       ctx.setLineWidth(4);
-      ctx.moveTo(wxW - 61, wxH - that.data.paishui + 20);
-      ctx.lineTo(wxW - 61, wxH - that.data.paishui - 70);
+      ctx.moveTo(wxW - 82, wxH - that.data.paishui + 20);
+      ctx.lineTo(wxW - 82, wxH - that.data.paishui - 70);
       ctx.stroke();
       ctx.closePath();
     }
@@ -443,7 +449,7 @@ Page({
       ctx.fillText('1#水泵：' + that.data.socketdata.waterPump1, 66, 70)
       ctx.fillText('2#水泵：' + that.data.socketdata.waterPump2, 166, 70)
       ctx.fillText('主机：' + that.data.socketdata.hydraulicPumpMotor, 266, 70)
-      ctx.fillText('提篮格栅：' + that.data.socketdata.liftingGrid, 66, 100)
+      ctx.fillText('提篮格栅：' + that.data.socketdata.basketGrille, 66, 100)
       ctx.fillText('截污阀：' + that.data.socketdata.sluiceSluiceSwitch, 166, 100)
       ctx.fillText('排水阀门：' + that.data.socketdata.sluiceSwitch, 266, 100)
     }
@@ -454,7 +460,6 @@ Page({
     var ctx = wx.createCanvasContext('four');
     var wxH = wx.getSystemInfoSync().windowHeight;
     var wxW = wx.getSystemInfoSync().windowWidth;
-
     function water() {
       ctx.beginPath();
       const wrd = ctx.createLinearGradient(0, wxH - 300, 0, wxH - 20);
@@ -462,6 +467,9 @@ Page({
       wrd.addColorStop(0.6, '#1C86EE');
       wrd.addColorStop(1, '#0000FF');
       ctx.setFillStyle(wrd);
+      // 左右俩边河道水位
+      ctx.fillRect(0, wxH - 350, 30, 300);
+      ctx.fillRect(wxW - 30, wxH - 350, 30, 300);
       if (that.data.out == '高于'){
         if (that.data.water >= 290 || that.data.water <= 120) {
         }else{
@@ -469,9 +477,9 @@ Page({
             water: that.data.water + 1
           })
         }
-        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
-        ctx.fillRect(0, wxH - 250, 50, 75);
-        ctx.fillRect(wxW - 50, wxH - 250, 50, 75);
+        ctx.fillRect(70, wxH - that.data.water, wxW - 140, 300 + (wxH - 350 - (wxH - that.data.water)));
+        ctx.fillRect(30, wxH - 250, 50, 75);
+        ctx.fillRect(wxW - 80, wxH - 250, 50, 75);
       } else if (that.data.out == '停止'){
         if (that.data.water <= 180) {
         } else {
@@ -479,10 +487,10 @@ Page({
             water: that.data.water - 1
           })
         }
-        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
+        ctx.fillRect(70, wxH - that.data.water, wxW - 140, 300 + (wxH - 350 - (wxH - that.data.water)));
 
-        ctx.fillRect(0, wxH - that.data.water, 50, that.data.water - 180);
-        ctx.fillRect(wxW - 50, wxH - that.data.water, 50, that.data.water - 180);
+        ctx.fillRect(30, wxH - that.data.water, 50, that.data.water - 180);
+        ctx.fillRect(wxW - 80, wxH - that.data.water, 50, that.data.water - 180);
       } else if (that.data.out == '低于'){
         if (that.data.water <= 100) {
         } else {
@@ -490,11 +498,11 @@ Page({
             water: that.data.water - 1
           })
         }
-        ctx.fillRect(50, wxH - that.data.water, wxW - 100, 300 + (wxH - 350 - (wxH - that.data.water)));
+        ctx.fillRect(70, wxH - that.data.water, wxW - 140, 300 + (wxH - 350 - (wxH - that.data.water)));
 
         if (that.data.water >= 180){
-          ctx.fillRect(0, wxH - that.data.water, 50, that.data.water - 180);
-          ctx.fillRect(wxW - 50, wxH - that.data.water, 50, that.data.water - 180);
+          ctx.fillRect(30, wxH - that.data.water, 50, that.data.water - 180);
+          ctx.fillRect(wxW - 80, wxH - that.data.water, 50, that.data.water - 180);
         }
       }
       ctx.stroke();
@@ -509,7 +517,6 @@ Page({
     var wxW = wx.getSystemInfoSync().windowWidth;
     function Clock(ctx, wxH, wxW) {
       // 实时获取各个参数
-
       // 依次执行各个方法
       that.drawwater(); //水位高度
       that.drawtilan(ctx, wxH, wxW);    //tilan

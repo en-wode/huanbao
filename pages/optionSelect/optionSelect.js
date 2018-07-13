@@ -12,9 +12,13 @@ Page({
     equipname: ''
   },
   onLoad: function (options) {
+    console.log(options)
     this.setData({
       equipid: options.equipid,
       equipname: options.equipname
+    })
+    wx.setNavigationBarTitle({
+      title: options.equipname + '号设备功能选择'
     })
   },
   //事件处理函数

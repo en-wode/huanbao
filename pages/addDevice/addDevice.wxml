@@ -1,25 +1,54 @@
 <!--pages/addDevice/addDevice.wxml-->
 <import src="/dist/toptips/index.wxml" />
-
+<import src="/dist/dialog/index.wxml" />
+<import src="/dist/toast/index.wxml" />
 <view >
   <view class="zan-panel">
-    <!-- <view class="zan-cell">
-      <view class="zan-cell__bd" >用户</view>
-        <view class="zan-cell__ft" bindtap='message'>
-          <view class="demo__icon zan-badge">
-          消息
-          <view class="zan-badge__count">9</view>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" > </view>
+        <view class="zan-cell__ft">
+            <text bindtap="piliang">{{piliang}}</text>
         </view>
-      </view>
-    </view> -->
+    </view> 
   </view>
     <view class="item-box" wx:if="{{device.length > 0}}">
       <view class="items" >
-        <view  wx:for="{{device}}"  wx:for-item="item" wx:key="item.id" id = '{{item.id}}' class="item">
-          <view bindtap="detail"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}"class="inner txt" id = '{{item.id}}' data-name = '{{item.equipmentName}}'>
-          {{item.equipmentName}}号设备 <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;color:#B5B5B5'></text></view>
-          <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+        <checkbox-group bindchange="checkboxChange">
+          <view  wx:for="{{device}}"  wx:for-item="item" wx:key="item.id" id = '{{item.id}}' class="item">
+            <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}"class="inner txt" >
+              
+              <checkbox value="{{item.id}}" checked="" hidden="{{showView}}" />
+
+              <view bindtap="detail" id = '{{item.id}}' data-name = '{{item.equipmentName}}' class='list-detail' style='{{showStyle}}'>
+                  {{item.equipmentName}}号设备 <text class='weather'>{{weather[index]}}    {{item.pattern}}</text><text class='condition' style='{{item.conditionStyle}}'>{{item.isConnection}} <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;          color:#B5B5B5'></text></text>
+              </view>
+            </view>
+            <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+          </view>
+        </checkbox-group>
+      </view>
+    </view>
+    <view hidden="{{showView}}">
+      <view class='card' style='margin-bottom:8rpx' >
+        <view class='card_title'>
+          <view class="iconfont icon-dengpao" ></view>工作模式
         </view>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class='radiocheck'>
+            <view class="zan-row ">
+              <view class='zan-col zan-col-8'><radio value="0" checked=""/>自动值守</view>
+              <view class='zan-col zan-col-8'><radio value="3" checked=""/>暴雨排涝</view>
+              <view class='zan-col zan-col-8'><radio value="1" checked=""/>晴天截流</view>
+            </view> 
+            <view class='list-radio zan-row'>
+              <view class='zan-col zan-col-8'><radio value="2" checked=""/>初雨限流</view>
+              <view class='zan-col zan-col-8'><radio value="4" checked=""/>防倒灌  </view>
+            </view>
+          </label>
+        </radio-group>
+      </view>
+      <view class='detail_buttom'>
+        <button class="zan-btn my-btn" formType='submit' bindtap='save'>保存</button>
       </view>
     </view>
   <!-- <view >
@@ -43,6 +72,8 @@
       添加设备
     </view>
   </view> -->
+  <template is="zan-toast" data="{{ zanToast }}"></template>
+  <template is="zan-dialog" data="{{ zanDialog }}"></template>
   <view class='tip_title'>欢迎使用蓝翔环保管理小程序</view>
     <template is="zan-toptips" data="{{ zanTopTips }}"></template>
 </view>

@@ -1,12 +1,23 @@
 // pages/addDevice/addDevice.js
 const Zan = require('../../dist/index');
+var bmap = require('../../utils/bmap-wx.min.js');
+
 var app = getApp()
 
-Page(Object.assign({}, Zan.TopTips,{
+Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
   data: {
     device: [],
     delBtnWidth: 180,//删除按钮宽度单位（rpx）
-    userId: ''
+    userId: '',
+    showView: true,
+    showStyle: 'width: 100%',
+    work: 0,
+    piliang: '批量操作',
+    condition: '在线',
+    conditionStyle: 'color: #7CCD7C',
+    equipmentsId: [],
+    pattern: '',
+    weather: []
   },
 
   onLoad: function (options) {
@@ -16,6 +27,7 @@ Page(Object.assign({}, Zan.TopTips,{
     that.setData({
       userId: options.id
     })
+    var list = 0
     wx.getStorage({
       key: 'sessionid',
       success: function (res) {
@@ -36,14 +48,134 @@ Page(Object.assign({}, Zan.TopTips,{
                 url: '../index/index'
               })
             }
+            for (var index in result.data.result) {
+              if (result.data.result[index].addressX != null) {
+                var location = result.data.result[index].addressY + ',' + result.data.result[index].addressX
+                BMap.weather({
+                  location: location,
+                  fail: fail,
+                  success: success
+                });
+              } else {
+                that.setData({
+                  [`weather[${list}]`]: '暂无',
+                })
+                list++
+              }
+              if (result.data.result[index].isConnection == 1) {
+                result.data.result[index].isConnection = '在线'
+                result.data.result[index].conditionStyle = 'color: #7CCD7C'
+              } else {
+                result.data.result[index].conditionStyle = 'color: #858585'
+                result.data.result[index].isConnection = '离线'
+              }
+              if (result.data.result[index].pattern == '0') {
+                result.data.result[index].pattern = "自动值守"
+              } else if (result.data.result[index].pattern == '1') {
+                result.data.result[index].pattern = "晴天截流"
+              } else if (result.data.result[index].pattern == '2') {
+                result.data.result[index].pattern = "初雨限流"
+              } else if (result.data.result[index].pattern == '3') {
+                result.data.result[index].pattern = "暴雨排涝"
+              } else if (result.data.result[index].pattern == '4') {
+                result.data.result[index].pattern = "防倒灌"
+              }
+            }
             that.setData({
-              device: result.data.result
+              device: result.data.result,
             })
           }
         })
       }
     })
+    var BMap = new bmap.BMapWX({
+      ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU',
+    });
+    var fail = function (data) {
+      console.log('fail!!!!')
+    };
+    var success = function (data) {
+      var weatherData = data.originalData.results[0].weather_data;
+      weatherData[0].date = weatherData[0].date.slice(0, 2)
+      that.data.weather[list] = data.currentWeather[0].weatherDesc
+      that.setData({
+        [`weather[${list}]`]: that.data.weather[list],
+      })
+      list++
+    }
+  },
+  // 批量操作
+  checkboxChange: function (e) {
+    this.setData({
+      equipmentsId: e.detail.value
+    })
+  },
+  radioChange: function (e) {
+    this.setData({
+      pattern: e.detail.value
+    })
+  },
+  save: function () {
+    const that = this
+    that.showZanDialog({
+      title: '模式修改',
+      content: '请确认是否保存操作',
+      showCancel: true
+    }).then(() => {
+      that.setdata();
+    }).catch(() => {
+    });
     
+  },
+  setdata: function () {
+    const that = this
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: app.globalData.url + 'equipmentPort/changePatternOfEquipments',
+      method: 'POST',
+      header: header,
+      data: {
+        userId: wx.getStorageSync('userId'),
+        equipmentsId: that.data.equipmentsId,
+        pattern: that.data.pattern
+      },
+      success: function (result) {
+        if (result.data.code == 0 && result.data.msg == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        } else if (result.data.code == 1) {
+          that.showZanToast('保存成功');
+        } else {
+          that.showZanToast(result.data.msg);
+        }
+      }
+    })
+  },
+  // 批量操作end
+  piliang: function () {
+    const that = this
+    var txtStyle
+    if (that.data.showView) {
+      txtStyle = "width: 90%";
+      that.data.piliang = '取消'
+    } else {
+      that.data.piliang = '批量操作'
+      txtStyle = "width: 100%";
+    }
+    that.setData({
+      showView: !that.data.showView,
+      showStyle: txtStyle,
+      piliang: that.data.piliang
+    })
+  },
+  model: function (e) {
+    this.setData({
+      work: e.currentTarget.id,
+    })
   },
   touchS: function (e) {
 

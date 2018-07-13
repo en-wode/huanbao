@@ -6,7 +6,9 @@
       is="zan-tab"
       data="{{ ...tab1, componentId: 'tab1' }}"></template>
   </view>
-  <canvas class="canvas" canvas-id="lineGraph"></canvas>
+      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+
+  <!-- <canvas class="canvas" canvas-id="lineGraph"></canvas> -->
   <view class="section">  
     <picker mode="date" value="{{date}}" start="2018-01-01" end="{{endDate}}" bindchange="bindDateChange">  
       <view class="zan-cell">
