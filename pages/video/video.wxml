@@ -1,4 +1,4 @@
 <!--pages/video/video.wxml-->
 <view>
-  <live-player src="{{videosrc}}" mode="live" autoplay="true" orientation='vertical' object-fit='contain' class='video' />
+  <live-player src="{{videosrc}}" mode="live" autoplay="true" orientation='horizontal'  class='video' class='bili' />
 </view>

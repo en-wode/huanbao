@@ -35,7 +35,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         value: ''
       },
       stopWaterLevel1: {
-        title: '1#水泵停止水位',
+        title: '1#水泵停泵水位',
         inputType: 'text',
         placeholder: '请输入数值',
         componentId: 'stopWaterLevel1',
@@ -43,35 +43,35 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         value: ''
       },
       startWaterLevel1: {
-        title: '1#水泵开启水位',
+        title: '1#水泵启泵水位',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'startWaterLevel1',
         value: ''
       },
       stopWaterLevel2: {
-        title: '2#水泵停止水位',
+        title: '2#水泵停泵水位',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'stopWaterLevel2',
         value: ''
       },
       startWaterLevel2: {
-        title: '2#水泵开启水位',
+        title: '2#水泵启泵水位',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'startWaterLevel2',
         value: ''
       },
       stopWaterLevel3: {
-        title: '3#水泵停止水位',
+        title: '3#水泵停泵水位',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'stopWaterLevel2',
         value: '0'
       },
       startWaterLevel3: {
-        title: '3#水泵开启水位',
+        title: '3#水泵启泵水位',
         placeholder: '请输入数值',
         inputType: 'text',
         componentId: 'startWaterLevel2',
@@ -93,6 +93,11 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       }
     },
     value: '23',
+    cdisabled: true,
+    bianji: '编辑',
+    change: '模式切换',
+    con: 'background:#7A7A7A',
+    inputstyle: '',
     work: 0,
     controls: [
       {
@@ -119,9 +124,44 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     })
     that.getdata();
   },
-  model: function (e) {
+  // 是否编辑
+  change: function () {
     this.setData({
+      cdisabled: !this.data.cdisabled,
+      bianji: this.data.cdisabled ? '取消' : '编辑',
+      change: this.data.cdisabled ? '参数修改' :'模式切换',
+      con: this.data.cdisabled ? 'background:red' : 'background:#7A7A7A',
+      inputstyle: this.data.cdisabled ? 'border-bottom:1px solid #ccc' : ''
+    })
+  },
+  model: function (e) {
+    const that = this;
+    
+    that.setData({
       work: e.currentTarget.id,
+    })
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    console.log(that.data.equipid)
+    wx.request({
+      url: app.globalData.url + 'equipmentPort/viewPatternData',
+      method: 'GET',
+      header: header,
+      data: {
+        equipmentId: that.data.equipid,
+        pattern: e.currentTarget.id
+      },
+      success: function (result) {
+        if (result.data.code == 0 && result.data.msg == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }else {
+          console.log(result)
+        }
+      }
     })
   },
   // toggleBaseDialog() {
@@ -137,7 +177,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
   // },
   handleZanFieldChange: function (e) {
     const that = this
-    console.log(e);
   },
   garbagechange: function (value) {
     const that = this
@@ -158,54 +197,63 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
     });
   },
   addCount: function (event) {
-    const that = this;
-    let compontId = event.currentTarget.dataset.id
-    let controls = that.data.controls[compontId];
-    switch (parseInt(compontId)) {
-      case 0:
-        if (that.data.base.drainageOverflowHeight >= controls.max) {
-          return
-        } else {
-          that.setData({
-            [`base.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight + 5,
-          });
-        }
-        break
-      case 1:
-        if (that.data.base.InterceptingLimitflowHeight >= controls.max) {
-          return
-        } else {
-          that.setData({
-            [`base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight + 5,
-          });
-        }
-        break
+    if (this.data.cdisabled) {
+      return
+    } else {
+      const that = this;
+      let compontId = event.currentTarget.dataset.id
+      let controls = that.data.controls[compontId];
+      switch (parseInt(compontId)) {
+        case 0:
+          if (that.data.base.drainageOverflowHeight >= controls.max) {
+            return
+          } else {
+            that.setData({
+              [`base.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight + 5,
+            });
+          }
+          break
+        case 1:
+          if (that.data.base.InterceptingLimitflowHeight >= controls.max) {
+            return
+          } else {
+            that.setData({
+              [`base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight + 5,
+            });
+          }
+          break
+      }
     }
   },
   minusCount: function (event) {
-    const that = this;
-    let compontId = event.currentTarget.dataset.id
-    let controls = that.data.controls[compontId];
-    switch (parseInt(compontId)) {
-      case 0:
-        if (that.data.base.drainageOverflowHeight <= controls.min) {
-          return
-        } else {
-          that.setData({
-            [`base.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight - 5,
-          });
-        }
-        break
-      case 1:
-        if (that.data.base.InterceptingLimitflowHeight <= controls.min) {
-          return
-        } else {
-          that.setData({
-            [`base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight - 5,
-          });
-        }
-        break
+    if (this.data.cdisabled) {
+      return
+    } else {
+      const that = this;
+      let compontId = event.currentTarget.dataset.id
+      let controls = that.data.controls[compontId];
+      switch (parseInt(compontId)) {
+        case 0:
+          if (that.data.base.drainageOverflowHeight <= controls.min) {
+            return
+          } else {
+            that.setData({
+              [`base.drainageOverflowHeight`]: that.data.base.drainageOverflowHeight - 5,
+            });
+          }
+          break
+        case 1:
+          if (that.data.base.InterceptingLimitflowHeight <= controls.min) {
+            return
+          } else {
+            that.setData({
+              [`base.InterceptingLimitflowHeight`]: that.data.base.InterceptingLimitflowHeight - 5,
+            });
+          }
+          break
+      }
     }
+    
   },
   drainagechange: function (value) {
     const that = this
@@ -227,23 +275,54 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`device.stopWaterLevel2`]: that.setcountxs(event.detail.value.stopWaterLevel2, that.data.devices.bottomHoleHeight),
       [`device.vigilance`]: that.setcountxs(event.detail.value.vigilance, that.data.devices.bottomHoleHeight),
       [`device.seaLevel`]: that.setcountxs(event.detail.value.seaLevel, that.data.devices.bottomHoleHeight),
-      [`device.cod`]: that.signFigures(event.detail.value.cod * 100),
-      [`device.ss`]: that.signFigures(event.detail.value.ss * 100),
+      [`device.cod`]: that.signFigures(event.detail.value.cod),
+      [`device.ss`]: that.signFigures(event.detail.value.ss),
     })
     for (const key in this.data.device){
       if (this.data.device[key]===''){
         this.data.device[key] = null;  
       }
     }
-    
     that.showZanDialog({
-      title: '参数修改',
+      title: that.data.change,
       content: '请确认是否保存操作',
       showCancel: true
     }).then(() => {
-      that.setdata();
+      if (that.data.cdisabled) {
+        that.switchmodel();
+      } else {
+        that.setdata();
+      }
     }).catch(() => {
     });
+  },
+  switchmodel: function () {
+    const that = this;
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: app.globalData.url + 'equipmentPort/switchPattern',
+      method: 'POST',
+      header: header,
+      data: {
+        userId: wx.getStorageSync('userId'),
+        equipmentId: that.data.device.equipmentId,
+        pattern: that.data.device.pattern
+      },
+      success: function (result) {
+        if (result.data.code == 0 && result.data.msg == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        } else if (result.data.code == 1) {
+          that.showZanToast('模式切换成功');
+        } else {
+          that.showZanToast(result.data.msg);
+        }
+      }
+    })
   },
   setdata: function () {
     const that = this;
@@ -251,27 +330,31 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.device)
-    wx.request({
-      url: app.globalData.url + 'equipmentPort/addEquipmentPort',
-      method: 'POST',
-      header: header,
-      data: {
-        userId: wx.getStorageSync('userId'),
-        device: that.data.device
-      },
-      success: function (result) {
-        if (result.data.code == 0 && result.data.msg == 2000){
-          wx.navigateTo({
-            url: '../index/index'
-          })
-        }else if (result.data.code == 1) {
-          that.showZanToast('保存成功');
-        } else {
-          that.showZanToast(result.data.msg);
+    
+    if (that.data.device.pattern == 0){
+      that.showZanToast('自动值守无法修改参数');
+    }else{
+      wx.request({
+        url: app.globalData.url + 'equipmentPort/addEquipmentPort',
+        method: 'POST',
+        header: header,
+        data: {
+          userId: wx.getStorageSync('userId'),
+          device: that.data.device
+        },
+        success: function (result) {
+          if (result.data.code == 0 && result.data.msg == 2000) {
+            wx.navigateTo({
+              url: '../index/index'
+            })
+          } else if (result.data.code == 1) {
+            that.showZanToast('参数修改成功');
+          } else {
+            that.showZanToast(result.data.msg);
+          }
         }
-      }
-    })
+      })
+    }
   },
   getdata: function () {
     const that = this;

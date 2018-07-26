@@ -9,7 +9,8 @@
       <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
 
   <!-- <canvas class="canvas" canvas-id="lineGraph"></canvas> -->
-  <view class="section">  
+  <view wx:if="{{showtp}}" class='tips'>{{tips}}</view>
+  <view class="section" wx:if="{{index == 1}}">  
     <picker mode="date" value="{{date}}" start="2018-01-01" end="{{endDate}}" bindchange="bindDateChange">  
       <view class="zan-cell">
         <view class="zan-cell__bd" >日期选择:</view>

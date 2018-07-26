@@ -97,7 +97,7 @@ page{
 .section_gap{
   width: 85%;
   margin: 0 auto;
-  padding: 24rpx;
+  padding: 8rpx;
 }
 .detail_buttom{
   padding: 40rpx;
@@ -143,4 +143,20 @@ slider{
 }
 .zan-field__title{
   min-width: 480rpx
+}
+.bianji{
+  background: #039cfc;
+  color: whitesmoke;
+  padding: 6rpx 14rpx;
+  border-radius: 4rpx
+}
+.zan-field{
+  padding: 2px 15px;
+}
+.tip{
+  background:white;
+  font-size: 24rpx;
+  color: #ccc;
+  padding-bottom: 10px;
+  text-align: center
 }

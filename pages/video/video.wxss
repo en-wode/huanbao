@@ -3,3 +3,7 @@
   width: 100vh;
   height: 100vh;
 }
+.bili{
+  width: 58vh;
+  height: 100vh;
+}

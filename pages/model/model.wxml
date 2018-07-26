@@ -4,11 +4,19 @@
 <import src="/dist/select/index.wxml" />
 <import src="/dist/field/index.wxml" />
 <view >
-  <view class='card'>
+ <view class='card'>
     <view class="zan-cell  ">
       <view class="zan-cell__bd" >井底标高：  {{(devices.bottomHoleHeight-10000)/100}}米</view>
       <view class="zan-cell__ft">
         取小数点后俩位有效数字
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class="zan-cell  ">
+      <view class="zan-cell__bd" >参数设置</view>
+      <view class="zan-cell__ft bianji" bindtap='change'>
+        {{bianji}}
       </view>
     </view>
   </view>
@@ -22,16 +30,17 @@
       </view>
       <view class="section section_gap">
         <view class="body-view">
-        <text class="s-con" data-id="0" bindtap="minusCount">-</text>
+        <text class="s-con" data-id="0" bindtap="minusCount" style='{{con}}'>-</text>
           <slider 
             max="{{controls[0].max}}"
             min='{{controls[0].min}}'
             step="5"
             bindchange="drainageOverflowHeight" 
             value='{{base.drainageOverflowHeight}}'
+            disabled='{{cdisabled}}'
             show-value
           />
-          <text class="s-con" data-id="0" bindtap="addCount">＋</text>
+          <text class="s-con" data-id="0" bindtap="addCount" style='{{con}}'>＋</text>
         </view>
       </view>
     </view>
@@ -45,35 +54,36 @@
       </view>
       <view class="section section_gap">
         <view class="body-view">
-        <text class="s-con" data-id="1" bindtap="minusCount">-</text>
+        <text class="s-con" data-id="1" bindtap="minusCount" style='{{con}}'>-</text>
           <slider 
             max="{{controls[1].max}}"
             min='{{controls[1].min}}'
             step="5"
             bindchange="InterceptingLimitflowHeight" 
             value='{{base.InterceptingLimitflowHeight}}'
+            disabled='{{cdisabled}}'
             show-value
           />
-          <text class="s-con" data-id="1" bindtap="addCount">＋</text>
+          <text class="s-con" data-id="1" bindtap="addCount" style='{{con}}'>＋</text>
         </view>
       </view>
     </view>
     <!-- //雨量计 -->
     <view class='card'>
-        <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge}}"></template>
+        <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
 
     <!-- //晴转雨时间 -->
     <view class='card'>
-        <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' , value: devices.sunnyToRain}}"></template>
+        <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' , value: devices.sunnyToRain, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
     <!-- //警戒水位 -->
     <view class='card'>
-        <template is="zan-field" data="{{  ...base.vigilance, componentId: 'vigilance' , value: devices.vigilance}}"></template>
+        <template is="zan-field" data="{{  ...base.vigilance, componentId: 'vigilance' , value: devices.vigilance, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
     <!-- //闸门雨水位要求高度差 -->
     <view class='card'>
-        <template is="zan-field" data="{{  ...base.seaLevel, componentId: 'seaLevel' , value: devices.seaLevel}}"></template>
+        <template is="zan-field" data="{{  ...base.seaLevel, componentId: 'seaLevel' , value: devices.seaLevel, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
     <view class='card'>
       <view class='card_title'>
@@ -84,9 +94,9 @@
       </view>
       <view class="body-view">
           <!-- //1#水泵停止水位 -->
-          <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1', value: devices.stopWaterLevel1 }}"></template>
+          <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1', value: devices.stopWaterLevel1, disabled: cdisabled ,style: inputstyle}}"></template>
         <!-- //1#水泵开启水位 -->
-          <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1}}"></template>
+          <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1, disabled: cdisabled,style: inputstyle}}"></template>
       </view>
     </view>
     <view class='card'>
@@ -98,9 +108,9 @@
       </view>
       <view class="body-view">
           <!-- //2#水泵停止水位 -->
-          <template is="zan-field" data="{{  ...base.stopWaterLevel2, componentId: 'stopWaterLevel2' , value: devices.stopWaterLevel2 }}"></template>
+          <template is="zan-field" data="{{  ...base.stopWaterLevel2, componentId: 'stopWaterLevel2' , value: devices.stopWaterLevel2 , disabled: cdisabled,style: inputstyle}}"></template>
         <!-- //2#水泵开启水位 -->
-          <template is="zan-field" data="{{  ...base.startWaterLevel2, componentId: 'startWaterLevel2', value: devices.startWaterLevel2 }}"></template>
+          <template is="zan-field" data="{{  ...base.startWaterLevel2, componentId: 'startWaterLevel2', value: devices.startWaterLevel2, disabled: cdisabled ,style: inputstyle}}"></template>
       </view>
     </view>
   <view class='card' style='display: none'>
@@ -112,9 +122,9 @@
       </view>
       <view class="body-view">
           <!-- //3#水泵停止水位 -->
-          <template is="zan-field" data="{{  ...base.stopWaterLevel3, componentId: 'stopWaterLevel3' }}"></template>
+          <template is="zan-field" data="{{  ...base.stopWaterLevel3, componentId: 'stopWaterLevel3', disabled: cdisabled ,style: inputstyle}}"></template>
         <!-- //3#水泵开启水位 -->
-          <template is="zan-field" data="{{  ...base.startWaterLevel3, componentId: 'startWaterLevel3' }}"></template>
+          <template is="zan-field" data="{{  ...base.startWaterLevel3, componentId: 'startWaterLevel3', disabled: cdisabled ,style: inputstyle}}"></template>
       </view>
     </view>
     <view class='card'>
@@ -125,8 +135,8 @@
         </view>
       </view>
       <view class="body-view">
-        <template is="zan-field" data="{{  ...base.COD, componentId: 'cod', value: devices.cod }}"></template>
-        <template is="zan-field" data="{{  ...base.SS, componentId: 'ss', value: devices.ss}}"></template>
+        <template is="zan-field" data="{{  ...base.COD, componentId: 'cod', value: devices.cod , disabled: cdisabled,style: inputstyle}}"></template>
+        <template is="zan-field" data="{{  ...base.SS, componentId: 'ss', value: devices.ss, disabled: cdisabled,style: inputstyle}}"></template>
       </view>
     </view>
     <view class='card' style='margin-bottom:8rpx'>
@@ -158,6 +168,9 @@
     </view>
     <view class='detail_buttom'>
       <button class="zan-btn my-btn" formType='submit'>保存</button>
+    </view>
+    <view class='tip'>
+      编辑状态下保存仅修改模式参数，否则将切换工作模式
     </view>
   </form>
   <template is="zan-dialog" data="{{ zanDialog }}"></template>

@@ -24,7 +24,7 @@
       disabled="{{ disabled }}"
       focus="{{ focus }}"
       value="{{ value }}"
-
+      style='{{ style }}'
       placeholder="{{ placeholder }}"
       class="zan-field__input zan-cell__bd {{ right ? 'zan-field__input--right' : '' }}"
       placeholder-class="zan-field__placeholder"

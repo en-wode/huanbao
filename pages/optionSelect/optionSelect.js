@@ -12,7 +12,6 @@ Page({
     equipname: ''
   },
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       equipid: options.equipid,
       equipname: options.equipname

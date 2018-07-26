@@ -20,14 +20,6 @@
       </view>
   </view>
   </view>
-  <view class='card'>
-    <view class="zan-cell  ">
-      <view class="zan-cell__bd" >井底标高：  {{(data.bottomHoleHeight-10000)/100}}米</view>
-      <view class="zan-cell__ft">
-        取小数点后俩位有效数字
-      </view>
-    </view>
-  </view>
   <view class='card_num'>
    <view class="zan-row">
       <view class="zan-col zan-col-11 ">
@@ -78,7 +70,7 @@
             <wxc-progress percent="{{data.sluiceOpeningDegree/data.sewerageSluice*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
           </view>
           <view class="zan-col zan-col-4 procolor">
-            {{data.sluiceOpeningDegree/data.sewerageSluice*100}}%
+            {{paishui}}%
           </view>
         </view>
       </view>
@@ -96,7 +88,7 @@
             <wxc-progress percent="{{data.sluiceSluiceOpeningDegree/data.sluiceHeight*100}}" active-color="#33ccff,#3399ff"></wxc-progress>
           </view>
           <view class="zan-col zan-col-4 procolor">
-            {{data.sluiceSluiceOpeningDegree/data.sluiceHeight*100}}%
+            {{jiewu}}%
           </view>
         </view>
       </view>

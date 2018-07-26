@@ -28,6 +28,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
       userId: options.id
     })
     var list = 0
+    console.log(1)
     wx.getStorage({
       key: 'sessionid',
       success: function (res) {
@@ -43,25 +44,45 @@ Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
             userId: options.id
           },
           success: function (result) {
+            console.log(result)
             if (result.data.code == 0 && result.data.msg == 2000) {
               wx.navigateTo({
                 url: '../index/index'
               })
             }
-            for (var index in result.data.result) {
-              if (result.data.result[index].addressX != null) {
-                var location = result.data.result[index].addressY + ',' + result.data.result[index].addressX
-                BMap.weather({
-                  location: location,
-                  fail: fail,
-                  success: success
-                });
+            var success = function (data) {
+              var weatherData = data.originalData.results[0].weather_data;
+              weatherData[0].date = weatherData[0].date.slice(0, 2)
+              that.data.weather[list] = data.currentWeather[0].weatherDesc
+              that.setData({
+                [`weather[${list}]`]: that.data.weather[list],
+              })
+              list++
+              weather()
+            }
+            weather()
+            function weather(){
+              if (list >= result.data.result.length){
+                return
               } else {
-                that.setData({
-                  [`weather[${list}]`]: '暂无',
-                })
-                list++
+                if (result.data.result[list].addressX != null) {
+                  var location = result.data.result[list].addressY + ',' + result.data.result[list].addressX
+                  BMap.weather({
+                    location: location,
+                    fail: fail,
+                    success: success
+                  });
+                } else {
+                  that.setData({
+                    [`weather[${list}]`]: '暂无',
+                  })
+                  list++
+                  weather()
+                }
               }
+            }
+            for (var index in result.data.result) {
+              
               if (result.data.result[index].isConnection == 1) {
                 result.data.result[index].isConnection = '在线'
                 result.data.result[index].conditionStyle = 'color: #7CCD7C'
@@ -94,15 +115,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
     var fail = function (data) {
       console.log('fail!!!!')
     };
-    var success = function (data) {
-      var weatherData = data.originalData.results[0].weather_data;
-      weatherData[0].date = weatherData[0].date.slice(0, 2)
-      that.data.weather[list] = data.currentWeather[0].weatherDesc
-      that.setData({
-        [`weather[${list}]`]: that.data.weather[list],
-      })
-      list++
-    }
+    
   },
   // 批量操作
   checkboxChange: function (e) {

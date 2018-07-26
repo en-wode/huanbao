@@ -69,19 +69,16 @@ Page(Object.assign({}, Zan.Field,{
 
   },
   handleZanFieldChange : function(event){
-    console.log(event)
     this.setData({
       [`${event.currentTarget.dataset.componentId}`]: event.detail.value
     })
   },
   bindPickertype: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       typeindex: e.detail.value
     })
   },
   bindPickerlevel: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       levelindex: e.detail.value
     })
@@ -117,7 +114,6 @@ Page(Object.assign({}, Zan.Field,{
     }
   }
   , markertap(e) {
-    console.log(e)
   },
   getlocat: function () {
     const that = this;
@@ -228,11 +224,9 @@ Page(Object.assign({}, Zan.Field,{
             url: '../index/index'
           })
         }
-        console.log(result.data.result.map(v => v.type))
         that.setData({
           questiontype: result.data.result.map(v => v.type)
         })
-        console.log(result)
       }
     })
     wx.request({
@@ -243,7 +237,6 @@ Page(Object.assign({}, Zan.Field,{
         that.setData({
           questionlevel: result.data.result.map(v => v.type)
         })
-        console.log(result)
       }
     })
   },
@@ -253,10 +246,6 @@ Page(Object.assign({}, Zan.Field,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.question)
-    console.log(that.data.tel)
-    console.log(that.data.typeindex+1)
-    console.log(that.data.levelindex+1)
     wx.request({
       url: app.globalData.url + 'equipmentMaintenance/addQuestion',
       method: 'POST',

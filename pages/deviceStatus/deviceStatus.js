@@ -20,8 +20,10 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       tingdian: '',
       fuqiu: '',
       shebmen: '',
-      workstatus: ''
+      workstatus: '',
     },
+    paishui: 0,
+    jiewu: 0,
     tab1: {
       list: [{
         id: 'shuju',
@@ -46,25 +48,52 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     wx.setNavigationBarTitle({
       title: options.equipname + '号设备实况'
     })
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: app.globalData.url + 'equipment/getById',
+      method: 'GET',
+      header: header,
+      data: {
+        equipmentId: that.data.id
+      },
+      success: function (result) {
+        if (result.data.msg == 2000 && result.data.code == 0) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        }
+        if (!result.data.result.addressX || !result.data.result.addressY) {
+          BMap.weather({
+            fail: fail,
+            success: success
+          });
+        } else {
+          var location = result.data.result.addressY + ',' + result.data.result.addressX
+          BMap.weather({
+            location: location,
+            fail: fail,
+            success: success
+          });
+        }
+      }
+    });
     var BMap = new bmap.BMapWX({
       ak: 'Kt4HeTotWl6bEOTK5aQv7ZhjdxWGuBQU'
     });
     var fail = function (data) {
-      console.log('fail!!!!')
+      console.log(data)
     };
     var success = function (data) {
       var weatherData = data.originalData.results[0].weather_data;
-      // weatherData = '城市：' + weatherData.currentCity + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n';
-      // var weather = data.originalData;
       weatherData[0].date = weatherData[0].date.slice(0,2)
       that.setData({
         weatherData: weatherData,
       });
     }
-    BMap.weather({
-      fail: fail,
-      success: success
-    });
+    
 
     app.socket().open();
     app.socket().on('connect', function () {
@@ -76,7 +105,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     // let name = 'res22' + options.equipid
     let name = 'online';
       app.socket().on(name, d => {
-        console.log(d)
+        console.log(d);
         if (d.equipmentId != that.data.id ) {
           return
         } else {
@@ -151,6 +180,10 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
               [`weiyu.fuqiu`]: '非上下限'
             })
           }
+          that.setData({
+            paishui: (d.sluiceOpeningDegree / d.sewerageSluice * 100).toFixed(2),
+            jiewu: (d.sluiceSluiceOpeningDegree / d.sluiceHeight * 100).toFixed(2)
+          })
           if (d.waterLevelOfSewagePipe === '???') {
             d.waterLevelOfSewagePipe = '未检测'
           }
@@ -225,7 +258,8 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       header: header,
       data: {
         userId: wx.getStorageSync('userId'),
-        equipmentId: that.data.id
+        equipmentId: that.data.id,
+        where: targetid
       },
       success: function (result) {
         if (result.data.code == 2000) {
