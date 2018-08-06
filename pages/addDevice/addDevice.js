@@ -99,6 +99,8 @@ Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
                   result.data.result[index].pattern = "自动值守(暴雨排涝)"
                 } else if (result.data.result[index].nowPattern == 4) {
                   result.data.result[index].pattern = "自动值守(防倒灌)"
+                } else {
+                  result.data.result[index].pattern = "自动值守"
                 }
               } else if (result.data.result[index].pattern == '1') {
                 result.data.result[index].pattern = "晴天截流"

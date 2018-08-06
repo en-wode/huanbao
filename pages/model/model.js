@@ -145,34 +145,34 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
     console.log(that.data.equipid)
-    wx.request({
-      url: app.globalData.url + 'equipmentPort/viewPatternData',
-      method: 'GET',
-      header: header,
-      data: {
-        equipmentId: that.data.equipid,
-        pattern: e.currentTarget.id
-      },
-      success: function (result) {
-        if (result.data.code == 0 && result.data.msg == 2000) {
-          wx.navigateTo({
-            url: '../index/index'
-          })
-        } else if (result.data.code == 0){
-          that.setData({
-            devices: [],
-          })
-        } else {
-          that.setData({
-            devices: result.data.result,
-            [`base.drainageOverflowHeight`]: result.data.result.drainageOverflowHeight,
-            [`base.InterceptingLimitflowHeight`]: result.data.result.InterceptingLimitflowHeight,
-            [`controls[0].max`]: result.data.result.sewerageSluice,
-            [`controls[1].max`]: result.data.result.sluiceHeight,
-          })
-        }
-      }
-    })
+    // wx.request({
+    //   url: app.globalData.url + 'equipmentPort/viewPatternData',
+    //   method: 'GET',
+    //   header: header,
+    //   data: {
+    //     equipmentId: that.data.equipid,
+    //     pattern: e.currentTarget.id
+    //   },
+    //   success: function (result) {
+    //     if (result.data.code == 0 && result.data.msg == 2000) {
+    //       wx.navigateTo({
+    //         url: '../index/index'
+    //       })
+    //     } else if (result.data.code == 0){
+    //       that.setData({
+    //         devices: [],
+    //       })
+    //     } else {
+    //       that.setData({
+    //         devices: result.data.result,
+    //         [`base.drainageOverflowHeight`]: result.data.result.drainageOverflowHeight,
+    //         [`base.InterceptingLimitflowHeight`]: result.data.result.InterceptingLimitflowHeight,
+    //         [`controls[0].max`]: result.data.result.sewerageSluice,
+    //         [`controls[1].max`]: result.data.result.sluiceHeight,
+    //       })
+    //     }
+    //   }
+    // })
   },
   // toggleBaseDialog() {
   //   const that = this;
