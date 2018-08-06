@@ -1,0 +1,19 @@
+
+<!--pages/simulation/simulation.wxml-->
+<view class='wrap'>
+    <!-- <view><text>sass</text></view> -->
+    <!-- 基础布局 -->
+     <canvas canvas-id='two' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:1"></canvas> 
+
+    <!-- 水动画 -->
+     <canvas canvas-id='four' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:2"></canvas> 
+
+    <!-- 水下设备及说明 -->
+     <canvas canvas-id='five' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:3"></canvas> 
+
+    <!-- 云及提篮 排水阀动画 -->
+     <canvas canvas-id='first' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:4"></canvas> 
+
+    <!--  水泵  -->
+     <canvas canvas-id='three' style="width: 100vw; height: 100vh;position:absolute;top:0;left:0;z-index:5"></canvas> 
+</view>

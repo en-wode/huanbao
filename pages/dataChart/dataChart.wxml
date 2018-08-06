@@ -1,0 +1,47 @@
+<!--pages/dataChart/dataChart.wxml-->
+<import src="../../dist/tab/index.wxml" />
+<view>
+  <view >
+    <template
+      is="zan-tab"
+      data="{{ ...tab1, componentId: 'tab1' }}"></template>
+  </view>
+      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+
+  <!-- <canvas class="canvas" canvas-id="lineGraph"></canvas> -->
+  <view wx:if="{{showtp}}" class='tips'>{{tips}}</view>
+  <view class="section" wx:if="{{index == 1}}">  
+    <picker mode="date" value="{{date}}" start="2018-01-01" end="{{endDate}}" bindchange="bindDateChange">  
+      <view class="zan-cell">
+        <view class="zan-cell__bd" >日期选择:</view>
+          <view class="zan-cell__ft" bindtap='message'>
+            <view class="demo__icon zan-badge">
+            {{dates}} 
+            </view>
+        </view>
+      </view>
+      <!-- <view class="picker">  
+        日期:  
+      </view>   -->
+    </picker>  
+  </view>  
+  <!-- <view class='contain'>
+    <view class='title'>流量记录</view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-12">
+          最高：16.8 m³/h
+        </view>
+        <view class="zan-col zan-col-12">
+          最低：16.8 m³/h
+        </view>
+      </view>
+    <view class="zan-row">
+      <view class="zan-col zan-col-12">
+        平均: 8 m³/h
+      </view>
+      <view class="zan-col zan-col-12">
+        瞬时: 8 m³/h
+      </view>
+    </view>
+  </view> -->
+</view>

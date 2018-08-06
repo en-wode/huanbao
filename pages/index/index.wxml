@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<import src="../../dist/field/index.wxml" />
+<view class="container">
+  <view class="userinfo">
+    <text class="user-motto" >{{motto}}</text>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="zan-panel">
+        <template
+          is="zan-field"
+          data="{{ ...base.name, value: usname}}"></template>
+        <template
+          is="zan-field"
+          data="{{ ...base.password, value: uspassword}}"></template>
+      </view>
+      <text class='tips' >{{message}}</text>
+      <text class='editpassword' bindtap='editpassword'>修改密码</text>
+       <button
+          class="zan-btn"
+          formType="submit">登录</button>
+      </form>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto tip" >{{tip}}</text>
+  </view>
+</view>

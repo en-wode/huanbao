@@ -1,0 +1,37 @@
+/* pages/dataChart/dataChart.wxss */
+.canvas {
+  width: 100%;
+  height: 400rpx;
+   margin: 40rpx 0 40rpx 0; 
+}
+.zan-tab__bd{
+  box-shadow:0rpx 2rpx 18rpx 4rpx #ccc;
+}
+.contain{
+  width: 88%;
+  margin: 0 auto;
+  margin-top: 166rpx;
+  font-family: Helvetica Neue,Helvetica,Roboto,Segoe UI,Arial,sans-serif;
+}
+.title {
+  font-size: 38rpx;
+  color: #8F8F8F;
+  text-align: center;
+  border-bottom: 4rpx solid #8F8F8F;
+  line-height: 70rpx;
+}
+.zan-row{
+  width: 90%;
+  margin: 0 auto
+}
+.zan-col{
+  color: #babecd;
+  padding: 24rpx 0;
+  font-size: 34rpx;
+}
+.tips{
+  font-size:28rpx;
+  text-align:center;
+  color:#B5B5B5;
+}
+

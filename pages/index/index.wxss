@@ -1,0 +1,67 @@
+/**index.wxss**/
+page{
+  background: linear-gradient(#518cf6, #045193);
+}
+.userinfo {
+  width: 86%;
+  margin: 28rpx auto
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+
+.usermotto {
+  margin-top: 160rpx;
+  color: #fff;
+}
+
+.user-motto{
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 48rpx
+}
+.tip{
+  color: 	#CDC9C9;
+  font-size: 12px
+}
+.zan-panel{
+  background: none;
+  color: white;
+  margin-top: 148rpx;
+}
+.zan-field__title{
+  color: white
+}
+.zan-field__placeholder{
+  color: #B8B8B8
+}
+.zan-cell__bd{
+  color: white;
+}
+.zan-btn{
+  margin-top: 128rpx;
+  color: #63B8FF;
+  background: #FCFCFC;
+  border-radius: 45px
+}
+.editpassword{
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  float: right;
+  color: #DCDCDC;
+}
+.tips{
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  float: left;
+  color: red 
+}

@@ -1,0 +1,70 @@
+/* pages/deviceLink/deviceLink.wxss */
+page{
+  background:white;
+}
+.link_top{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+.link_bottom{
+  height: 100%;
+  color: #999;
+  background: #f3f3f3;
+  padding-top: 28rpx
+}
+.link_image{
+  width: 150rpx;
+  height: 150rpx;
+}
+.link_name{
+  font-size: 32rpx;
+
+}
+.section{
+  margin: 4rpx 0;
+  background: white;
+}
+.link_tip{
+  font-size: 12px;
+  line-height:1;
+  color:#999;
+  padding:6px 15px;
+  background: white;
+}
+.tijiao{
+  margin-top:3px;
+
+}
+.code{
+  float: right
+}
+/** wxss **/
+/** 修改button默认的点击态样式类**/
+.button-hover {
+  background-color: red;
+}
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: blue;
+}
+.marginview{
+  height: 2.6rem;
+  padding: 0 15px;
+  color:#00b7ee;
+  background: white;
+  border-bottom: 1px solid #dddddc;
+}
+.link_button{
+  padding: 80rpx 20px 0 20px;
+  background:white;
+}
+.tips{
+  color: red;
+  font-size: 28rpx;
+  background:white;
+  padding:18rpx 0 0 18rpx;
+}

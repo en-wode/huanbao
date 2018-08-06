@@ -1,0 +1,177 @@
+/**app.wxss**/
+@import 'index.wxss';
+
+@font-face {
+  font-family: 'iconfont';  /* project id 624563 */
+  src: url('//at.alicdn.com/t/font_624563_rmhuwt0f49ara4i.eot');
+  src: url('//at.alicdn.com/t/font_624563_rmhuwt0f49ara4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_624563_rmhuwt0f49ara4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_624563_rmhuwt0f49ara4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_624563_rmhuwt0f49ara4i.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-unie65b:before { content: "\e6b4"; }
+
+.icon-shidu:before { content: "\e60f"; }
+
+.icon-wifi:before { content: "\e659"; }
+
+.icon-shuibeng1:before { content: "\e630"; }
+
+.icon-famen01:before { content: "\e63d"; }
+
+.icon-ren:before { content: "\e619"; }
+
+.icon-jiantouarrow506:before { content: "\e6b5"; }
+
+.icon-jiankangfengxianyufang:before { content: "\e67e"; }
+
+.icon-jiantoushangsheng:before { content: "\e7f1"; }
+
+.icon-jiantouxiajiang:before { content: "\e7f2"; }
+
+.icon-zidong:before { content: "\e613"; }
+
+.icon-banshou:before { content: "\e65c"; }
+
+.icon-jienenghuanbao:before { content: "\e645"; }
+
+.icon-jia:before { content: "\e601"; }
+
+.icon-jiantou:before { content: "\e7a9"; }
+
+.icon-shouhu:before { content: "\e62b"; }
+
+.icon-jishuidian:before { content: "\e604"; }
+
+.icon-xitongzhuangtai:before { content: "\e642"; }
+
+.icon-wendu:before { content: "\e689"; }
+
+.icon-sun:before { content: "\e603"; }
+
+.icon-icon-test:before { content: "\e605"; }
+
+.icon-icon-test1:before { content: "\e606"; }
+
+.icon-icon-test3:before { content: "\e608"; }
+
+.icon-icon-test9:before { content: "\e614"; }
+
+.icon-icon-test11:before { content: "\e616"; }
+
+.icon-icon-test14:before { content: "\e61a"; }
+
+.icon-icon-test15:before { content: "\e61b"; }
+
+.icon-icon-test16:before { content: "\e61c"; }
+
+.icon-icon-test21:before { content: "\e621"; }
+
+.icon-icon-test22:before { content: "\e622"; }
+
+.icon-icon-test23:before { content: "\e65b"; }
+
+.icon-fenshuizha:before { content: "\e60b"; }
+
+.icon-shuiweizhan:before { content: "\e60e"; }
+
+.icon-xue:before { content: "\e6b7"; }
+
+.icon-qiwen:before { content: "\e6b8"; }
+
+.icon-qing:before { content: "\e6b9"; }
+
+.icon-qiwen-:before { content: "\e6ba"; }
+
+.icon-yin:before { content: "\e6bb"; }
+
+.icon-yu:before { content: "\e6bc"; }
+
+.icon-caidanmoshi:before { content: "\e665"; }
+
+.icon-shuikudian:before { content: "\e62a"; }
+
+.icon-shuizha:before { content: "\e62d"; }
+
+.icon-huanbao:before { content: "\e638"; }
+
+.icon-shuili:before { content: "\e63a"; }
+
+.icon-dianji:before { content: "\e607"; }
+
+.icon-dycdp:before { content: "\e782"; }
+
+.icon-xiaofangshuibeng:before { content: "\e60d"; }
+
+.icon-shouji:before { content: "\e633"; }
+
+.icon-shuilongtou:before { content: "\e733"; }
+
+.icon-riqi:before { content: "\e64d"; }
+
+.icon-biyan:before { content: "\e67d"; }
+
+.icon-video-surveillance:before { content: "\e654"; }
+
+.icon-shezhi:before { content: "\e675"; }
+
+.icon-shanchu:before { content: "\e611"; }
+
+.icon-open-eye:before { content: "\e79c"; }
+
+.icon-yibiaopan-copy-copy:before { content: "\e64e"; }
+
+.icon-taiyang:before { content: "\e7ed"; }
+
+.icon-icon-humidity:before { content: "\e60c"; }
+
+.icon-caozuomoshiqiehuan:before { content: "\e677"; }
+
+.icon-zidingyi:before { content: "\e634"; }
+
+.icon-taiyang1:before { content: "\e662"; }
+
+.icon-xianzhi:before { content: "\e609"; }
+
+.icon-shuibei:before { content: "\e669"; }
+
+.icon-shuiyuan:before { content: "\e639"; }
+
+.icon-shuilongtou1:before { content: "\e612"; }
+
+.icon-dengpao:before { content: "\e60a"; }
+
+.icon-shuibeng:before { content: "\e625"; }
+
+.icon-lkingbolvsehuanbao:before { content: "\e602"; }
+
+.icon-yujing:before { content: "\e61e"; }
+
+.icon-shishiliuliang:before { content: "\e99a"; }
+
+.icon-famen:before { content: "\e9d3"; }
+
+.icon-fa-dashboard:before { content: "\e615"; }
+
+
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120rpx 0;
+  box-sizing: border-box;
+  font-family: Helvetica Neue,Helvetica,Roboto,Segoe UI,Arial,sans-serif;
+  color: #999;
+} 

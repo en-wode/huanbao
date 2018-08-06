@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/optionSelect/optionSelect",
+    "pages/dataChart/dataChart",
+    "pages/video/video",
+    "pages/model/model",
+    "pages/location/location",
+    "pages/deviceStatus/deviceStatus",
+    "pages/deviceGroup/deviceGroup",
+    "pages/addDevice/addDevice",
+    "pages/deviceDetail/deviceDetail",
+    "pages/deviceLink/deviceLink",
+    "pages/chartList/chartList",
+    "pages/editPassword/editPassword",
+    "pages/canvas/canvas",
+    "pages/message/message"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#518cf6",
+    "navigationBarTitleText": "蓝翔环保",
+    "navigationBarTextStyle": "white"
+  }
+}

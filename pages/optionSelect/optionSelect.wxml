@@ -1,0 +1,28 @@
+<!--pages/optionSelect/optionSelect.wxml-->
+<view class="option-contain">
+  <view class="userinfo">
+    <image src='../../assets/images/1.png'></image> 
+    <!-- <open-data type="userAvatarUrl" class='userAvatarUrl'></open-data>
+    <open-data type="userNickName" lang="zh_CN"></open-data> -->
+  </view>
+  <view class="usermotto">
+    <view class="zan-row option-bottom">
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='1'>
+          <view class="iconfont icon-shuizha de-detail" ></view>
+          设备实况
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='2'>
+          <view class="iconfont icon-shezhi de-caozuo" ></view>
+          设备报修
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='3'>
+          <view class="iconfont icon-caozuomoshiqiehuan de-check" ></view>
+          情景模式
+        </view>
+        <view class="zan-col zan-col-12" bindtap='optionSelect' id='4'>
+          <view class="iconfont icon-xitongzhuangtai de-history" ></view>
+          历史数据
+        </view>
+      </view>
+  </view>
+</view>

@@ -1,0 +1,78 @@
+/* pages/optionSelect/optionSelect.wxss */
+page{
+  background: linear-gradient(#02a1b4,#d9bba3);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+.option-contain{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  box-sizing:border-box;
+  color: black;
+}
+.userinfo {
+  flex-direction: column;
+  align-items: center;
+  height:48vh;
+}
+image {
+  height:48vh;
+  width:40vh;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+
+.zan-col{
+  margin-top: 68rpx;
+}
+.usermotto {
+  width:100%;
+  text-align: center;
+  height: 54vh;
+  background: linear-gradient(#87d1d2,#d9bba3);
+  color: #727171;
+}
+
+.iconfont{
+  font-size: 64rpx;
+  color: white;
+  width:174rpx;
+  height:168rpx;
+  margin:0 auto 18rpx;
+  border-radius:50%;
+  background:red;
+  line-height: 168rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+.de-detail{
+  background: #fc3403
+}
+.de-caozuo{
+  background: #fccd05
+}
+.de-check{
+  background: #039cfc
+}
+.de-history{
+  background: #441dd2
+}
+.userAvatarUrl{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  display: block;
+  overflow: hidden;
+}

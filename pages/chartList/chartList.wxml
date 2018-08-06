@@ -1,0 +1,42 @@
+<!--pages/chartList/chartList.wxml-->
+<view >
+  <view >
+    <view class="zan-panel" bindtap='history' id='waterLevelInWell'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">井内水位</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='history' id='riveRaterLevel'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">河道水位</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='history' id='totalDischargeOfSewage'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">污水总流量</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='history' id='cod'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">水质COD记录</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='history' id='ss'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">水质SS记录</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+    <view class="zan-panel" bindtap='history' id='rainfall'>
+      <view class="zan-cell zan-cell--access">
+        <view class="zan-cell__bd">雨量</view>
+        <view class="zan-cell__ft"></view>
+      </view>
+    </view>
+  </view>
+</view>
+

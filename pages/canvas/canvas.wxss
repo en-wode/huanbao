@@ -1,0 +1,9 @@
+/* pages/canvas/canvas.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.wrap{
+  width: 100%;
+  height: 100%;
+}

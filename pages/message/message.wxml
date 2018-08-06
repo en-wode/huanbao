@@ -1,0 +1,27 @@
+<!--pages/mssage/message.wxml-->
+<view>
+  <view class="zan-panel">
+    <view class="zan-card">
+      <view class="zan-card__detail">
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col red">紧急</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+             1#排污井有堵塞溢满
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__left-col">
+           联系方式：12587465236
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__right-col">2017.11.11 10：18</view>
+          <view class="zan-card__left-col zan-c-red">天风路铁路桥下</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

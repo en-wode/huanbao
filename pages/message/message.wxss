@@ -1,0 +1,7 @@
+/* pages/mssage/message.wxss */
+.zan-card__detail{
+  margin-left: 0
+}
+.red {
+  color: red
+}
