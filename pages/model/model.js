@@ -287,6 +287,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`device.seaLevel`]: that.setcountxs(event.detail.value.seaLevel, that.data.devices.bottomHoleHeight),
       [`device.cod`]: that.signFigures(event.detail.value.cod),
       [`device.ss`]: that.signFigures(event.detail.value.ss),
+      [`device.rainGauge`]: parseFloat(event.detail.value.rainGauge)*10,
     })
     for (const key in this.data.device){
       if (this.data.device[key]===''){
@@ -354,7 +355,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         },
         success: function (result) {
           console.log(that.data.device)
-          if (that.data.device.data.code == 0 && result.data.msg == 2000) {
+          if (result.data.code == 0 && result.data.msg == 2000) {
             wx.navigateTo({
               url: '../index/index'
             })

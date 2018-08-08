@@ -361,7 +361,7 @@ Page({
         out: '低于'
       })
     }
-    if (that.data.waterLevelInWell < that.data.garbageHeight) {
+    if (that.data.socketdata.waterLevelInWell < (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100)) {
       that.setData({
         chaoguo: false
       })
@@ -370,7 +370,9 @@ Page({
         chaoguo: true
       })
     }
-    if (that.data.riveRaterLevel < that.data.garbageHeight){
+    console.log('1', (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100))
+    console.log('2', that.data.socketdata.truncatedPipeHeight)
+    if (that.data.socketdata.riveRaterLevel < (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100)){
       that.setData({
         riverchaoguo: true
       })
@@ -512,7 +514,6 @@ Page({
           // 左右俩边河道水位
           ctx.fillRect(0, wxH - 120, 30, 70);
           ctx.fillRect(wxW - 30, wxH - 120, 30, 70);
-          console.log(false)
           if (that.data.water < 140) {
           } else {
             that.setData({
@@ -548,8 +549,6 @@ Page({
         // ctx.fillRect(wxW - 80, wxH - that.data.water, 50, that.data.water - 180);
       } else if (that.data.out == '低于') {
         // 左右俩边河道水位
-        console.log('riverchaoguo', that.data.riverchaoguo)
-        console.log('chaoguo', that.data.chaoguo )
         if (that.data.riverchaoguo) {
           ctx.fillRect(0, wxH - 130, 30, 80);
           ctx.fillRect(wxW - 30, wxH - 130, 40, 80);
