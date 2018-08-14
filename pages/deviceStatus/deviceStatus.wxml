@@ -60,7 +60,7 @@
   </view>
   <view class='card'>
     <view class="zan-cell">
-      <view class="zan-cell__bd"> 排水闸门开度 {{paishui}}%, 堰顶标高：{{data.inletPipeHeight + data.sewerageSluice}}mm</view>
+      <view class="zan-cell__bd"> 排水闸门开度 {{paishui}}%, 堰顶标高：{{yanding}}m</view>
       <view class="zan-cell__ft">{{data.sluiceSwitch}}</view>
     </view>
     <view class="section section_gap">

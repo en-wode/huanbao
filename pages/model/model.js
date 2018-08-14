@@ -144,7 +144,6 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    console.log(that.data.equipid)
     // wx.request({
     //   url: app.globalData.url + 'equipmentPort/viewPatternData',
     //   method: 'GET',
@@ -287,7 +286,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       [`device.seaLevel`]: that.setcountxs(event.detail.value.seaLevel, that.data.devices.bottomHoleHeight),
       [`device.cod`]: that.signFigures(event.detail.value.cod),
       [`device.ss`]: that.signFigures(event.detail.value.ss),
-      [`device.rainGauge`]: parseFloat(event.detail.value.rainGauge)*10,
+      [`device.rainGauge`]: parseFloat(event.detail.value.rainGauge),
     })
     for (const key in this.data.device){
       if (this.data.device[key]===''){
@@ -341,32 +340,27 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-    
-    if (that.data.device.pattern == 0){
-      that.showZanToast('自动值守无法修改参数');
-    }else{
-      wx.request({
-        url: app.globalData.url + 'equipmentPort/addEquipmentPort',
-        method: 'POST',
-        header: header,
-        data: {
-          userId: wx.getStorageSync('userId'),
-          device: that.data.device
-        },
-        success: function (result) {
-          console.log(that.data.device)
-          if (result.data.code == 0 && result.data.msg == 2000) {
-            wx.navigateTo({
-              url: '../index/index'
-            })
-          } else if (result.data.code == 1) {
-            that.showZanToast('参数修改成功');
-          } else {
-            that.showZanToast(result.data.msg);
-          }
+
+    wx.request({
+      url: app.globalData.url + 'equipmentPort/addEquipmentPort',
+      method: 'POST',
+      header: header,
+      data: {
+        userId: wx.getStorageSync('userId'),
+        device: that.data.device
+      },
+      success: function (result) {
+        if (result.data.code == 0 && result.data.msg == 2000) {
+          wx.navigateTo({
+            url: '../index/index'
+          })
+        } else if (result.data.code == 1) {
+          that.showZanToast('参数修改成功');
+        } else {
+          that.showZanToast(result.data.msg);
         }
-      })
-    }
+      }
+    })
   },
   getdata: function () {
     const that = this;

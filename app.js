@@ -2,7 +2,6 @@
 var util = require('utils/util')
 const io = require('utils/socket/weapp.socket.io.js');
 const socket = io('ws://192.168.0.109:7001');
-// const socket = io('http://47.98.162.168');
 // const socket = io('https://www.lxwater.cn/');
 
 App({
@@ -40,7 +39,7 @@ App({
     userInfo: null,
     openId: null,
     locationInfo: null,
-    url: 'http://192.168.0.109:7001/'
+    url: 'http://192.168.0.109:7001/',
     // url: 'https://www.lxwater.cn/'
   },
   header: {

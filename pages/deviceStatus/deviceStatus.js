@@ -10,6 +10,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
    * 页面的初始数据
    */
   data: {
+    equipid: '',
     weatherData: [],
     id: '',
     data: {},
@@ -22,6 +23,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       shebmen: '',
       workstatus: '',
     },
+    yanding: null,
     paishui: 0,
     jiewu: 0,
     tab1: {
@@ -44,6 +46,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     var that = this;
     that.setData({
       id: options.equipid,
+      equipid: options.equipid,
     }) 
     wx.setNavigationBarTitle({
       title: options.equipname + '号设备实况'
@@ -94,21 +97,24 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
       });
     }
     
-
+    app.socket().emit('index', {
+      equipmentId: options.equipid
+    })
     app.socket().open();
+    
     app.socket().on('connect', function () {
-      that.showTopTips('刷新成功')
+      that.showTopTips('刷新成功');
     });
-    app.socket().on('disconnect', function () {
-      console.log('断开');
-    });
-    // let name = 'res22' + options.equipid
-    let name = 'online';
-      app.socket().on(name, d => {
+    let name = 'online' + options.equipid;
+    app.socket().on(name, d => {
+        console.log(d)
+        that.setData({
+          yanding: ((d.inletPipeHeight + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+        })
+        console.log(that.data.yanding)
         if (d.equipmentId != that.data.id ) {
           return
         } else {
-          console.log(d);
           if (d.keyboardStatus == 7) {
             that.setData({
               [`weiyu.workstatus`]: '自动'
@@ -193,12 +199,10 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
         }
       
     })
-    app.socket().emit('index', {
-      equipmentId: options.equipid
-    })
-
+    app.socket().on('disconnect', function () {
+      console.log('断开');
+    });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -241,7 +245,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
   simulation: function () {
     let that = this;
     wx.navigateTo({
-      url: '../canvas/canvas?id=' + that.data.id
+      url: '../canvas/canvas?id=' + that.data.id + '&equipid=' + that.data.equipid
     });
   },
 

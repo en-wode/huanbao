@@ -16,11 +16,11 @@ Page({
     liftingGrid: '停',
     // 水面高度 1超过管道 0低于管道
     wtheight: 1,
-    paishui: 1,
     socketdata: {},
     canw: wx.getSystemInfoSync().windowHeight,
     tilan: 150,
     paishui: 150,
+    paishui1: 150,
     water: 250,
     out: '',
     chaoguo: true,
@@ -38,14 +38,14 @@ Page({
     that.tree(); //基础图案
     that.wind();
     app.socket().open();
-    let name = 'online'
+    let name = 'online' + option.equipid;
     app.socket().on(name, d => {
       if (d.equipmentId != option.id) {
         return
       } else {
-        console.log(d)
         that.setData({
-          socketdata: d
+          socketdata: d,
+          paishui1: 80 * (d.sluiceOpeningDegree / d.sewerageSluice) + 110
         })
         that.startcanvas()
       }
@@ -349,9 +349,9 @@ Page({
 
     //井内水位
     if (that.data.socketdata.waterLevelInWell > that.data.socketdata.riveRaterLevel) {
-        that.setData({
-          out: '高于',
-        })
+      that.setData({
+        out: '高于',
+      })
     } else if (that.data.socketdata.waterLevelInWell == that.data.socketdata.riveRaterLevel) {
       that.setData({
         out: '停止'
@@ -370,9 +370,9 @@ Page({
         chaoguo: true
       })
     }
-    console.log('1', (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100))
-    console.log('2', that.data.socketdata.truncatedPipeHeight)
-    if (that.data.socketdata.riveRaterLevel < (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100)){
+    // console.log('1', (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100))
+    // console.log('2', that.data.socketdata.truncatedPipeHeight)
+    if (that.data.socketdata.riveRaterLevel < (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100)) {
       that.setData({
         riverchaoguo: true
       })
@@ -436,20 +436,31 @@ Page({
   },
   drawpaishui(ctx, wxW, wxH) {
     const that = this;
-    if (that.data.paishui >= 190 || that.data.paishui <= 120) {
-    } else if (that.data.socketdata.sluiceSwitch == '关') {
-      that.setData({
-        paishui: that.data.paishui + 1
-      })
-    } else if (that.data.socketdata.sluiceSwitch == '开') {
+    if (Math.abs(that.data.paishui - that.data.paishui1) < 2){
+
+    } else if (that.data.paishui > that.data.paishui1) {
       that.setData({
         paishui: that.data.paishui - 1
       })
-    } else if (that.data.socketdata.sluiceSwitch == '停') {
-      // that.setData({
-      //   paishui: that.data.paishui - 1
-      // })
+    } else if (that.data.paishui < that.data.paishui1) {
+      that.setData({
+        paishui: that.data.paishui + 1
+      })
     }
+    // if (that.data.paishui >= 190 || that.data.paishui <= 120) {
+    // } else if (that.data.socketdata.sluiceSwitch == '关') {
+    //   that.setData({
+    //     paishui: that.data.paishui + 1
+    //   })
+    // } else if (that.data.socketdata.sluiceSwitch == '开') {
+    //   that.setData({
+    //     paishui: that.data.paishui - 1
+    //   })
+    // } else if (that.data.socketdata.sluiceSwitch == '停') {
+    //   // that.setData({
+    //   //   paishui: that.data.paishui - 1
+    //   // })
+    // }
     function drawpaishui(ctx, wxW, wxH) {
       ctx.beginPath(); //that.data.paishui -  154  that.data.paishui - 230
       ctx.setLineWidth(4);
@@ -488,17 +499,17 @@ Page({
       wrd.addColorStop(0.6, '#1C86EE');
       wrd.addColorStop(1, '#0000FF');
       ctx.setFillStyle(wrd);
-     
+
       if (that.data.out == '高于') {
-        if (that.data.chaoguo){
+        if (that.data.chaoguo) {
           // 左右俩边河道水位
-          if (that.data.riverchaoguo){
+          if (that.data.riverchaoguo) {
             ctx.fillRect(0, wxH - 130, 30, 80);
             ctx.fillRect(wxW - 30, wxH - 130, 30, 80);
           } else {
             ctx.fillRect(30, wxH - 250, 50, 75);
             ctx.fillRect(wxW - 80, wxH - 250, 50, 75);
-            
+
             ctx.fillRect(0, wxH - 270, 30, 220);
             ctx.fillRect(wxW - 30, wxH - 270, 30, 220);
           }
@@ -526,7 +537,6 @@ Page({
         }
 
       } else if (that.data.out == '停止') {
-
         if (that.data.water <= 180) {
         } else {
           that.setData({
@@ -537,12 +547,13 @@ Page({
           ctx.fillRect(0, wxH - 130, 30, 80);
           ctx.fillRect(wxW - 30, wxH - 130, 30, 80);
         } else {
-          ctx.fillRect(30, wxH - 250, 50, 75);
-          ctx.fillRect(wxW - 80, wxH - 250, 50, 75);
+          console.log('停止')
+          
+          ctx.fillRect(30, wxH - 250, 40, 75);
+          ctx.fillRect(wxW - 70, wxH - 250, 40, 75);
           ctx.fillRect(0, wxH - 270, 30, 220);
           ctx.fillRect(wxW - 30, wxH - 270, 30, 220);
         }
-
         ctx.fillRect(70, wxH - that.data.water, wxW - 140, 300 + (wxH - 350 - (wxH - that.data.water)));
 
         // ctx.fillRect(30, wxH - that.data.water, 50, that.data.water - 180);
@@ -552,10 +563,11 @@ Page({
         if (that.data.riverchaoguo) {
           ctx.fillRect(0, wxH - 130, 30, 80);
           ctx.fillRect(wxW - 30, wxH - 130, 40, 80);
+          console.log(1)
+          
         } else {
           ctx.fillRect(30, wxH - 250, 40, 75);
           ctx.fillRect(wxW - 70, wxH - 250, 40, 75);
-          
           ctx.fillRect(0, wxH - 270, 30, 220);
           ctx.fillRect(wxW - 30, wxH - 270, 30, 220);
         }
@@ -572,7 +584,7 @@ Page({
           //   ctx.fillRect(30, wxH - that.data.water, 50, that.data.water - 180);
           //   ctx.fillRect(wxW - 80, wxH - that.data.water, 50, that.data.water - 180);
           // }
-        }else{
+        } else {
           if (that.data.water <= 140) {
           } else {
             that.setData({
