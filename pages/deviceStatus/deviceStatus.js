@@ -4,7 +4,7 @@ const Zan = require('../../dist/index');
 
 const app = getApp();
 
-Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
+Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
 
   /**
    * 页面的初始数据
@@ -14,7 +14,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     weatherData: [],
     id: '',
     data: {},
-    weiyu:{
+    weiyu: {
       shuibeng1: '',
       shuibeng2: '',
       yalidianji: '',
@@ -42,12 +42,11 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var that = this;
     that.setData({
       id: options.equipid,
       equipid: options.equipid,
-    }) 
+    })
     wx.setNavigationBarTitle({
       title: options.equipname + '号设备实况'
     })
@@ -91,125 +90,227 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     };
     var success = function (data) {
       var weatherData = data.originalData.results[0].weather_data;
-      weatherData[0].date = weatherData[0].date.slice(0,2)
+      weatherData[0].date = weatherData[0].date.slice(0, 2)
       that.setData({
         weatherData: weatherData,
       });
     }
-    
-    app.socket().emit('index', {
-      equipmentId: options.equipid
-    })
-    app.socket().open();
-    
-    app.socket().on('connect', function () {
-      that.showTopTips('刷新成功');
-    });
-    let name = 'online' + options.equipid;
-    app.socket().on(name, d => {
-        console.log(d)
-        that.setData({
-          yanding: ((d.inletPipeHeight + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
-        })
-        console.log(that.data.yanding)
-        if (d.equipmentId != that.data.id ) {
-          return
-        } else {
-          if (d.keyboardStatus == 7) {
-            that.setData({
-              [`weiyu.workstatus`]: '自动'
-            })
-          } else if (d.keyboardStatus == 6) {
-            that.setData({
-              [`weiyu.workstatus`]: '手动'
-            })
-          } else {
-            that.setData({
-              [`weiyu.workstatus`]: '远程'
-            })
-          }
-          if ((d.callThePolice & 1) == 0) {
-            that.setData({
-              [`weiyu.shuibeng2`]: '错误'
-            })
-          } else {
-            that.setData({
-              [`weiyu.shuibeng2`]: '正常'
-            })
-          }
-          if ((d.callThePolice & 2) == 0) {
-            that.setData({
-              [`weiyu.shuibeng1`]: '错误'
-            })
-          } else {
-            that.setData({
-              [`weiyu.shuibeng1`]: '正常'
-            })
-          }
-          if ((d.callThePolice & 4) == 0) {
-            that.setData({
-              [`weiyu.yalidianji`]: '错误'
-            })
-          } else {
-            that.setData({
-              [`weiyu.yalidianji`]: '正常'
-            })
-          }
-          if ((d.callThePolice & 128) == 0) {
-            that.setData({
-              [`weiyu.tingdian`]: '停电'
-            })
-          } else {
-            that.setData({
-              [`weiyu.tingdian`]: '正常'
-            })
-          }
-          if ((d.floatingBall & 1) == 0) {
-            that.setData({
-              [`weiyu.shebmen`]: '打开'
-            })
-          } else {
-            that.setData({
-              [`weiyu.shebmen`]: '无'
-            })
-          }
-          if ((d.floatingBall & 4) == 0) {
-            that.setData({
-              [`weiyu.fuqiu`]: '上限'
-            })
-          } else if ((d.floatingBall & 2) == 0) {
-            that.setData({
-              [`weiyu.fuqiu`]: '下限'
-            })
-          } else {
-            that.setData({
-              [`weiyu.fuqiu`]: '非上下限'
-            })
-          }
+    app.globalData.time = setInterval(function(){
+      wx.request({
+        url: app.globalData.url + 'io/getData',
+        method: 'GET',
+        header: header,
+        data: {
+          equipmentId: that.data.id
+        },
+        success: function (d) {
+          d = d.data.result
           that.setData({
-            paishui: (d.sluiceOpeningDegree / d.sewerageSluice * 100).toFixed(2),
-            jiewu: (d.sluiceSluiceOpeningDegree / d.sluiceHeight * 100).toFixed(2)
+            yanding: ((d.inletPipeHeight + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
           })
-          if (d.waterLevelOfSewagePipe === '???') {
-            d.waterLevelOfSewagePipe = '未检测'
+          console.log(d)
+          if (d.equipmentId != that.data.id) {
+            return
+          } else {
+            if (d.keyboardStatus == 7) {
+              that.setData({
+                [`weiyu.workstatus`]: '自动'
+              })
+            } else if (d.keyboardStatus == 6) {
+              that.setData({
+                [`weiyu.workstatus`]: '手动'
+              })
+            } else {
+              that.setData({
+                [`weiyu.workstatus`]: '远程'
+              })
+            }
+            if ((d.callThePolice & 1) == 0) {
+              that.setData({
+                [`weiyu.shuibeng2`]: '错误'
+              })
+            } else {
+              that.setData({
+                [`weiyu.shuibeng2`]: '正常'
+              })
+            }
+            if ((d.callThePolice & 2) == 0) {
+              that.setData({
+                [`weiyu.shuibeng1`]: '错误'
+              })
+            } else {
+              that.setData({
+                [`weiyu.shuibeng1`]: '正常'
+              })
+            }
+            if ((d.callThePolice & 4) == 0) {
+              that.setData({
+                [`weiyu.yalidianji`]: '错误'
+              })
+            } else {
+              that.setData({
+                [`weiyu.yalidianji`]: '正常'
+              })
+            }
+            if ((d.callThePolice & 128) == 0) {
+              that.setData({
+                [`weiyu.tingdian`]: '停电'
+              })
+            } else {
+              that.setData({
+                [`weiyu.tingdian`]: '正常'
+              })
+            }
+            if ((d.floatingBall & 1) == 0) {
+              that.setData({
+                [`weiyu.shebmen`]: '打开'
+              })
+            } else {
+              that.setData({
+                [`weiyu.shebmen`]: '无'
+              })
+            }
+            if ((d.floatingBall & 4) == 0) {
+              that.setData({
+                [`weiyu.fuqiu`]: '上限'
+              })
+            } else if ((d.floatingBall & 2) == 0) {
+              that.setData({
+                [`weiyu.fuqiu`]: '下限'
+              })
+            } else {
+              that.setData({
+                [`weiyu.fuqiu`]: '非上下限'
+              })
+            }
+            that.setData({
+              paishui: (d.sluiceOpeningDegree / d.sewerageSluice * 100).toFixed(2),
+              jiewu: (d.sluiceSluiceOpeningDegree / d.sluiceHeight * 100).toFixed(2)
+            })
+            if (d.waterLevelOfSewagePipe === '???') {
+              d.waterLevelOfSewagePipe = '未检测'
+            }
+            that.setData({
+              data: d,
+            });
           }
-          that.setData({
-            data: d,
-          });
         }
-      
-    })
-    app.socket().on('disconnect', function () {
-      console.log('断开');
-    });
+      })
+    }, 2000)
+
+    // app.socket().emit('index', {
+    //   equipmentId: options.equipid
+    // })
+    // app.socket().open();
+
+    // app.socket().on('connect', function () {
+    //   that.showTopTips('刷新成功');
+    // });
+    // let name = 'online' + options.equipid;
+    // app.socket().on(name, d => {
+    //   console.log(d)
+    //   that.setData({
+    //     yanding: ((d.inletPipeHeight + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+    //   })
+    //   console.log(that.data.yanding)
+    //   if (d.equipmentId != that.data.id) {
+    //     return
+    //   } else {
+    //     if (d.keyboardStatus == 7) {
+    //       that.setData({
+    //         [`weiyu.workstatus`]: '自动'
+    //       })
+    //     } else if (d.keyboardStatus == 6) {
+    //       that.setData({
+    //         [`weiyu.workstatus`]: '手动'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.workstatus`]: '远程'
+    //       })
+    //     }
+    //     if ((d.callThePolice & 1) == 0) {
+    //       that.setData({
+    //         [`weiyu.shuibeng2`]: '错误'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.shuibeng2`]: '正常'
+    //       })
+    //     }
+    //     if ((d.callThePolice & 2) == 0) {
+    //       that.setData({
+    //         [`weiyu.shuibeng1`]: '错误'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.shuibeng1`]: '正常'
+    //       })
+    //     }
+    //     if ((d.callThePolice & 4) == 0) {
+    //       that.setData({
+    //         [`weiyu.yalidianji`]: '错误'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.yalidianji`]: '正常'
+    //       })
+    //     }
+    //     if ((d.callThePolice & 128) == 0) {
+    //       that.setData({
+    //         [`weiyu.tingdian`]: '停电'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.tingdian`]: '正常'
+    //       })
+    //     }
+    //     if ((d.floatingBall & 1) == 0) {
+    //       that.setData({
+    //         [`weiyu.shebmen`]: '打开'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.shebmen`]: '无'
+    //       })
+    //     }
+    //     if ((d.floatingBall & 4) == 0) {
+    //       that.setData({
+    //         [`weiyu.fuqiu`]: '上限'
+    //       })
+    //     } else if ((d.floatingBall & 2) == 0) {
+    //       that.setData({
+    //         [`weiyu.fuqiu`]: '下限'
+    //       })
+    //     } else {
+    //       that.setData({
+    //         [`weiyu.fuqiu`]: '非上下限'
+    //       })
+    //     }
+    //     that.setData({
+    //       paishui: (d.sluiceOpeningDegree / d.sewerageSluice * 100).toFixed(2),
+    //       jiewu: (d.sluiceSluiceOpeningDegree / d.sluiceHeight * 100).toFixed(2)
+    //     })
+    //     if (d.waterLevelOfSewagePipe === '???') {
+    //       d.waterLevelOfSewagePipe = '未检测'
+    //     }
+    //     that.setData({
+    //       data: d,
+    //     });
+    //   }
+
+    // })
+    // app.socket().on('disconnect', function () {
+    //   console.log('断开');
+    // });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
-  getlv: function() {
+  getlv: function () {
     const that = this;
     var header = {
       'content-type': 'application/json',
@@ -271,9 +372,9 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
             url: '../index/index'
           })
         }
-        if (result.data.code == 0){
+        if (result.data.code == 0) {
           that.showTopTips(result.data.msg)
-        } else if (result.data.code == 1){
+        } else if (result.data.code == 1) {
           wx.navigateTo({
             url: '../video/video?equipid=' + that.data.id + '&id=' + targetid
           });
@@ -289,9 +390,11 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab , {
     this.showZanTopTips(data);
   },
   onUnload: function () {
-    app.socket().close();
+    clearInterval(app.globalData.time)
+    // app.socket().close();
   },
   onHide: function () {
-    app.socket().close();
+    // clearInterval(app.globalData.time)
+    // app.socket().close();
   }
 }))

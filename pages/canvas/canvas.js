@@ -37,23 +37,51 @@ Page({
     var starta = null;
     that.tree(); //基础图案
     that.wind();
-    app.socket().open();
-    let name = 'online' + option.equipid;
-    app.socket().on(name, d => {
-      if (d.equipmentId != option.id) {
-        return
-      } else {
-        that.setData({
-          socketdata: d,
-          paishui1: 80 * (d.sluiceOpeningDegree / d.sewerageSluice) + 110
-        })
-        that.startcanvas()
-      }
-    })
-    app.socket().emit('index', {
-      equipmentId: option.id
-      // equipmentId: 22
-    })
+    // app.socket().open();
+    // let name = 'online' + option.equipid;
+    // app.socket().on(name, d => {
+    //   if (d.equipmentId != option.id) {
+    //     return
+    //   } else {
+    //     that.setData({
+    //       socketdata: d,
+    //       paishui1: 80 * (d.sluiceOpeningDegree / d.sewerageSluice) + 110
+    //     })
+    //     that.startcanvas()
+    //   }
+    // })
+    // app.socket().emit('index', {
+    //   equipmentId: option.id
+    //   // equipmentId: 22
+    // })
+    var header = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    app.globalData.cvtime = setInterval(function () {
+      wx.request({
+        url: app.globalData.url + 'io/getData',
+        method: 'GET',
+        header: header,
+        data: {
+          equipmentId: option.equipid
+        },
+        success: function (d) {
+          d = d.data.result
+          console.log(d)
+          if (d.equipmentId != option.equipid) {
+            return
+          } else {
+            that.setData({
+              socketdata: d,
+              paishui1: 80 * (d.sluiceOpeningDegree / d.sewerageSluice) + 110
+            })
+            that.startcanvas()
+          }
+        }
+      })
+    }, 2000)
+
     that.sheb()
     // 每40ms执行一次drawClock()，人眼看来就是流畅的画面
     setTimeout(function () {
@@ -436,7 +464,7 @@ Page({
   },
   drawpaishui(ctx, wxW, wxH) {
     const that = this;
-    if (Math.abs(that.data.paishui - that.data.paishui1) < 2){
+    if (Math.abs(that.data.paishui - that.data.paishui1) < 2) {
 
     } else if (that.data.paishui > that.data.paishui1) {
       that.setData({
@@ -548,7 +576,7 @@ Page({
           ctx.fillRect(wxW - 30, wxH - 130, 30, 80);
         } else {
           console.log('停止')
-          
+
           ctx.fillRect(30, wxH - 250, 40, 75);
           ctx.fillRect(wxW - 70, wxH - 250, 40, 75);
           ctx.fillRect(0, wxH - 270, 30, 220);
@@ -564,7 +592,7 @@ Page({
           ctx.fillRect(0, wxH - 130, 30, 80);
           ctx.fillRect(wxW - 30, wxH - 130, 40, 80);
           console.log(1)
-          
+
         } else {
           ctx.fillRect(30, wxH - 250, 40, 75);
           ctx.fillRect(wxW - 70, wxH - 250, 40, 75);
@@ -628,11 +656,13 @@ Page({
   onUnload: function () {
     const that = this;
     clearInterval(that.data.start);
-    app.socket().close();
+    clearInterval(app.globalData.cvtime)
+    // app.socket().close();
   },
   onHide: function () {
     const that = this;
     clearInterval(that.data.start);
-    app.socket().close();
+    clearInterval(app.globalData.cvtime)
+    // app.socket().close();
   }
 })

@@ -5,14 +5,24 @@ const socket = io('ws://192.168.0.109:7001');
 // const socket = io('https://www.lxwater.cn/');
 
 App({
-  onLaunch1: function () {  
+  onLaunch: function () {  
     // 展示本地存储能力
     var that = this;
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
+
+    let name = 'online'
+    socket.emit('index', {
+      equipmentId: 33
+    })
+    // let name = socket.id;
+
+    // console.log(socket.id);
+    // socket.on(name)
   },
   getLocationInfo: function (cb) {
+    
     var that = this;
     if (this.globalData.locationInfo) {
       cb(this.globalData.locationInfo)
@@ -39,6 +49,8 @@ App({
     userInfo: null,
     openId: null,
     locationInfo: null,
+    time: null,
+    cvtime: null,
     url: 'http://192.168.0.109:7001/',
     // url: 'https://www.lxwater.cn/'
   },

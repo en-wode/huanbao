@@ -340,7 +340,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
       'content-type': 'application/json',
       'cookie': wx.getStorageSync("sessionid")//读取cookie
     };
-
+    console.log(that.data.device)
     wx.request({
       url: app.globalData.url + 'equipmentPort/addEquipmentPort',
       method: 'POST',
