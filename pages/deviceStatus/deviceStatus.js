@@ -95,6 +95,105 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
         weatherData: weatherData,
       });
     }
+    wx.request({
+      url: app.globalData.url + 'io/getData',
+      method: 'GET',
+      header: header,
+      data: {
+        equipmentId: that.data.id
+      },
+      success: function (d) {
+        d = d.data.result
+        that.setData({
+          yanding: ((d.inletPipeHeight*10 + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+        })
+        if (d.equipmentId != that.data.id) {
+          return
+        } else {
+          if (d.keyboardStatus == 7) {
+            that.setData({
+              [`weiyu.workstatus`]: '自动'
+            })
+          } else if (d.keyboardStatus == 6) {
+            that.setData({
+              [`weiyu.workstatus`]: '手动'
+            })
+          } else {
+            that.setData({
+              [`weiyu.workstatus`]: '远程'
+            })
+          }
+          if ((d.callThePolice & 1) == 0) {
+            that.setData({
+              [`weiyu.shuibeng2`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shuibeng2`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 2) == 0) {
+            that.setData({
+              [`weiyu.shuibeng1`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shuibeng1`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 4) == 0) {
+            that.setData({
+              [`weiyu.yalidianji`]: '错误'
+            })
+          } else {
+            that.setData({
+              [`weiyu.yalidianji`]: '正常'
+            })
+          }
+          if ((d.callThePolice & 128) == 0) {
+            that.setData({
+              [`weiyu.tingdian`]: '停电'
+            })
+          } else {
+            that.setData({
+              [`weiyu.tingdian`]: '正常'
+            })
+          }
+          if ((d.floatingBall & 1) == 0) {
+            that.setData({
+              [`weiyu.shebmen`]: '打开'
+            })
+          } else {
+            that.setData({
+              [`weiyu.shebmen`]: '无'
+            })
+          }
+          if ((d.floatingBall & 4) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '上限'
+            })
+          } else if ((d.floatingBall & 2) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '下限'
+            })
+          } else {
+            that.setData({
+              [`weiyu.fuqiu`]: '非上下限'
+            })
+          }
+          that.setData({
+            paishui: (d.sluiceOpeningDegree / d.sewerageSluice * 100).toFixed(2),
+            jiewu: (d.sluiceSluiceOpeningDegree / d.sluiceHeight * 100).toFixed(2)
+          })
+          if (d.waterLevelOfSewagePipe === '???') {
+            d.waterLevelOfSewagePipe = '未检测'
+          }
+          that.setData({
+            data: d,
+          });
+        }
+      }
+    })
     app.globalData.time = setInterval(function(){
       wx.request({
         url: app.globalData.url + 'io/getData',
@@ -106,9 +205,8 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
         success: function (d) {
           d = d.data.result
           that.setData({
-            yanding: ((d.inletPipeHeight + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+            yanding: ((d.inletPipeHeight*10 + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
           })
-          console.log(d)
           if (d.equipmentId != that.data.id) {
             return
           } else {
