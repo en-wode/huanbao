@@ -1,20 +1,20 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/workTime/workTime",
     "pages/optionSelect/optionSelect",
     "pages/dataChart/dataChart",
     "pages/video/video",
     "pages/model/model",
     "pages/location/location",
     "pages/deviceStatus/deviceStatus",
-    "pages/deviceGroup/deviceGroup",
     "pages/addDevice/addDevice",
-    "pages/deviceDetail/deviceDetail",
     "pages/deviceLink/deviceLink",
     "pages/chartList/chartList",
     "pages/editPassword/editPassword",
     "pages/canvas/canvas",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/status3/status3"
   ],
   "window": {
     "backgroundTextStyle": "light",

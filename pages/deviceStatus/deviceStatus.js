@@ -103,9 +103,10 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
         equipmentId: that.data.id
       },
       success: function (d) {
+        console.log(d)
         d = d.data.result
         that.setData({
-          yanding: ((d.inletPipeHeight*10 + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+          yanding: ((d.inletPipeHeight * 10 + d.sewerageSluice - d.sluiceOpeningDegree) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
         })
         if (d.equipmentId != that.data.id) {
           return
@@ -168,17 +169,21 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
               [`weiyu.shebmen`]: '无'
             })
           }
-          if ((d.floatingBall & 4) == 0) {
+          if ((d.floatingBall & 8) == 0){
             that.setData({
-              [`weiyu.fuqiu`]: '上限'
+              [`weiyu.fuqiu`]: '上'
+            })
+          } else if ((d.floatingBall & 4) == 0) {
+            that.setData({
+              [`weiyu.fuqiu`]: '中'
             })
           } else if ((d.floatingBall & 2) == 0) {
             that.setData({
-              [`weiyu.fuqiu`]: '下限'
+              [`weiyu.fuqiu`]: '下'
             })
           } else {
             that.setData({
-              [`weiyu.fuqiu`]: '非上下限'
+              [`weiyu.fuqiu`]: ' '
             })
           }
           that.setData({
@@ -205,7 +210,7 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
         success: function (d) {
           d = d.data.result
           that.setData({
-            yanding: ((d.inletPipeHeight*10 + d.sewerageSluice) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
+            yanding: ((d.inletPipeHeight * 10 + d.sewerageSluice - d.sluiceOpeningDegree) / 1000 + (d.bottomHoleHeight - 10000) / 100).toFixed(2)
           })
           if (d.equipmentId != that.data.id) {
             return
@@ -268,17 +273,21 @@ Page(Object.assign({}, Zan.TopTips, Zan.Tab, {
                 [`weiyu.shebmen`]: '无'
               })
             }
-            if ((d.floatingBall & 4) == 0) {
+            if ((d.floatingBall & 8) == 0) {
               that.setData({
-                [`weiyu.fuqiu`]: '上限'
+                [`weiyu.fuqiu`]: '上'
+              })
+            } else if ((d.floatingBall & 4) == 0) {
+              that.setData({
+                [`weiyu.fuqiu`]: '中'
               })
             } else if ((d.floatingBall & 2) == 0) {
               that.setData({
-                [`weiyu.fuqiu`]: '下限'
+                [`weiyu.fuqiu`]: '下'
               })
             } else {
               that.setData({
-                [`weiyu.fuqiu`]: '非上下限'
+                [`weiyu.fuqiu`]: ' '
               })
             }
             that.setData({

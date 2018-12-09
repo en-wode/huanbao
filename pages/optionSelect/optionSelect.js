@@ -27,9 +27,15 @@ Page({
     let targetid = options.currentTarget.id;
     switch (Number(targetid)) {
       case 1:
-        wx.navigateTo({
-          url: '../deviceStatus/deviceStatus?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
-        });
+        if (that.data.equipid == 37) {
+          wx.navigateTo({
+            url: '../status3/status3?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
+          });
+        }else{
+          wx.navigateTo({
+            url: '../deviceStatus/deviceStatus?equipid=' + that.data.equipid + '&equipname=' + that.data.equipname
+          });
+        }
         break;
       case 2:
         wx.navigateTo({

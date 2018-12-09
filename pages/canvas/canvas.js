@@ -57,7 +57,7 @@ Page({
         } else {
           that.setData({
             socketdata: d,
-            paishui1: 80 * (1-d.sluiceOpeningDegree / d.sewerageSluice) + 110
+            paishui1: 80 * (1 - d.sluiceOpeningDegree / d.sewerageSluice) + 110
           })
           that.startcanvas()
         }
@@ -78,7 +78,7 @@ Page({
           } else {
             that.setData({
               socketdata: d,
-              paishui1: 80 * (1 -d.sluiceOpeningDegree / d.sewerageSluice) + 110
+              paishui1: 80 * (1 - d.sluiceOpeningDegree / d.sewerageSluice) + 110
             })
             that.startcanvas()
           }
@@ -381,7 +381,7 @@ Page({
       })
     } else {
       that.setData({
-        out: '高于'
+        out: '低于'
       })
     }
     //井内水位
@@ -393,13 +393,13 @@ Page({
       that.setData({
         waterlevel: '高于'
       })
-    } else if (that.data.socketdata.waterLevelInWell - (that.data.socketdata.bottomHoleHeight - 10000) / 100 < that.data.socketdata.inletPipeHeight / 100) {
+    } else if ((that.data.socketdata.waterLevelInWell - (that.data.socketdata.bottomHoleHeight - 10000) / 100) - (that.data.socketdata.inletPipeHeight / 100) < 0) {
       that.setData({
         waterlevel: '低于'
       })
     }
     //河道水位
-    if (((that.data.socketdata.inletPipeHeight / 100 + that.data.socketdata.sewerageSluice / 1000) - (that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100) > 0) && ((that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100) - (that.data.socketdata.inletPipeHeight / 100) > 0)){
+    if (((that.data.socketdata.inletPipeHeight / 100 + that.data.socketdata.sewerageSluice / 1000) - (that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100) > 0) && ((that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100) - (that.data.socketdata.inletPipeHeight / 100) > 0)) {
       that.setData({
         river: '停止',
       })
@@ -412,11 +412,11 @@ Page({
         river: '低于'
       })
     }
-    console.log(that.data.socketdata.inletPipeHeight / 100)
-    console.log(that.data.socketdata.sewerageSluice/1000)
-    console.log(that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100)
-    console.log(that.data.socketdata.waterLevelInWell - (that.data.socketdata.bottomHoleHeight - 10000) / 100)
-    console.log(that.data.waterlevel)
+    // console.log(that.data.socketdata.inletPipeHeight / 100)
+    // console.log(that.data.socketdata.sewerageSluice / 1000)
+    // console.log(that.data.socketdata.riveRaterLevel - (that.data.socketdata.bottomHoleHeight - 10000) / 100)
+    // console.log(that.data.socketdata.waterLevelInWell - (that.data.socketdata.bottomHoleHeight - 10000) / 100)
+    // console.log(that.data.waterlevel)
     // if (that.data.socketdata.waterLevelInWell < (that.data.socketdata.truncatedPipeHeight / 100 + (that.data.socketdata.bottomHoleHeight - 10000) / 100)) {
     //   that.setData({
     //     chaoguo: false
@@ -559,7 +559,7 @@ Page({
         } else if (that.data.river == '停止') {
           ctx.fillRect(wxW - 70, wxH - 210, 50, 30);
           ctx.fillRect(wxW - 30, wxH - 210, 30, 160);
-        } else if (that.data.river == '低于'){
+        } else if (that.data.river == '低于') {
           console.log('低于1', 'rever')
           ctx.fillRect(wxW - 30, wxH - 140, 30, 90);
         }
@@ -580,7 +580,7 @@ Page({
           ctx.fillRect(wxW - 70, wxH - 250, 50, 75);
           ctx.fillRect(wxW - 30, wxH - 270, 30, 220);
         } else if (that.data.river == '停止') {
-          if (that.data.out == '高于'){
+          if (that.data.out == '高于') {
             console.log('高于1', 'rever')
             ctx.fillRect(wxW - 70, wxH - 190, 50, 10);
             ctx.fillRect(wxW - 30, wxH - 190, 30, 140);
@@ -619,7 +619,7 @@ Page({
         } else if (that.data.out == '高于') {
           console.log('低于', 'river')
           ctx.fillRect(wxW - 30, wxH - 150, 30, 100);
-        } else if (that.data.out == '低于'){
+        } else if (that.data.out == '低于') {
           console.log('低于2', 'river')
           ctx.fillRect(wxW - 30, wxH - 165, 30, 115);
         } else if (that.data.out == '停止') {

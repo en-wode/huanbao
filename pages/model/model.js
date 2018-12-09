@@ -14,6 +14,12 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         inputType: 'digit',
         componentId: 'rainGauge'
       },
+      sluiceTime: {
+        title: '闸门最大启闭时间(单位：秒)',
+        placeholder: '请输入数值',
+        componentId: 'sluiceTime',
+        value: ''
+      },
       sunnyToRain: {
         title: '晴转雨时间(单位：秒)',
         placeholder: '请输入数值',
@@ -293,6 +299,7 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         this.data.device[key] = null;  
       }
     }
+    console.log(that.data.device)
     that.showZanDialog({
       title: that.data.change,
       content: '请确认是否保存操作',
@@ -376,11 +383,13 @@ Page(Object.assign({}, Zan.Dialog, Zan.Field, Zan.Toast, Zan.Select,{
         equipmentId: that.data.equipid
       },
       success: function (result) {
+        console.log(result)
         if (result.data.msg == 2000 && result.data.code == 0) {
           wx.navigateTo({
             url: '../index/index'
           })
         }
+
         if (result.data.result) {
           that.setData({
             devices: result.data.result,
