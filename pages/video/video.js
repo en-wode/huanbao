@@ -35,6 +35,7 @@ Page({
         where: that.data.where,
       },
       success: function (result) {
+        console.log(result)
         if (result.data.code == 1){
           that.setData({
             videosrc: result.data.result.link

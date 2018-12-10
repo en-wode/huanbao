@@ -29,6 +29,7 @@ Page(extend({}, Tab, {
       }],
       selectedId: 'week'
     },
+    bottomHoleHeight: null,
     index: 0,
     check: ['一', '二', '三', '四', '五', '六', '日'],
     hisdata: [],
@@ -110,6 +111,23 @@ Page(extend({}, Tab, {
       endDate: time,
       dates: time
     }) 
+    var header1 = {
+      'content-type': 'application/json',
+      'cookie': wx.getStorageSync("sessionid")//读取cookie
+    };
+    wx.request({
+      url: app.globalData.url + 'io/getData',
+      method: 'GET',
+      header: header1,
+      data: {
+        equipmentId: that.data.id
+      },
+      success: function (d) {
+        that.setData({
+          bottomHoleHeight: (d.data.result.bottomHoleHeight - 10000) / 100,
+        }) 
+      }
+    })
     that.getdata()
 
   },
@@ -149,9 +167,14 @@ Page(extend({}, Tab, {
           })
         }
         console.log(result)
-        
         if (result.data.result.length > 0) {
-          var hisdata = result.data.result.map(v => v['title'])
+          console.log(result.data.result);
+          var hisdata;
+          if (that.data.datalist == 'waterLevelInWell' || that.data.datalist == 'riveRaterLevel') {
+            hisdata = result.data.result.map(v => parseFloat((v['title'] / 100 + that.data.bottomHoleHeight).toFixed(2)))
+          } else {
+            hisdata = result.data.result.map(v => (v['title']))
+          }
           var hisdate = result.data.result.map(v => v['creatTime'])
           var isAllEqual = new Set(hisdata).size === 1;
           if (isAllEqual) {
@@ -253,6 +276,9 @@ Page(extend({}, Tab, {
   //   }
     
   // },
+  trans: function (value, btht) {
+    return parseFloat((value / 100 + btht).toFixed(2));
+  },
   lineCanvas: function() {
     const that = this;
     var windowWidth = 320;

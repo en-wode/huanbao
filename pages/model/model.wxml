@@ -73,6 +73,11 @@
         <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
 
+<!-- //闸门最大启闭时间 -->
+    <!-- <view class='card'>
+        <template is="zan-field" data="{{  ...base.sluiceTime, componentId: 'sluiceTime' , value: devices.sluiceTime, disabled:  cdisabled,style: inputstyle}}"></template>
+    </view>  -->
+
     <!-- //晴转雨时间 -->
     <view class='card'>
         <template is="zan-field" data="{{  ...base.sunnyToRain, componentId: 'sunnyToRain' , value: devices.sunnyToRain, disabled: cdisabled,style: inputstyle}}"></template>

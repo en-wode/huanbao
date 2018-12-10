@@ -91,13 +91,13 @@ Page(Object.assign({}, Zan.TopTips, Zan.Dialog, Zan.Toast,{
                 result.data.result[index].isConnection = '离线'
               }
               if (result.data.result[index].pattern == '0') {
-                if (result.data.result[index].nowPattern == 1) {
+                if (Math.floor(result.data.result[index].pressureGauge / 16) == 1) {
                   result.data.result[index].pattern = "自动值守(晴天截流)"
-                } else if (result.data.result[index].nowPattern == 2){
+                } else if (Math.floor(result.data.result[index].pressureGauge / 16) == 2){
                   result.data.result[index].pattern = "自动值守(初雨限流)"
-                } else if (result.data.result[index].nowPattern == 3) {
+                } else if (Math.floor(result.data.result[index].pressureGauge / 16) == 3) {
                   result.data.result[index].pattern = "自动值守(暴雨排涝)"
-                } else if (result.data.result[index].nowPattern == 4) {
+                } else if (Math.floor(result.data.result[index].pressureGauge / 16) == 4) {
                   result.data.result[index].pattern = "自动值守(防倒灌)"
                 } else {
                   result.data.result[index].pattern = "自动值守"

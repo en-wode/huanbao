@@ -1,4 +1,4 @@
-/* pages/deviceGroup/deviceGroup.wxss */
+/* pages/deviceStatus/deviceStatus.wxss */
 page{
   background: #f3f3f3;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -9,20 +9,42 @@ page{
 .card{
   background: #fff;
   font-size: 30rpx;
-  padding: 0 0 12rpx 0;
+  padding: 0 0 12rpx 0; 
   margin-bottom: 18rpx;
   font-weight: 500
+}
+.card_num{
+  background: #fff;
+  font-size: 30rpx;
+  margin-bottom: 8rpx;
+  font-weight: 500
+}
+.card_contain{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 8rpx;
+  font-weight:500;
+  padding:12rpx 0;
+  font-size:34rpx;
 }
 .card_title{
   width: 90%;
   margin: 0 auto;
   padding-bottom: 8rpx;
-  border-bottom: 4rpx solid #f3f3f3;
+  border-bottom: 6rpx solid #f3f3f3;
   font-weight: bolder;
   padding: 12rpx 0;
 }
-.switch{
-  padding: 0 15px;
+.bdline{
+  border-right: 1px solid #ccc
+}
+.card_val{
+  min-width: 168rpx;
+  text-align: center!important;
+}
+.card_name{
+  font-size: 32rpx;
+  font-weight: 500
 }
 /* 卡片内部字体颜色 */
 .card_status{
@@ -32,6 +54,9 @@ page{
   margin-top: 8rpx;
   color: #5f5f5f;
   font-size: 26rpx
+}
+.zan-cell__ft{
+  min-width: 130rpx
 }
 
 /* 字体图标 */
@@ -60,79 +85,74 @@ page{
 .icon-shidu{
   color: #00C1DE;
 }
-.icon-icon-test23{
+.icon-dengpao{
   color: #f1c232;
 }
 
 /* 工作指示灯 */
+.icon-qiwen-{
+  color: red
+}
+.icon-jishuidian{
+  color: #AAAAAA
+}
+.icon-video-surveillance{
+  color: #5CACEE
+}
+.icon-shuilongtou1{
+  color: #36648B
+}
 .work_light{
   padding: 24rpx 0;
 }
 .light{
   font-size: 58rpx!important;
 }
-.icon-shuibei{
+.icon-dianji{
   color: #CD3700
 }
-.icon-video-surveillance{
+.icon-famen01{
   color: blue
 }
-.icon-famen01{
+.icon-xiaofangshuibeng{
   color: #CDCD00
 }
-.icon-shuiweizhan{
+.icon-icon-test23{
   color: #4A708B
 }
-.icon-caidanmoshi{
-  color: #09b6ba
+.card_title2{
+  font-weight:bolder
+}
+.work-name{
+  margin-top: 8rpx;
+  font-size: 24rpx
 }
 /* slider */
+.weather{
+  padding: 16rpx 0;
+  text-align: center;
+  line-height: 24px;
+  font-size: 26rpx
+}
+
 .section_gap{
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
   padding: 24rpx;
 }
-.detail_buttom{
-  padding: 22rpx;
-  color: #77c0e8;
-  background:white
+.monitor{
+  padding: 18rpx 18px
 }
-.save{
-  border-right: 1px solid #5f5f5f
+.today{
+  font-weight: 700
 }
-.body-view{
-  padding: 0 10rpx
+.zan-tab__title{
+  width: 100%
 }
-.s-con{
-  height:40rpx;
-  line-height:38rpx;
-  vertical-align:-8rpx;
-  width:40rpx;
-  display:inline-block;
-  text-align:center;
-  background:red;
-  border-radius:6rpx;
-  color:white;
-  box-shadow:#EE4000 0rpx 0rpx 4rpx ;
+.zan-col{
+  padding: 0
 }
-slider{
-  padding:0 12rpx;
-  display:inline-block;
-  width:70%
-}
-.zan-cell-my{
-  position:relative;
-  display:flex;
-  align-items:center;
-  line-height:1.4;
-  font-size:14px;
-}
-.my-btn{
-  margin: 48rpx 0 0 0;
-  color: white;
-  background: #5CACEE;
-  border-radius: 45px;
-}
-.zan-field__title{
-  min-width: 480rpx
+
+.procolor{
+  color: #666
 }
