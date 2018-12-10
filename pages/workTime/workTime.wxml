@@ -1,0 +1,34 @@
+<!--pages/workTime/workTime.wxml-->
+<view class="container">
+    <view class='progress_box'>
+      <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
+      <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
+      <view class="progress_text">
+          <view class="progress_dot"></view> 
+          <text class='progress_info'> 已为您工作{{progress_txt}}天</text>
+      </view>     
+    </view>
+    <view class='working'>
+      <view class="zan-row option-bottom">
+        <view class="zan-col zan-col-12">
+          警戒水位：<text class='tips'>正常运行</text>
+        </view>
+        <view class="zan-col zan-col-12">
+          水泵运行：<text class='tips'>正常运行</text>
+        </view>
+        <view class="zan-col zan-col-12" >
+          监控运行：<text class='tips'>正常运行</text>
+        </view>
+        <view class="zan-col zan-col-12">
+          闸门运行：<text class='tips'>正常运行</text>
+        </view>
+        <view class="zan-col zan-col-12" >
+          压力电机：<text class='tips'>正常运行</text>
+        </view>
+        <view class="zan-col zan-col-12">
+          液压电机：<text class='tips'>正常运行</text>
+        </view>
+      </view>
+    </view>
+</view>
+
