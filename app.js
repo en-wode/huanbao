@@ -17,7 +17,8 @@ App({
     //           code: res.code
     //         },
     //         success: function(result){
-    //           console.log(result)
+    //           console.log(result)+
+
     //           // wx.getUserInfo({
     //           //   success: function (res) {
     //           //     console.log(res)
@@ -41,6 +42,7 @@ App({
     // });
 
   },
+  
   getLocationInfo: function (cb) {
     var that = this;
     if (this.globalData.locationInfo) {
@@ -71,7 +73,7 @@ App({
     time: null,
     cvtime: null,
     // url: 'http://localhost:7001/',
-    url: 'https://www.lxwater.cn/'
+    url: 'https://home.lxwater.cn/'
     // url: 'http://39.107.105.1:7001/'
   },
   header: {

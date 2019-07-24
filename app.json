@@ -19,7 +19,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#518cf6",
-    "navigationBarTitleText": "蓝翔环保",
+    "navigationBarTitleText": "蓝翔机电",
     "navigationBarTextStyle": "white"
-  }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置将用于所在地区天气查询"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }

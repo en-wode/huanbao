@@ -31,7 +31,7 @@ page{
 }
 .tip{
   color: 	#CDC9C9;
-  font-size: 12px
+  font-size: 16px
 }
 .zan-panel{
   background: none;

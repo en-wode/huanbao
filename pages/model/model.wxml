@@ -73,10 +73,10 @@
         <template is="zan-field" data="{{  ...base.rainGauge, componentId: 'rainGauge' , value: devices.rainGauge, disabled: cdisabled,style: inputstyle}}"></template>
     </view>
 
-<!-- //闸门最大启闭时间 -->
-    <!-- <view class='card'>
+<!--//闸门最大启闭时间 -->
+     <view class='card'>
         <template is="zan-field" data="{{  ...base.sluiceTime, componentId: 'sluiceTime' , value: devices.sluiceTime, disabled:  cdisabled,style: inputstyle}}"></template>
-    </view>  -->
+    </view> 
 
     <!-- //晴转雨时间 -->
     <view class='card'>
@@ -98,10 +98,9 @@
         </view>
       </view>
       <view class="body-view">
-          <!-- //1#水泵停止水位 -->
-          <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1', value: devices.stopWaterLevel1, disabled: cdisabled ,style: inputstyle}}"></template>
         <!-- //1#水泵开启水位 -->
-          <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1, disabled: cdisabled,style: inputstyle}}"></template>
+          <template is="zan-field" data="{{  ...base.stopWaterLevel1, componentId: 'stopWaterLevel1' , value: devices.stopWaterLevel1, disabled: cdisabled,style: inputstyle}}"></template>
+                    <template is="zan-field" data="{{  ...base.startWaterLevel1, componentId: 'startWaterLevel1' , value: devices.startWaterLevel1, disabled: cdisabled,style: inputstyle}}"></template>
       </view>
     </view>
     <view class='card'>

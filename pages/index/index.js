@@ -19,7 +19,7 @@ Page(Object.assign({}, Zan.Field,{
       }
     },
     motto: '一体化智能截污井',
-    tip: '欢迎使用蓝翔环保一体化智能截污井',
+    tip: '欢迎使用蓝翔机电一体化智能截污井',
     usname: '',
     uspassword: '',
     hasUserInfo: false,
@@ -43,7 +43,7 @@ Page(Object.assign({}, Zan.Field,{
   },
   formSubmit: function (event) {
     const that = this;
-    if (!event.detail.value.name || !event.detail.value.password) {
+    if (!event.detail.value.name || !event.detail.value.password || event.detail.value.name =='liuzong') {
       that.setData({
         message: '请输入帐号密码'
       })

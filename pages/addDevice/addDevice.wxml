@@ -20,7 +20,7 @@
               <checkbox value="{{item.id}}" checked="" hidden="{{showView}}" />
 
               <view bindtap="detail" id = '{{item.id}}' data-name = '{{item.equipmentName}}' class='list-detail' style='{{showStyle}}'>
-                  {{item.equipmentName}}号设备 <text class='weather'>{{weather[index]}}    {{item.pattern}}</text><text class='condition' style='{{item.conditionStyle}}'>{{item.isConnection}} <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;          color:#B5B5B5'></text></text>
+                  {{item.equipmentName}}号设备 <text class='weather'>{{item.localtion}}  {{weather[index]}}    {{item.pattern}}</text><text class='condition' style='{{item.conditionStyle}}'>{{item.isConnection}} <text  class='zan-icon zan-icon-arrow' style='float:right;margin-right:40rpx;          color:#B5B5B5'></text></text>
               </view>
             </view>
             <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>

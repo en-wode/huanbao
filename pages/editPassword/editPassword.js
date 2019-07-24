@@ -1,6 +1,6 @@
 // pages/editPassword/editPassword.js
 const Zan = require('../../dist/index');
-
+const app = getApp()
 Page(Object.assign({}, Zan.Field,{
 
   /**
